@@ -5,18 +5,18 @@
 
 | # | Project | Status shown | Screenshots | Links shown | Approve? |
 |---|---------|--------------|-------------|-------------|----------|
-| 1 | HANDY | 개발 중 (In development) | CONCEPT placeholder (no real shots) | none | [x] |
-| 2 | Spotory | 개발 중 | CONCEPT placeholder | none | [x] |
-| 3 | VIBLOG | 개발 중 | CONCEPT placeholder | none | [x] |
-| 4 | Chain Zero | 개발 중 | CONCEPT placeholder | none | [x] |
-| 5 | RECEIPT | 개발 중 | CONCEPT placeholder | none | [x] |
-| 6 | FlowWorks | 부분 구현 (Partial) | CONCEPT placeholder | none | [x] |
-| 7 | Side A | 개발 중 (출시 QA 중, 미검증 릴리스 명시) | CONCEPT placeholder | none | [x] |
-| 8 | RecordFlow | 부분 구현 | CONCEPT placeholder | none | [x] |
-| 9 | Cyworld 2026 | 부분 구현 | CONCEPT placeholder | none | [x] |
-| 10 | FlowNote | 기획 (Planned, 실행 불가 명시) | CONCEPT placeholder | none | [x] |
-| 11 | RodeblockRush | 미확인 (Unverified) | CONCEPT placeholder | none | [x] |
-| 12 | BLANKY | 미확인 (Unverified) | CONCEPT placeholder | none | [x] |
+| 1 | HANDY | 개발 중 (In development) | 실화면 1 (온보딩) | none | [x] |
+| 2 | Spotory | 개발 중 | 실화면 1 (지도) | none | [x] |
+| 3 | VIBLOG | 개발 중 | 실화면 1 (로그인) | none | [x] |
+| 4 | Chain Zero | 개발 중 | 실화면 1 (홈) | none | [x] |
+| 5 | RECEIPT | 개발 중 | 실화면 1 (온보딩) | none | [x] |
+| 6 | FlowWorks | 부분 구현 (Partial) | CONCEPT (환경 한계, 사유 기록) | none | [x] |
+| 7 | Side A | 개발 중 (출시 QA 중, 미검증 릴리스 명시) | 실화면 3 (로그인·회원가입·한국어) | none | [x] |
+| 8 | RecordFlow | 부분 구현 (AI 학습) | 브랜드 에셋 1 (실행 캡처 아님 명시) | none | [x] |
+| 9 | Cyworld 2026 | 부분 구현 | CONCEPT (환경 한계, 사유 기록) | none | [x] |
+| 10 | FlowNote | 기획 (Planned, 빌드 실패 확인) | CONCEPT | none | [x] |
+| 11 | RodeblockRush | 개발 중 (루프 완성, 테스트 통과) | 스플래시 에셋 1 (실행 캡처 아님 명시) | none | [x] |
+| 12 | BLANKY | 개발 중 (20종 파티게임) | 스플래시 에셋 1 (실행 캡처 아님 명시) | none | [x] |
 
 ## Security scan (2026-10-11, local)
 
@@ -40,6 +40,7 @@ HANDY + Spotory + VIBLOG + Chain Zero (4 featured, strongest evidence). The rest
 | Project | Image on site | How obtained |
 |---|---|---|
 | HANDY | `handy-1.png` — real onboarding screen | xcodebuild Debug + simctl install/launch/screenshot (iPhone 17 Pro) |
+| Chain Zero | `chain-zero-1.png` — real home screen (level, rank, daily, missions) | `pod install` recovery + xcodebuild Release + simctl install/launch/screenshot |
 | Spotory | `spotory-map.png` — real map screen | in-repo asset `assets/images/real_app_map_screenshot.png` |
 | Side A | `side-a-1.png` — real sign-in screen | `expo start --web` + Playwright capture |
 | RodeblockRush | `rodeblockrush-splash.png` — splash art (asset, not a run capture) | in-repo `assets/splash/splash.png` |
