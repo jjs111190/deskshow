@@ -44,6 +44,8 @@ HANDY + Spotory + VIBLOG + Chain Zero (4 featured, strongest evidence). The rest
 | Side A | `side-a-1.png` — real sign-in screen | `expo start --web` + Playwright capture |
 | RodeblockRush | `rodeblockrush-splash.png` — splash art (asset, not a run capture) | in-repo `assets/splash/splash.png` |
 | RecordFlow | `recordflow-art.png` — brand art (asset, not a run capture) | in-repo `assets/Recody 1.png` |
+| VIBLOG | `viblog-1.png` — real sign-in screen (local-mode notice) | `flutter build ios --simulator` + simctl install/launch/screenshot |
+| RECEIPT | `receipt-1.png` — real onboarding screen | xcodebuild Debug + simctl install/launch/screenshot (healthy device; earlier failures were a wedged simulator, not the app) |
 | BLANKY | `blanky-splash.png` — splash logo (asset, not a run capture) | in-repo `assets/branding/splash_logo.png` |
 
 Not captured (CONCEPT shown, reasons recorded):
