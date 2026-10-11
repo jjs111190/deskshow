@@ -34,3 +34,23 @@
 ## Suggested first publish set
 
 HANDY + Spotory + VIBLOG + Chain Zero (4 featured, strongest evidence). The rest can stay draft until screenshots exist.
+
+## Capture log (2026-10-11, owner-approved)
+
+| Project | Image on site | How obtained |
+|---|---|---|
+| HANDY | `handy-1.png` — real onboarding screen | xcodebuild Debug + simctl install/launch/screenshot (iPhone 17 Pro) |
+| Spotory | `spotory-map.png` — real map screen | in-repo asset `assets/images/real_app_map_screenshot.png` |
+| Side A | `side-a-1.png` — real sign-in screen | `expo start --web` + Playwright capture |
+| RodeblockRush | `rodeblockrush-splash.png` — splash art (asset, not a run capture) | in-repo `assets/splash/splash.png` |
+| RecordFlow | `recordflow-art.png` — brand art (asset, not a run capture) | in-repo `assets/Recody 1.png` |
+| BLANKY | `blanky-splash.png` — splash logo (asset, not a run capture) | in-repo `assets/branding/splash_logo.png` |
+
+Not captured (CONCEPT shown, reasons recorded):
+
+- RECEIPT — builds and installs, but never stays running under ad-hoc signature (likely App Groups/widget entitlements); simulator media service also wedged twice. Needs owner Xcode run with Team.
+- FlowWorks — `build:pwa` + dev server both abnormally slow (>25 min tsc); capture pending build completion.
+- Cyworld 2026 — `next dev` wedged (no output, no listen); `next build` in progress.
+- VIBLOG — `flutter build ios --simulator` in progress (web platform not configured; expo-style web capture N/A).
+- Chain Zero / RecordFlow — no `react-native-web` dep; web capture would require adding deps to originals (declined).
+- FlowNote — not buildable per its README (Planned).
