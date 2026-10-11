@@ -1,0 +1,33 @@
+{
+  "name": "deskshow",
+  "version": "0.1.0",
+  "private": true,
+  "description": "DESKSHOW — Your Apps, Beautifully Presented. Static developer showcase, free hosting on GitHub Pages.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4173",
+    "typecheck": "tsc --noEmit",
+    "lint": "echo \"no eslint config yet — tsc + validator are the gates\" && npm run typecheck && npm run validate:public",
+    "test": "node --test tests/*.test.mjs",
+    "scan": "node tools/scanner.mjs",
+    "analyze": "node tools/analyzer.mjs",
+    "validate:public": "node tools/validator.mjs",
+    "sync:projects": "node tools/scanner.mjs"
+  },
+  "dependencies": {
+    "lucide-react": "^0.469.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "~5.6.3",
+    "vite": "^6.0.0"
+  }
+}

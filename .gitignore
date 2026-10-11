@@ -1,0 +1,25 @@
+node_modules
+dist
+dist-ssg
+.DS_Store
+*.local
+
+# --- NEVER publish these (validator also enforces) ---
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.mobileprovision
+**/DerivedData/
+**/build/
+**/.cxx/
+
+# --- Local-only analysis workspace (never deployed) ---
+.local-analysis/
+internal/
+tools/.cache/
+
+# --- Unapproved media staging ---
+public/screenshots/review/
+public/screenshots/private/

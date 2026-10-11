@@ -1,0 +1,342 @@
+{
+  "scannedAt": "2026-10-11T04:39:30.126Z",
+  "roots": [
+    "~/Desktop"
+  ],
+  "count": 37,
+  "projects": [
+    {
+      "projectPathRef": "~/Desktop/apps-showcase",
+      "projectName": "apps-showcase",
+      "projectType": "vite-web",
+      "language": "TypeScript",
+      "lastModified": "2026-10-11T04:39:28.070Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/ARG",
+      "projectName": "ARG",
+      "projectType": "node",
+      "language": "TypeScript/JavaScript",
+      "lastModified": "2026-01-23T05:35:32.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/MacBook Pro/BLANKY",
+      "projectName": "BLANKY",
+      "projectType": "flutter",
+      "language": "Dart",
+      "lastModified": "2026-09-02T22:30:56.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/Chain Zero",
+      "projectName": "Chain Zero",
+      "projectType": "expo",
+      "language": "TypeScript",
+      "lastModified": "2026-09-07T22:40:06.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/cornelai-note",
+      "projectName": "cornelai-note",
+      "projectType": "expo",
+      "language": "TypeScript",
+      "lastModified": "2026-03-17T11:09:21.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/cyworld-2026",
+      "projectName": "cyworld-2026",
+      "projectType": "capacitor",
+      "language": "TypeScript",
+      "lastModified": "2026-06-15T13:43:05.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/DonT/dont-game",
+      "projectName": "dont-game",
+      "projectType": "expo",
+      "language": "TypeScript",
+      "lastModified": "2026-09-29T15:07:10.493Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/dualinput-watch-app-prototype",
+      "projectName": "dualinput-watch-app-prototype",
+      "projectType": "vite-web",
+      "language": "TypeScript",
+      "lastModified": "2026-03-27T12:42:18.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/FlowMind/flowmindweb",
+      "projectName": "flowmindweb",
+      "projectType": "vite-web",
+      "language": "TypeScript",
+      "lastModified": "2026-01-06T13:09:14.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/FlowWorks",
+      "projectName": "FlowWorks",
+      "projectType": "capacitor",
+      "language": "TypeScript",
+      "lastModified": "2026-09-24T23:14:24.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/HANDY",
+      "projectName": "HANDY",
+      "projectType": "xcode",
+      "language": "Swift",
+      "lastModified": "2026-10-11T03:54:03.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/hustory",
+      "projectName": "hustory",
+      "projectType": "expo",
+      "language": "TypeScript",
+      "lastModified": "2026-09-22T08:47:20.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/MacBook Pro/IF I HAD..",
+      "projectName": "IF I HAD..",
+      "projectType": "rust",
+      "language": "Rust",
+      "lastModified": "2026-09-29T13:16:14.042Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PDFLOW/apps/ipad",
+      "projectName": "ipad",
+      "projectType": "xcode",
+      "language": "Swift",
+      "lastModified": "2026-09-07T22:39:41.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/life-four-cuts",
+      "projectName": "life-four-cuts",
+      "projectType": "expo",
+      "language": "TypeScript",
+      "lastModified": "2026-09-10T18:04:19.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/LinkUs",
+      "projectName": "LinkUs",
+      "projectType": "node",
+      "language": "TypeScript/JavaScript",
+      "lastModified": "2026-06-27T15:31:58.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/MacBook Pro/LockToDo",
+      "projectName": "LockToDo",
+      "projectType": "xcode",
+      "language": "Swift",
+      "lastModified": "2026-10-11T03:52:42.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/mind-labyrinth_-room-escape",
+      "projectName": "mind-labyrinth_-room-escape",
+      "projectType": "vite-web",
+      "language": "TypeScript",
+      "lastModified": "2026-06-22T04:58:22.234Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/minihome-sns",
+      "projectName": "minihome-sns",
+      "projectType": "node",
+      "language": "TypeScript/JavaScript",
+      "lastModified": "2026-09-07T22:40:06.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/NeoMini",
+      "projectName": "NeoMini",
+      "projectType": "node",
+      "language": "TypeScript/JavaScript",
+      "lastModified": "2026-09-05T11:06:56.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/people",
+      "projectName": "people",
+      "projectType": "flutter",
+      "language": "Dart",
+      "lastModified": "2026-06-27T09:00:34.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/people-passed-by",
+      "projectName": "people-passed-by",
+      "projectType": "expo",
+      "language": "TypeScript",
+      "lastModified": "2026-05-17T23:20:31.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/rainy-mansion-mystery",
+      "projectName": "rainy-mansion-mystery",
+      "projectType": "vite-web",
+      "language": "TypeScript",
+      "lastModified": "2026-06-22T04:58:22.237Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/MacBook Pro/RECEIPT",
+      "projectName": "RECEIPT",
+      "projectType": "xcode",
+      "language": "Swift",
+      "lastModified": "2026-09-26T02:05:11.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/RecordFlow",
+      "projectName": "RecordFlow",
+      "projectType": "expo",
+      "language": "TypeScript",
+      "lastModified": "2026-09-09T03:16:47.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/MacBook Pro/RodeblockRush",
+      "projectName": "RodeblockRush",
+      "projectType": "godot",
+      "language": "GDScript",
+      "lastModified": "2026-09-10T18:02:47.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/RodeblockRush",
+      "projectName": "RodeblockRush",
+      "projectType": "godot",
+      "language": "GDScript",
+      "lastModified": "2026-09-07T23:16:26.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/shawdow kid",
+      "projectName": "shawdow kid",
+      "projectType": "expo",
+      "language": "TypeScript",
+      "lastModified": "2026-09-05T13:35:33.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/Side A",
+      "projectName": "Side A",
+      "projectType": "node",
+      "language": "TypeScript/JavaScript",
+      "lastModified": "2026-10-06T00:42:14.144Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/SketchLoop",
+      "projectName": "SketchLoop",
+      "projectType": "flutter",
+      "language": "Dart",
+      "lastModified": "2026-05-31T11:27:41.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/snap-moment-archive",
+      "projectName": "snap-moment-archive",
+      "projectType": "node",
+      "language": "TypeScript/JavaScript",
+      "lastModified": "2026-04-05T07:42:18.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/Spotory",
+      "projectName": "Spotory",
+      "projectType": "expo",
+      "language": "TypeScript",
+      "lastModified": "2026-09-07T22:28:18.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/studyflow",
+      "projectName": "studyflow",
+      "projectType": "vite-web",
+      "language": "TypeScript",
+      "lastModified": "2026-06-22T04:58:22.237Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/PROJECT/tinyworld",
+      "projectName": "tinyworld",
+      "projectType": "node",
+      "language": "TypeScript/JavaScript",
+      "lastModified": "2026-09-09T11:08:31.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/MacBook Pro/TWO TO FALL",
+      "projectName": "TWO TO FALL",
+      "projectType": "godot",
+      "language": "GDScript",
+      "lastModified": "2026-09-07T22:28:08.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/VIBLOG",
+      "projectName": "VIBLOG",
+      "projectType": "flutter",
+      "language": "Dart",
+      "lastModified": "2026-10-11T04:22:06.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    },
+    {
+      "projectPathRef": "~/Desktop/MacBook Pro/WristScroll",
+      "projectName": "WristScroll",
+      "projectType": "xcode",
+      "language": "Swift",
+      "lastModified": "2026-08-24T16:25:49.000Z",
+      "analysisConfidence": "Medium",
+      "visibility": "private-draft"
+    }
+  ]
+}
