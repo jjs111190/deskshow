@@ -50,8 +50,9 @@ HANDY + Spotory + VIBLOG + Chain Zero (4 featured, strongest evidence). The rest
 
 Not captured (CONCEPT shown, reasons recorded):
 
-- RECEIPT — builds and installs, but never stays running under ad-hoc signature (likely App Groups/widget entitlements); simulator media service also wedged twice. Needs owner Xcode run with Team.
-- FlowWorks — `build:pwa` + dev server both abnormally slow (>25 min tsc); capture pending build completion.
+- RECEIPT — captured (`receipt-1.png`, real onboarding). Earlier failures were a wedged simulator device, not the app; healthy device worked first try.
+- FlowWorks — dev serves + transforms OK, but the app renders blank without its API; the free API (`tsx`, plain or watch) and `tsc -b`/`vite build` all wedge at 0% CPU in this env (diagnosed: entry/bootstrap stall, not fixable without touching originals).
+- BLANKY — run capture blocked by third-party conflict: `google_mobile_ads` (CocoaPods) vs `webview_flutter_wkwebview` (SPM); needs owner-side Podfile fix. Disclosed: flutter tool auto-migrated BLANKY's Podfile/AppDelegate/.gitignore/xcscheme during attempts (standard forward-compatible upgrades).
 - Cyworld 2026 — `next dev` wedged (no output, no listen); `next build` in progress.
 - VIBLOG — `flutter build ios --simulator` in progress (web platform not configured; expo-style web capture N/A).
 - Chain Zero / RecordFlow — no `react-native-web` dep; web capture would require adding deps to originals (declined).

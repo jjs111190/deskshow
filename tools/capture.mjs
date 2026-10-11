@@ -12,6 +12,10 @@ if (!url || !out) {
 }
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: Number(w), height: Number(h) } });
+// Some local vite dev servers never finish serving /@vite/client (HMR),
+// which blocks DOMContentLoaded in real browsers. The app itself renders
+// fine without HMR, so drop that request and capture the real UI.
+await page.route('**/@vite/client', (route) => route.abort());
 await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
 await page.waitForTimeout(4000);
 await page.screenshot({ path: out });

@@ -1004,7 +1004,7 @@ export const projects: Project[] = [
     evidence: [
       {
         feature: 'Buildable app',
-        evidence: 'README: NOT READY / cannot build or run + docs/ (45 files) + apps/ipad skeleton',
+        evidence: 'README: NOT READY + build attempt 2026-10-11 failed: Swift errors in AppShell/CollaborationViews.swift (ambiguous Document, no accessible initializers)',
         status: 'Planned',
         confidence: 'High',
       },
