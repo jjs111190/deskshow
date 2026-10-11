@@ -53,7 +53,7 @@ Not captured (CONCEPT shown, reasons recorded):
 - RECEIPT — captured (`receipt-1.png`, real onboarding). Earlier failures were a wedged simulator device, not the app; healthy device worked first try.
 - FlowWorks — dev serves + transforms OK, but the app renders blank without its API; the free API (`tsx`, plain or watch) and `tsc -b`/`vite build` all wedge at 0% CPU in this env (diagnosed: entry/bootstrap stall, not fixable without touching originals).
 - BLANKY — run capture blocked by third-party conflict: `google_mobile_ads` (CocoaPods) vs `webview_flutter_wkwebview` (SPM); needs owner-side Podfile fix. Disclosed: flutter tool auto-migrated BLANKY's Podfile/AppDelegate/.gitignore/xcscheme during attempts (standard forward-compatible upgrades).
-- Cyworld 2026 — `next dev` wedged (no output, no listen); `next build` in progress.
+- Cyworld 2026 — blocked three ways: `next dev` wedges at startup (0% CPU, no output, no listen, Node 22 and 25); `next build` hits a Turbopack IPC crash plus a genuine type error in the original (`app/api/upload/route.ts` FormData — owner fix needed); stale `out/` is 0 bytes.
 - VIBLOG — `flutter build ios --simulator` in progress (web platform not configured; expo-style web capture N/A).
 - Chain Zero / RecordFlow — no `react-native-web` dep; web capture would require adding deps to originals (declined).
 - FlowNote — not buildable per its README (Planned).

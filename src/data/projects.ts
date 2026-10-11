@@ -360,7 +360,16 @@ export const projects: Project[] = [
     visibility: 'approved',
     featured: true,
     icon: 'icons/chain-zero.png',
-    screenshots: [],
+    screenshots: [
+      {
+        src: 'screenshots/chain-zero-1.png',
+        altKo: 'Chain Zero 홈 화면 — 레벨·랭크·데일리·일일 미션·플레이',
+        altEn: 'Chain Zero home — level, rank, daily, missions, play',
+        captionKo: '실제 홈 화면 (시뮬레이터 실행 캡처)',
+        captionEn: 'Real home screen (simulator capture)',
+        concept: false,
+      },
+    ],
     videos: [],
     repositoryUrl: null,
     demoUrl: null,
@@ -437,6 +446,12 @@ export const projects: Project[] = [
       {
         feature: 'Quality gate',
         evidence: 'package.json: npm run check (tsc + vitest + expo-doctor) + src/game/__tests__',
+        status: 'Implemented',
+        confidence: 'High',
+      },
+      {
+        feature: 'Simulator run capture',
+        evidence: 'xcodebuild Release (CODE_SIGNING_ALLOWED=NO) + simctl install/launch on VIBLOG Test iPhone + screenshots/chain-zero-1.png (home: level, rank, daily, missions visible)',
         status: 'Implemented',
         confidence: 'High',
       },
