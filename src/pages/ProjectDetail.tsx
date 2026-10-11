@@ -5,6 +5,8 @@ import { projects } from '../data/projects';
 import { ProjectCard, initial, iconUrl } from '../components/ProjectCard';
 import { useLang, ui } from '../i18n';
 
+const shotUrl = (src: string) => `${import.meta.env.BASE_URL}${src}`;
+
 const statusLabel: Record<string, { ko: string; en: string }> = {
   implemented: { ko: '구현 완료', en: 'Implemented' },
   'in-development': { ko: '개발 중', en: 'In development' },
@@ -17,7 +19,7 @@ export function ProjectDetail() {
   const { slug } = useParams();
   const { lang } = useLang();
   const s = ui[lang];
-  const [lightbox, setLightbox] = useState(false);
+  const [lightbox, setLightbox] = useState<string | null>(null);
   const p = projects.find((x) => x.slug === slug);
 
   useEffect(() => {
@@ -27,7 +29,7 @@ export function ProjectDetail() {
 
   useEffect(() => {
     const fn = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setLightbox(false);
+      if (e.key === 'Escape') setLightbox(null);
     };
     window.addEventListener('keydown', fn);
     return () => window.removeEventListener('keydown', fn);
@@ -89,20 +91,40 @@ export function ProjectDetail() {
       <section className="section">
         <h2>{s.overview}</h2>
         <p className="prose">{tr.overview}</p>
-        <div className="shot-row">
-          <button
-            className="shot"
-            onClick={() => setLightbox(true)}
-            aria-label="open screenshot viewer"
-            style={{ cursor: 'pointer', font: 'inherit' }}
-          >
-            <span>
-              <span className="badge-concept">{s.concept}</span>
-              <br />
-              {s.conceptNote}
-            </span>
-          </button>
+        <div className="gallery">
+          {p.screenshots.map((shot, i) => (
+            <button
+              key={i}
+              className="shot shot-btn"
+              onClick={() => setLightbox(shotUrl(shot.src))}
+              aria-label={`open screenshot ${i + 1}`}
+            >
+              <img
+                className="shot-img"
+                src={shotUrl(shot.src)}
+                alt={lang === 'ko' ? shot.altKo : shot.altEn}
+                loading="lazy"
+              />
+            </button>
+          ))}
+          {p.screenshots.length === 0 && (
+            <div className="shot">
+              <span>
+                <span className="badge-concept">{s.concept}</span>
+                <br />
+                {s.conceptNote}
+              </span>
+            </div>
+          )}
         </div>
+        {p.screenshots.length > 0 && (
+          <p className="muted" style={{ fontSize: 13 }}>
+            {p.screenshots
+              .map((shot) => (lang === 'ko' ? shot.captionKo : shot.captionEn) ?? '')
+              .filter(Boolean)
+              .join(' · ')}
+          </p>
+        )}
       </section>
 
       <section className="section">
@@ -158,14 +180,8 @@ export function ProjectDetail() {
       )}
 
       {lightbox && (
-        <div className="lightbox" onClick={() => setLightbox(false)} role="dialog" aria-modal="true">
-          <div className="shot">
-            <span>
-              <span className="badge-concept">{s.concept}</span>
-              <br />
-              {s.conceptNote}
-            </span>
-          </div>
+        <div className="lightbox" onClick={() => setLightbox(null)} role="dialog" aria-modal="true">
+          <img className="lightbox-img" src={lightbox} alt="screenshot fullscreen" />
         </div>
       )}
     </main>

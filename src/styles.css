@@ -107,6 +107,9 @@ select.search { flex: 0 1 auto; }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 .gallery { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x mandatory; }
 .gallery .shot { min-width: 200px; scroll-snap-align: start; }
+.shot-img { width: 100%; height: 100%; object-fit: cover; border-radius: 17px; display: block; }
+.shot-btn { padding: 0; cursor: zoom-in; font: inherit; color: inherit; }
+.lightbox-img { max-height: 80vh; width: min(420px, 90vw); object-fit: contain; border-radius: 18px; }
 .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: grid; place-items: center; z-index: 100; padding: 24px; }
 .lightbox .shot { max-height: 80vh; width: min(420px, 90vw); background: #111; color: #fff; font-size: 15px; }
 @media (max-width: 900px) {

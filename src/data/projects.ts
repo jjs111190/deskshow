@@ -5,7 +5,8 @@ import type { Project } from '../types';
  * - No absolute local paths, no secrets, no personal emails.
  * - Every feature claim has an entry in `evidence` with a status.
  * - repositoryUrl / demoUrl are null unless a public URL was verified.
- * - screenshots: real captures only. Empty = CONCEPT placeholder UI.
+ * - screenshots: real captures only (public/screenshots/). Empty = CONCEPT placeholder UI.
+ * - Owner approved all 12 rows on 2026-10-11 (see PUBLICATION_REVIEW.md).
  */
 export const projects: Project[] = [
   {
@@ -14,12 +15,21 @@ export const projects: Project[] = [
     name: 'HANDY',
     category: 'Mobile App',
     platforms: ['iOS', 'watchOS'],
-    technologies: ['Swift', 'SwiftUI', 'VisionKit', 'MultipeerConnectivity', 'WidgetKit', 'xcodegen'],
+    technologies: ['Swift', 'SwiftUI', 'VisionKit', 'MultipeerConnectivity', 'WidgetKit', 'App Intents', 'xcodegen'],
     status: 'in-development',
     visibility: 'approved',
     featured: true,
     icon: 'icons/handy.png',
-    screenshots: [],
+    screenshots: [
+      {
+        src: 'screenshots/handy-1.png',
+        altKo: 'HANDY 온보딩 첫 화면 — 종이 명함을 그대로, iPhone 안에',
+        altEn: 'HANDY onboarding — paper cards, kept as designed, in your iPhone',
+        captionKo: '실제 온보딩 화면 (시뮬레이터 실행 캡처)',
+        captionEn: 'Real onboarding screen (simulator capture)',
+        concept: false,
+      },
+    ],
     videos: [],
     repositoryUrl: null,
     demoUrl: null,
@@ -27,65 +37,83 @@ export const projects: Project[] = [
     ko: {
       tagline: '종이 명함을, 원래 디자인 그대로.',
       shortDescription:
-        '종이 명함의 앞면과 뒷면을 그대로 보관하고, 필요한 연락처 정보만 자연스럽게 건네는 iPhone 앱입니다.',
+        '종이 명함의 앞뒤를 그대로 보관하고, 건넬 정보만 골라 전달하는 iPhone·Watch 명함 앱입니다.',
       overview:
-        'HANDY는 명함을 사진으로 보관하는 것을 넘어, 스캔·공유·근거리 교환까지 한 흐름으로 연결합니다. 외부 패키지나 필수 서버 없이 동작하며, 실제 카메라 스캔과 근거리 공유는 실기기에서 확인하도록 설계되었습니다.',
+        'HANDY는 명함 스캔부터 보관·공유까지 한 흐름으로 연결합니다. 문서 스캐너 기반 촬영과 원근 수동 보정, 일괄 스캔 요약을 갖추고, 건네기에서는 QR·근처 공유·연락처 만들기를 고를 수 있습니다. 만난 장소 지도, 3D 빌딩, 위젯과 워치 앱까지 포함된 네이티브 앱으로, 외부 패키지나 필수 서버 없이 동작합니다.',
       howItWorks: [
-        '명함을 스캔하거나 사진 가져오기로 보관함에 저장합니다.',
-        '건네기 탭에서 공개할 항목만 골라 QR·근처 공유·연락처 만들기로 전달합니다.',
-        '받은 명함은 보관함에서 검색하고 위젯·워치에서 빠르게 확인합니다.',
+        '스캐너로 명함을 촬영하거나(원근 보정·일괄 요약 지원) 사진을 가져와 보관함에 저장합니다.',
+        '건네기 탭에서 공개할 항목만 골라 QR·근처 공유·내 카드 만들기로 전달합니다.',
+        '받은 명함은 보관함·지도·위젯·워치에서 꺼내 보고, 리마인더와 외형·PIN 설정으로 다듬습니다.',
       ],
       developmentNotes:
-        'SwiftUI 기반 네이티브 앱으로 Features/Scanner, Sharing, NFC, NameDrop, Library 모듈이 소스에서 확인됩니다. Info.plist는 project.yml에서 생성되는 xcodegen 구조입니다.',
+        'Features 아래 Scanner(촬영·원근·일괄), Sharing(공유 옵션·가져오기 검토), NameDrop·NFC·MyCards·Library·Map(만남 지도·3D 빌딩)·CardHandoff·CardViewer·CardDetail·Reminders·Onboarding·Tutorial·Settings(외형·PIN·개인정보·권한)·Automation·Handoff 모듈과 HANDYWatch·HANDYWidgets·HANDYTests·HANDYUITests가 소스에서 확인됩니다. Info.plist는 project.yml에서 생성되는 xcodegen 구조입니다.',
       futurePlans:
-        '배포용 Signing(Team 지정)과 실기기 검증이 남은 상태로 README에 TODO로 명시되어 있습니다.',
+        '배포용 Signing(Team 지정)과 실기기 카메라·근거리 공유 검증이 README의 TODO로 남아 있습니다.',
     },
     en: {
       tagline: 'Paper business cards, kept as designed.',
       shortDescription:
-        'An iPhone app that keeps both sides of a paper business card and shares only what you choose.',
+        'An iPhone and Watch card app that archives both sides of each card and shares only what you pick.',
       overview:
-        'HANDY connects scanning, storing, and proximity sharing in one flow. It has no external packages or required servers; camera scanning and nearby sharing are designed for real devices.',
+        'HANDY connects card scanning, archiving, and sharing in one flow. It offers document-scanner capture with manual perspective fix and batch summaries, plus QR, nearby sharing, or contact creation for hand-off. A native app with meeting maps, 3D buildings, widgets, and a Watch app — no external packages or required servers.',
       howItWorks: [
-        'Scan a card or import a photo into your library.',
+        'Scan cards (perspective fix, batch summaries) or import photos into the library.',
         'Pick only the fields to share via QR, nearby sharing, or contact creation.',
-        'Find cards in the library and glance at them from widgets and Watch.',
+        'Recall cards from the library, map, widgets, or Watch, tuned with reminders and appearance/PIN settings.',
       ],
       developmentNotes:
-        'A native SwiftUI app. Scanner, Sharing, NFC, NameDrop, and Library modules are verified in source. Info.plist is generated from project.yml (xcodegen).',
+        'Verified in source: Scanner, Sharing, NameDrop, NFC, MyCards, Library, Map (meeting map, 3D buildings), CardHandoff, CardViewer, CardDetail, Reminders, Onboarding, Tutorial, Settings (appearance, PIN, privacy, permissions), Automation, Handoff, plus HANDYWatch, HANDYWidgets, HANDYTests, HANDYUITests. Info.plist is generated from project.yml (xcodegen).',
       futurePlans:
-        'Distribution signing (Team) and on-device verification remain as TODO items in the README.',
+        'Distribution signing (Team) and on-device camera and nearby-sharing verification remain as README TODOs.',
     },
     features: [
       {
-        titleKo: '명함 앞뒤 보관',
-        titleEn: 'Front-and-back archive',
-        bodyKo: '명함의 앞면과 뒷면을 원래 디자인 그대로 보관합니다.',
-        bodyEn: 'Keep both sides of each card exactly as designed.',
+        titleKo: '문서 스캐너와 원근 보정',
+        titleEn: 'Document scanner with perspective fix',
+        bodyKo: 'DocumentCamera 촬영·수동 원근 조정·일괄 스캔 요약으로 휘어진 명함도 또렷하게 보관합니다.',
+        bodyEn: 'Document-camera capture, manual perspective adjustment, and batch summaries keep warped cards crisp.',
       },
       {
-        titleKo: '선택 공유',
+        titleKo: '고를 수 있는 공유',
         titleEn: 'Selective sharing',
-        bodyKo: '건넬 연락처 항목만 골라 QR·근처 공유·연락처 만들기로 전달합니다.',
-        bodyEn: 'Share only selected fields via QR, nearby sharing, or contact creation.',
+        bodyKo: '공유 옵션에서 건넬 항목만 고르고, 가져오기 검토로 받은 카드를 다듬습니다. NameDrop은 iOS 연락처 흐름에 얹고, QR에는 작은 앞면 미리보기를 담을 수 있습니다.',
+        bodyEn: 'Share only selected fields, review imports, bridge to iOS NameDrop contact flow, and embed a small front preview in QR.',
       },
       {
-        titleKo: '위젯과 워치',
-        titleEn: 'Widgets and Watch',
-        bodyKo: '자주 쓰는 내 카드를 위젯과 워치에서 빠르게 꺼낼 수 있는 구조가 확인됩니다.',
-        bodyEn: 'Frequently used cards are reachable from widgets and Watch.',
+        titleKo: '만남 지도와 3D',
+        titleEn: 'Meeting maps and 3D',
+        bodyKo: '카드를 만난 장소를 지도에서 되짚고 3D 빌딩으로 맥락을 확인합니다.',
+        bodyEn: 'Revisit where each card was exchanged on a meeting map with 3D buildings.',
+      },
+      {
+        titleKo: '위젯·워치·리마인더',
+        titleEn: 'Widgets, Watch, reminders',
+        bodyKo: '자주 쓰는 내 카드를 위젯·워치에서 꺼내고, 리마인더와 PIN·외형 설정으로 일상을 맞춥니다.',
+        bodyEn: 'Reach favorite cards from widgets and Watch, with reminders plus PIN and appearance settings.',
       },
     ],
     evidence: [
       {
-        feature: 'Card library models',
-        evidence: 'HANDY/Models/BusinessCard.swift, CardTypes.swift',
+        feature: 'Scanner flow',
+        evidence: 'Features/Scanner: CardScannerFlow, DocumentCameraView, ManualPerspectiveAdjustmentView, BatchScanSummaryView',
         status: 'Implemented',
         confidence: 'High',
       },
       {
-        feature: 'Scanner feature module',
-        evidence: 'HANDY/Features/Scanner + README VisionKit note',
+        feature: 'Sharing + NameDrop + NFC',
+        evidence: 'Features/Sharing (ShareOptionsView, ImportCardReviewView), NameDropView, NFCBadgeView + README sharing policy',
+        status: 'Implemented',
+        confidence: 'High',
+      },
+      {
+        feature: 'Library, map, cards surface',
+        evidence: 'LibraryView, MeetingMapView, Card3DBuildingView, MyCardsView, CardViewerView + HANDYWatch, HANDYWidgets',
+        status: 'Implemented',
+        confidence: 'High',
+      },
+      {
+        feature: 'Simulator run capture',
+        evidence: 'xcodebuild Debug (CODE_SIGNING_ALLOWED=NO) + simctl install/launch on iPhone 17 Pro + screenshots/handy-1.png',
         status: 'Implemented',
         confidence: 'High',
       },
@@ -103,12 +131,21 @@ export const projects: Project[] = [
     name: 'Spotory',
     category: 'Mobile App',
     platforms: ['iOS', 'Android'],
-    technologies: ['Expo SDK 57', 'React Native', 'TypeScript', 'Expo Router', 'expo-sqlite', 'MapLibre', 'Firebase'],
+    technologies: ['Expo SDK 57', 'React Native', 'TypeScript', 'Expo Router', 'expo-sqlite', 'MapLibre', 'Firebase', 'AdMob'],
     status: 'in-development',
     visibility: 'approved',
     featured: true,
     icon: 'icons/spotory.png',
-    screenshots: [],
+    screenshots: [
+      {
+        src: 'screenshots/spotory-map.png',
+        altKo: 'Spotory 지도 화면 — 전국 미션 클러스터와 하단 탭',
+        altEn: 'Spotory map screen — nationwide mission clusters and bottom tabs',
+        captionKo: '실제 지도 화면 (지도 타일에 CARTO 키 필요 표시가 보이는 개발 중 상태)',
+        captionEn: 'Real map screen (CARTO key-required tiles visible — work in progress)',
+        concept: false,
+      },
+    ],
     videos: [],
     repositoryUrl: null,
     demoUrl: null,
@@ -116,57 +153,71 @@ export const projects: Project[] = [
     ko: {
       tagline: '지도 위의 한 점을, 한 장의 이야기로.',
       shortDescription:
-        '지도 위의 장소를 직접 방문해 사진과 기록으로 남기는 iOS·Android 탐험 기록 앱입니다.',
+        '지도 위 장소를 직접 방문해 사진과 기록으로 남기는 iOS·Android 탐험 기록 앱입니다.',
       overview:
-        'Spotory는 MapLibre 기반 지도 위에 미션·핀·완료 사진을 쌓아가는 탐험 기록 앱입니다. 사진과 개인 기록은 기기에 우선 저장되고, 계정 없이 핵심 기능을 쓸 수 있습니다. 선택적 Firebase 로그인과 공개 미션, 온라인 영토 기능이 별도로 제공됩니다.',
+        'Spotory는 MapLibre 기반 지도 위에 미션·핀·완료 사진을 쌓는 탐험 기록 앱입니다. 서울 실제 장소 32곳·전국 대표 31곳과 읍면동별 미션 구조, 30가지 동네 촬영 유형을 갖추고, 사진과 기록은 기기에 우선 저장되어 계정 없이 핵심 기능을 씁니다. 아래 실제 지도 화면처럼 클러스터·하단 탭(지도·탐험·영토·앨범·프로필)이 동작하며, 선택적 Firebase 로그인 시 공개 미션과 온라인 영토가 열립니다.',
       howItWorks: [
-        '지도에서 미션을 고르고 직접 방문합니다.',
-        '현장에서 사진을 찍고 체크리스트로 인증합니다.',
-        '앨범·통계·배지로 탐험을 되돌아봅니다.',
+        '지도에서 미션을 고르고(검색·필터·주변 5km·거리/난이도순) 직접 방문합니다.',
+        '카메라 가이드(3분할·수평계·프레임)로 찍고 GPS·체크리스트로 인증합니다.',
+        '앨범·월별 통계·연속 탐험·배지로 되돌아보고, JSON 백업으로 옮깁니다.',
       ],
       developmentNotes:
-        'Expo SDK 57 + React Native 0.86 + TypeScript 6, Expo Router, Zustand, expo-sqlite 구조가 package.json과 src/features·database에서 확인됩니다. 네이티브 모듈 때문에 Expo Go가 아닌 Development Build가 필요합니다.',
-      futurePlans: '공개 미션·신고·차단 등 온라인 기능의 운영 정책 확정이 남은 것으로 보입니다.',
+        'Expo SDK 57 + React Native 0.86 + TypeScript 6, Expo Router, Zustand, expo-sqlite 구조와 map·missions·verification·camera·album·territory·community·custom-missions·profile·auth 기능 분리가 확인됩니다. MapLibre 네이티브 모듈 때문에 Expo Go가 아닌 Development Build가 필요합니다.',
+      futurePlans:
+        '지도 타일 키 설정(CARTO 표시 해소)과 공개 미션 운영 정책 확정이 남은 것으로 보입니다.',
     },
     en: {
       tagline: 'Visit a spot. Keep its story.',
       shortDescription:
         'An iOS and Android field-log app for visiting map spots and keeping photo stories.',
       overview:
-        'Spotory layers missions, pins, and finished photos on a MapLibre map. Photos and personal logs stay on-device first; core features work without an account. Optional Firebase sign-in unlocks public missions and territory play.',
+        'Spotory layers missions, pins, and finished photos on a MapLibre map — 32 Seoul spots, 31 national spots, town-level missions, and 30 neighborhood photo styles. Photos and logs stay on-device first with no account needed. The real map screen below shows working clusters and tabs (Map, Explore, Territory, Album, Profile); optional Firebase sign-in unlocks public missions and online territory.',
       howItWorks: [
-        'Pick a mission on the map and visit it in person.',
-        'Take a photo on site and verify with a checklist.',
-        'Revisit explorations through albums, stats, and badges.',
+        'Pick a mission on the map (search, filters, nearby 5km, distance/difficulty sort) and visit in person.',
+        'Shoot with camera guides (thirds grid, level, frames) and verify via GPS plus checklist.',
+        'Revisit via albums, monthly stats, streaks, badges — and move data with JSON backup.',
       ],
       developmentNotes:
-        'Verified stack: Expo SDK 57, React Native 0.86, TypeScript 6, Expo Router, Zustand, expo-sqlite. Native modules require a Development Build, not Expo Go.',
-      futurePlans: 'Online moderation policies for public missions appear to remain open.',
+        'Verified: Expo SDK 57, React Native 0.86, TypeScript 6, Expo Router, Zustand, expo-sqlite, with map, missions, verification, camera, album, territory, community, custom-missions, profile, auth splits. Native modules require a Development Build, not Expo Go.',
+      futurePlans:
+        'Map tile key setup (resolving the CARTO notice) and public-mission moderation policy look like remaining work.',
     },
     features: [
       {
         titleKo: '현장 인증 탐험',
         titleEn: 'On-site verified exploration',
-        bodyKo: '거리·GPS 오차를 반영한 위치 기반 활성화와 도보 내비게이션으로 현장을 인증합니다.',
-        bodyEn: 'Location activation with distance and GPS tolerance plus walking guidance.',
+        bodyKo: '거리·GPS 오차 반영 활성화, 도보 내비·음성 안내, 현장 수동 체크리스트로 다녀온 곳만 인증합니다.',
+        bodyEn: 'Distance- and GPS-tolerance activation, walking guidance with voice, and on-site checklists verify only visited spots.',
+      },
+      {
+        titleKo: '카메라 가이드',
+        titleEn: 'Camera guides',
+        bodyKo: '3분할 그리드·구조물 프레임·수평계·플래시·줌·전후면 전환과 로컬 해상도 검사를 갖춥니다.',
+        bodyEn: 'Thirds grid, structure frames, level, flash, zoom, front/back switch, plus local resolution checks.',
       },
       {
         titleKo: '오프라인 우선 기록',
         titleEn: 'Offline-first logs',
-        bodyKo: '원본·썸네일 분리 저장과 로컬 프로필·통계·배지가 기기 안에서 동작합니다.',
-        bodyEn: 'Split original/thumbnail storage with local profile, stats, and badges on-device.',
+        bodyKo: '원본·썸네일 분리 저장, 중복 방지, 사진 앱 내보내기·ZIP 공유, 로컬 프로필·통계·배지가 기기 안에서 돕니다.',
+        bodyEn: 'Split original/thumbnail storage, dedupe, gallery export, ZIP sharing, local profile, stats, and badges on-device.',
       },
       {
         titleKo: '선택적 온라인',
         titleEn: 'Optional online',
-        bodyKo: 'Firebase 로그인 시 공개 미션과 온라인 영토를 선택적으로 쓸 수 있습니다.',
-        bodyEn: 'Firebase sign-in optionally unlocks public missions and online territory.',
+        bodyKo: 'Firebase 로그인 시 공개/비공개 미션, 온라인 영토, 신고·차단, 앱 내 계정 삭제를 고를 수 있습니다.',
+        bodyEn: 'Firebase sign-in optionally unlocks public/private missions, online territory, reports, blocks, and in-app deletion.',
       },
     ],
     evidence: [
       {
+        feature: 'Real map screen',
+        evidence: 'assets/images/real_app_map_screenshot.png (published as screenshots/spotory-map.png)',
+        status: 'Implemented',
+        confidence: 'High',
+      },
+      {
         feature: 'Map + location stack',
-        evidence: 'package.json: MapLibre, expo-location, expo-camera',
+        evidence: 'package.json: MapLibre, expo-location, expo-camera + src/features/map',
         status: 'Implemented',
         confidence: 'High',
       },
@@ -177,8 +228,14 @@ export const projects: Project[] = [
         confidence: 'High',
       },
       {
-        feature: 'Public release',
-        evidence: 'No store listing URL verified',
+        feature: 'Mission catalog scale',
+        evidence: 'README: 32 Seoul + 31 national + town-level missions (file count not recounted)',
+        status: 'Partially Implemented',
+        confidence: 'Medium',
+      },
+      {
+        feature: 'Store release',
+        evidence: 'No store URL verified',
         status: 'Unverified',
         confidence: 'High',
       },
@@ -205,14 +262,14 @@ export const projects: Project[] = [
       shortDescription:
         '사진을 찍으면 기기 안 AI가 분위기를 읽고 4–8초 영상을 만들어 주는 Flutter 카메라 앱입니다.',
       overview:
-        'VIBLOG는 촬영·AI 분석·음악 매칭·영상 렌더링을 모두 기기 안에서 처리하는 것을 목표로 합니다. 유료 AI API 없이 Apple Vision과 번들된 ML Kit을 쓰고, 음악은 자체 CC0 내장곡과 무료 Openverse 추천을 병행합니다. 완성은 9:16 순간 영상으로 저장·공유됩니다.',
+        'VIBLOG는 촬영·AI 분석·음악 매칭·영상 렌더링을 기기 안에서 끝내는 것을 목표로 합니다. 장면·사물·얼굴 위치·색감 분석기(image_analyzer·scene_classifier·mood_classifier·color_analyzer)와 Ken Burns·오버레이 렌더러·네이티브 인코더 파이프라인이 소스에서 확인됩니다. 음악은 자체 CC0 내장 24곡과 무료 Openverse 추천을 병행하고, 라이선스를 영상에 자동 표기합니다. 포토부스(연속 촬영·16 필터·얼굴 추적 스티커·173 레이아웃)와 2.5D 음악실, Daily Mix·Room 소셜까지 담은 대형 코드베이스입니다.',
       howItWorks: [
-        '사진이나 짧은 영상을 찍거나 포토부스로 연속 촬영합니다.',
-        '기기 안 분석이 바이브·무드·장르를 추정하고 음악을 매칭합니다.',
-        '편집기에서 다듬고 9:16 영상으로 저장·공유합니다.',
+        '사진·짧은 영상·포토부스 연속 촬영으로 순간을 담습니다.',
+        '기기 안 분석이 바이브·무드·장르를 추정하고 음악(내장곡·사진의 노래·실제 곡 태그)을 매칭합니다.',
+        '편집기(음악·캡션·비율·모션·스티커·필터)에서 다듬고 9:16 영상으로 저장·공유합니다.',
       ],
       developmentNotes:
-        'Flutter 단일 코드베이스(lib/ai·audio·video·music_room), Riverpod, Supabase, AdMob 구조가 pubspec.yaml과 lib 디렉터리에서 확인됩니다.',
+        'Flutter 단일 코드베이스의 ai/·features(camera·booth·editor·music·rooms·studio·vibes·feed·gallery·pro)·video/·music_room·ads·billing 구조와 Riverpod·Supabase·AdMob 의존성이 확인됩니다. 웹 플랫폼 미구성으로 웹 실행 캡처는 불가했습니다.',
       futurePlans: '스토어 출시 여부와 서버 설정 연동 상태는 미확인으로 표기합니다.',
     },
     en: {
@@ -220,46 +277,58 @@ export const projects: Project[] = [
       shortDescription:
         'A Flutter camera app that reads the mood on-device and turns photos into 4–8s videos.',
       overview:
-        'VIBLOG aims to keep capture, AI analysis, music matching, and rendering fully on-device. It avoids paid AI APIs via Apple Vision and bundled ML Kit, pairing built-in CC0 tracks with free Openverse suggestions. Results are saved and shared as 9:16 moment videos.',
+        'VIBLOG aims to keep capture, AI analysis, music matching, and rendering fully on-device. Source shows scene/object/face/color analyzers plus a Ken Burns, overlay-renderer, and native-encoder pipeline. Music pairs 24 built-in CC0 tracks with free Openverse picks and auto license credits. A large codebase spanning photo booth (burst, 16 filters, face-tracking stickers, 173 layouts), a 2.5D music room, Daily Mix, and Room social.',
       howItWorks: [
-        'Capture a photo or clip, or use the photo-booth burst mode.',
-        'On-device analysis estimates vibe, mood, and genre, then matches music.',
-        'Polish in the editor and save or share a 9:16 video.',
+        'Capture photos, clips, or booth bursts.',
+        'On-device analysis estimates vibe, mood, and genre, then matches music (built-ins, photo-composed songs, real-track tags).',
+        'Polish in the editor (music, captions, ratio, motion, stickers, filters) and save or share 9:16 video.',
       ],
       developmentNotes:
-        'Single Flutter codebase (lib/ai, audio, video, music_room), Riverpod, Supabase, AdMob — verified in pubspec.yaml and lib/.',
+        'Single Flutter codebase: ai/, features (camera, booth, editor, music, rooms, studio, vibes, feed, gallery, pro), video/, music_room, ads, billing — with Riverpod, Supabase, AdMob. Web platform is not configured, so no web capture was possible.',
       futurePlans: 'Store release and server-settings wiring are marked unverified.',
     },
     features: [
       {
         titleKo: '온디바이스 AI 분석',
         titleEn: 'On-device AI analysis',
-        bodyKo: '장면·사물·얼굴 위치·색감을 기기 안에서 분석해 바이브를 추정합니다.',
-        bodyEn: 'Scene, object, face-position, and color analysis run fully on-device.',
+        bodyKo: '장면·사물·얼굴 위치·색감을 기기 안에서 분석해 바이브·무드를 추정하고, 민감 정보 추정은 하지 않습니다.',
+        bodyEn: 'Scene, object, face-position, and color analysis run on-device to estimate vibe and mood — never sensitive attributes.',
       },
       {
         titleKo: '포토부스와 꾸미기',
         titleEn: 'Photo booth and styling',
-        bodyKo: '타이머 연속 촬영, 실시간 필터, 얼굴 추적 스티커, 173종 레이아웃 꾸미기가 문서에 정리되어 있습니다.',
-        bodyEn: 'Burst capture, live filters, face-tracking stickers, and 173 layouts are documented.',
+        bodyKo: '타이머 연속 촬영·라이브 컷·실시간 필터·얼굴 추적 스티커·173 레이아웃·49 프레임·AI 무드 꾸미기를 갖춥니다.',
+        bodyEn: 'Burst capture, live cuts, live filters, face-tracking stickers, 173 layouts, 49 frames, AI mood styling.',
       },
       {
         titleKo: '저작권 안전한 음악',
         titleEn: 'Rights-safe music',
-        bodyKo: 'CC0 내장곡과 CC0·Public Domain·CC BY 추천만 사용하고 라이선스를 자동 표기합니다.',
-        bodyEn: 'Built-in CC0 tracks plus CC0 / Public Domain / CC BY suggestions with auto credit.',
+        bodyKo: 'CC0 내장곡·사진을 악보처럼 읽는 자작곡·CC BY 이하 추천만 쓰고 라이선스를 자동 표기합니다.',
+        bodyEn: 'Built-in CC0 tracks, photo-composed originals, and CC0/Public-Domain/CC-BY picks only, with auto credit.',
+      },
+      {
+        titleKo: '네이티브 영상 파이프라인',
+        titleEn: 'Native video pipeline',
+        bodyKo: 'Ken Burns·오버레이 렌더·1080p 저장본+720p 업로드 사본을 네이티브 인코더로 뽑습니다.',
+        bodyEn: 'Ken Burns, overlay rendering, and 1080p masters plus 720p upload copies via native encoders.',
       },
     ],
     evidence: [
       {
-        feature: 'On-device analysis modules',
-        evidence: 'lib/ai + camera/image_picker/video_player deps',
+        feature: 'Analysis modules',
+        evidence: 'lib/ai: image_analyzer, scene_classifier, mood_classifier, color_analyzer, caption_engine',
         status: 'Implemented',
-        confidence: 'Medium',
+        confidence: 'High',
+      },
+      {
+        feature: 'Booth + editor + export',
+        evidence: 'features/booth (10 files), features/editor (6 files), video/ (8 files incl. video_exporter)',
+        status: 'Implemented',
+        confidence: 'High',
       },
       {
         feature: 'Music licensing flow',
-        evidence: 'README music policy + lib/audio, lib/music_room',
+        evidence: 'README music policy + lib/audio, lib/music_room, photo_song_card',
         status: 'Partially Implemented',
         confidence: 'Medium',
       },
@@ -277,7 +346,7 @@ export const projects: Project[] = [
     name: 'Chain Zero',
     category: 'Game',
     platforms: ['iOS', 'Android'],
-    technologies: ['Expo', 'React Native', 'TypeScript', 'matter-js', 'Reanimated', 'AsyncStorage'],
+    technologies: ['Expo', 'React Native', 'TypeScript', 'matter-js', 'Reanimated', 'AsyncStorage', 'AdMob'],
     status: 'in-development',
     visibility: 'approved',
     featured: true,
@@ -290,69 +359,81 @@ export const projects: Project[] = [
     ko: {
       tagline: '숫자 사이의 관계를 손가락으로 설계하라.',
       shortDescription:
-        '숫자를 합치는 게임이 아니라, 숫자 사이의 관계를 경로로 설계하는 모바일 퍼즐 게임입니다.',
+        '경로 설계 퍼즐을 중심으로 20종 이상의 모드를 담은 Expo 모바일 퍼즐 게임입니다.',
       overview:
-        'Chain Zero는 인접한 숫자 카드를 드래그해 경로를 그리고, 계산 결과와 규칙 충족을 실시간으로 확인한 뒤 손을 떼어 판정하는 퍼즐입니다. 로그인·서버·인터넷·유료 API 없이 Expo Go에서 바로 실행됩니다.',
+        'Chain Zero는 인접 숫자 잇기(CHAIN)의 규칙 판정에 OVERDRIVE·JACKPOT·GIFT·GOLDEN·STREAK 기믹과 프리즘 연쇄를 얹고, NOVA(머지+폭발)·DROP·ECHO(기억력)·FLOOD·SLIDE·PAIRS·SUMPLETE(논리합)에 Bricks·Defense·Gomoku·Mines·Snake·Sokoban·Suika까지 20종 이상 모드를 담은 퍼즐 모음입니다. 전 모드 공유 글로벌 레벨·XP 해금, 16 업적·10 등급·도감, 모드별 스포트라이트 튜토리얼, 실패 시 AdMob 테스트 전면광고(60초 제한)를 갖추고, 엔진은 React Native를 import하지 않는 순수 TypeScript에 테스트가 딸려 있습니다.',
       howItWorks: [
-        '인접한 숫자 카드를 터치하고 드래그해 경로를 그립니다.',
-        '계산 결과와 규칙 충족을 실시간으로 확인합니다.',
-        '손을 떼어 판정하고 연쇄 효과와 중력으로 보드를 정리합니다.',
+        '홈에서 플레이를 눌러 모드를 고릅니다(레벨에 따라 해금, 플레이한 모드는 계속 개방).',
+        '드래그·밀기·뒤집기로 풀고 계산 결과와 규칙 충족을 실시간으로 확인합니다.',
+        '성적으로 XP·등급·업적을 쌓고 도감에서 기믹을 복습합니다.',
       ],
       developmentNotes:
-        'src/game·screens·state·services와 matter-js·Reanimated·Gesture Handler 의존성이 확인됩니다. README는 미구현 범위(보드 스와이프, 병합, 성장 시스템)를 명시하고 있습니다.',
-      futurePlans: '스테이지·규칙 카드 확장과 릴리스 빌드 검증이 다음 단계로 보입니다.',
+        'src/game 35+ 엔진(Board·Rule·Calculation·Gravity·Path·Stage·Spawn·Combo·Fever·Grade 등), 27개 화면, hooks(useXpAward·useFailureAd·useModeTutorial), data(codex·achievements·grades), services(AdEngine 등)와 npm run check 품질 게이트가 확인됩니다. README가 보드 스와이프·병합·성장 미구현 범위도 명시합니다.',
+      futurePlans: '실 광고 ID 전환과 스토어 릴리스 검증이 다음 단계로 보입니다.',
     },
     en: {
       tagline: 'Design the relations between numbers.',
       shortDescription:
-        'A mobile puzzle game about drawing paths between numbers, not merging them.',
+        'An Expo puzzle collection built around path-drawing, with 20+ game modes.',
       overview:
-        'Chain Zero lets you drag across adjacent number cards, preview results and satisfied rules live, then release to judge the stage. It runs in Expo Go with no login, server, connection, or paid API.',
+        'Chain Zero centers on path-drawing rule puzzles (CHAIN) layered with OVERDRIVE, JACKPOT, GIFT, GOLDEN, and STREAK gimmicks plus prism chains — then adds NOVA (merge + blasts), DROP, ECHO (memory), FLOOD, SLIDE, PAIRS, SUMPLETE (sum logic), Bricks, Defense, Gomoku, Mines, Snake, Sokoban, Suika, and more: over 20 modes. Shared global levels with XP unlocks, 16 achievements, 10 grades, a codex, per-mode spotlight tutorials, and test AdMob interstitials (60s throttle) round it out. Engines are pure TypeScript with tests.',
       howItWorks: [
-        'Touch and drag across adjacent number cards.',
-        'Preview the computed result and satisfied rules live.',
-        'Release to judge, clear chains, and settle the board with gravity.',
+        'Pick a mode from home (XP unlocks; played modes stay open).',
+        'Drag, slide, or flip through puzzles with live result and rule feedback.',
+        'Bank XP, grades, and achievements, and review gimmicks in the codex.',
       ],
       developmentNotes:
-        'Verified: src/game, screens, state, services plus matter-js, Reanimated, Gesture Handler. The README explicitly lists out-of-scope mechanics.',
-      futurePlans: 'More stages, rule cards, and release-build verification look like next steps.',
+        'Verified: 35+ engines in src/game, 27 screens, hooks (useXpAward, useFailureAd, useModeTutorial), data (codex, achievements, grades), services (AdEngine), and an npm run check quality gate. The README also states out-of-scope mechanics.',
+      futurePlans: 'Real ad-ID switchover and store-release verification look like next steps.',
     },
     features: [
       {
-        titleKo: '경로 설계 퍼즐',
-        titleEn: 'Path-drawing puzzle',
-        bodyKo: '숫자 이동·병합이 아니라 경로 설계와 규칙 판정이 핵심 루프입니다.',
-        bodyEn: 'Path design and rule judgment — not sliding or merging — is the core loop.',
+        titleKo: '20종 이상의 퍼즐 모드',
+        titleEn: '20+ puzzle modes',
+        bodyKo: 'CHAIN 원조 모드에 머지·낙하·기억·채우기·밀기·짝찾기·합추리 변형과 고전 아케이드 계열을 한 앱에 담습니다.',
+        bodyEn: 'The original CHAIN mode plus merge, drop, memory, flood, slide, pairs, and sum-logic variants with arcade classics in one app.',
       },
       {
-        titleKo: '실시간 규칙 피드백',
-        titleEn: 'Live rule feedback',
-        bodyKo: '드래그 중 계산 결과와 충족 규칙을 바로 보여줍니다.',
-        bodyEn: 'Computed results and satisfied rules preview while you drag.',
+        titleKo: '런 단위 기믹',
+        titleEn: 'Per-run gimmicks',
+        bodyKo: '성공 게이지 OVERDRIVE, 분홍 JACKPOT, 랜덤 GIFT, 점수 GOLDEN, 연속 STREAK 배수가 매 런을 다르게 만듭니다.',
+        bodyEn: 'OVERDRIVE gauge, rare JACKPOT, random GIFTs, GOLDEN tiles, and STREAK multipliers make every run different.',
+      },
+      {
+        titleKo: '전 모드 성장 공유',
+        titleEn: 'Shared progression',
+        bodyKo: '어떤 모드를 해도 XP가 쌓여 레벨이 오르고 새 모드가 열립니다. 16 업적·10 등급·도감이 기록을 묶습니다.',
+        bodyEn: 'Any mode earns XP toward levels that unlock modes. 16 achievements, 10 grades, and a codex tie records together.',
       },
       {
         titleKo: '완전 오프라인',
         titleEn: 'Fully offline',
-        bodyKo: '로그인·서버·인터넷 연결 없이 실행됩니다.',
-        bodyEn: 'Runs with no login, server, or internet connection.',
+        bodyKo: '로그인·서버·인터넷 없이 Expo Go에서 바로 실행되고, 기록은 AsyncStorage에 남습니다.',
+        bodyEn: 'Runs in Expo Go with no login, server, or connection; records persist in AsyncStorage.',
       },
     ],
     evidence: [
       {
-        feature: 'Game loop',
-        evidence: 'README play loop + src/game, src/screens',
+        feature: 'Mode roster',
+        evidence: 'src/screens: 27 screens incl. Nova/Drop/Echo/Flood/Slide/Pairs/Sumplete/Snake/Sokoban/Suika + ModeSelectScreen GAME_MODES',
+        status: 'Implemented',
+        confidence: 'High',
+      },
+      {
+        feature: 'Gimmicks + progression',
+        evidence: 'README gimmick/mode/progression sections + FeverEngine, ProgressionEngine, AchievementEngine, GradeEngine',
         status: 'Implemented',
         confidence: 'High',
       },
       {
         feature: 'Quality gate',
-        evidence: 'package.json: npm run check (tsc + vitest + expo-doctor)',
+        evidence: 'package.json: npm run check (tsc + vitest + expo-doctor) + src/game/__tests__',
         status: 'Implemented',
         confidence: 'High',
       },
       {
         feature: 'Store release',
-        evidence: 'No store URL verified',
+        evidence: 'No store URL verified; AdMob still test IDs per README',
         status: 'Unverified',
         confidence: 'High',
       },
@@ -377,16 +458,16 @@ export const projects: Project[] = [
     ko: {
       tagline: '하루를 영수증처럼 기록하다.',
       shortDescription:
-        '하루의 순간·집중·기분을 영수증 형식으로 모아보는 iOS 라이프 로그 앱입니다.',
+        '순간·집중·기분을 영수증 형식으로 모아보는 iOS 라이프 로그 앱입니다.',
       overview:
-        'RECEIPT는 Today·Archive·위젯 흐름으로 하루를 기록합니다. SwiftData 기반 로컬 저장과 HealthKit·위치·사진 연동 구조가 소스에서 확인되며, 연간·월간 영수증 보기가 Archive 모듈에 정리되어 있습니다.',
+        'RECEIPT는 Today(순간·포커스 세션)와 Archive(캘린더·월간·연간·일간 상세), 온보딩·설정, 위젯으로 하루를 기록합니다. 영수증 스타일 렌더(ReceiptView·ReceiptStyle·인쇄 전환·인쇄음)와 이미지 내보내기(ReceiptImageExporter·ShareReceiptSheet), 오늘의 한 줄 생성기, 햅틱·사운드, HealthKit·위치·사진 연동이 소스에서 확인되는 로컬 우선 앱입니다.',
       howItWorks: [
-        '오늘의 순간과 집중 세션을 기록합니다.',
-        '하루 영수증으로 모아 확인하고 이미지로 내보냅니다.',
+        '오늘의 순간(사진·한 줄)과 집중 세션을 기록합니다.',
+        '하루 영수증으로 모아 확인하고 이미지로 내보내 공유합니다.',
         '월·연간 아카이브와 위젯으로 흐름을 되돌아봅니다.',
       ],
       developmentNotes:
-        'Models/SharedModelContainer·ReceiptStore와 Today·Archive·Onboarding 뷰, RECEIPTWidget이 확인됩니다. xcodegen(project.yml) 구조입니다.',
+        'Models(DailyReceipt·FocusSession·Mood·Moment·TimelineEntry·RouteBuilder·SharedModelContainer), Services(ReceiptStore·Exporter·TodaysLineGenerator·Haptic·PrintSound·Health·Location·Photo), Views(Today·Archive 5종·Components 9종·Onboarding·Settings), RECEIPTWidget, xcodegen(project.yml) 구조가 확인됩니다.',
       futurePlans: '클라우드 동기화 유무와 스토어 출시는 미확인으로 표기합니다.',
     },
     en: {
@@ -394,46 +475,58 @@ export const projects: Project[] = [
       shortDescription:
         'An iOS life-log app that collects moments, focus, and mood like a printed receipt.',
       overview:
-        'RECEIPT records the day through Today, Archive, and widget flows. Local SwiftData storage with Health, location, and photo wiring is visible in source, alongside yearly and monthly receipt views.',
+        'RECEIPT records the day through Today (moments, focus sessions) and Archive (calendar, monthly, yearly, day detail), plus onboarding, settings, and widgets. Source shows receipt-styled rendering (ReceiptView, print transition, print sounds), image export and sharing, a today-line generator, haptics, and Health, location, and photo wiring — local-first throughout.',
       howItWorks: [
-        'Log moments and focus sessions for today.',
-        'Review the daily receipt and export it as an image.',
-        'Revisit flows via monthly, yearly archives and widgets.',
+        'Log moments (photos, one-liners) and focus sessions for today.',
+        'Review the daily receipt and export it as an image to share.',
+        'Revisit flows via monthly and yearly archives and widgets.',
       ],
       developmentNotes:
-        'Verified: SharedModelContainer, ReceiptStore, Today/Archive/Onboarding views, RECEIPTWidget. xcodegen (project.yml) structure.',
+        'Verified: Models (DailyReceipt, FocusSession, Mood, Moment, TimelineEntry, RouteBuilder, SharedModelContainer), Services (ReceiptStore, Exporter, TodaysLineGenerator, Haptic, PrintSound, Health, Location, Photo), Views (Today, 5 Archive, 9 Components, Onboarding, Settings), RECEIPTWidget, xcodegen (project.yml).',
       futurePlans: 'Cloud sync and store release are marked unverified.',
     },
     features: [
       {
         titleKo: '데일리 영수증',
         titleEn: 'Daily receipt',
-        bodyKo: '하루 기록을 영수증 레이아웃으로 모아보고 이미지로 내보냅니다.',
-        bodyEn: 'Collect the day in a receipt layout and export it as an image.',
+        bodyKo: '하루 기록을 영수증 레이아웃·인쇄 연출로 모아보고 이미지로 내보내 공유합니다.',
+        bodyEn: 'Collect the day in a receipt layout with print theatrics, then export and share as an image.',
       },
       {
         titleKo: '월·연간 아카이브',
         titleEn: 'Monthly and yearly archives',
-        bodyKo: '캘린더·월간·연간 보기로 흐름을 되돌아봅니다.',
-        bodyEn: 'Calendar, monthly, and yearly views trace long-term flows.',
+        bodyKo: '캘린더·월간·연간·일간 상세 보기로 긴 흐름을 되돌아봅니다.',
+        bodyEn: 'Calendar, monthly, yearly, and day-detail views trace long-term flows.',
+      },
+      {
+        titleKo: '집중 세션과 오늘의 한 줄',
+        titleEn: 'Focus sessions and today-line',
+        bodyKo: '포커스 기록과 자동 생성 한 줄이 하루를 요약합니다.',
+        bodyEn: 'Focus logs plus an auto-generated one-liner summarize each day.',
       },
       {
         titleKo: '로컬 우선 저장',
         titleEn: 'Local-first storage',
-        bodyKo: 'SwiftData 기반 로컬 저장 구조가 확인됩니다.',
-        bodyEn: 'SwiftData-based local storage is verified in source.',
+        bodyKo: 'SwiftData 기반 저장과 HealthKit·위치·사진 연동이 기기 안에서 돕니다.',
+        bodyEn: 'SwiftData storage with Health, location, and photo wiring stays on-device.',
       },
     ],
     evidence: [
       {
-        feature: 'Receipt data layer',
-        evidence: 'Models/DailyReceipt, ReceiptStore, SharedModelContainer',
+        feature: 'Receipt rendering + export',
+        evidence: 'ReceiptView, ReceiptStyle, ReceiptPrintTransition + ReceiptImageExporter, ShareReceiptSheet, PrintSoundService',
         status: 'Implemented',
         confidence: 'High',
       },
       {
         feature: 'Archive views',
-        evidence: 'Views/Archive: Calendar, Monthly, Yearly',
+        evidence: 'Views/Archive: Calendar, Monthly, Yearly, DayDetail + ArchiveView',
+        status: 'Implemented',
+        confidence: 'High',
+      },
+      {
+        feature: 'Data + device services',
+        evidence: 'DailyReceipt, FocusSession, Mood, SharedModelContainer + Health/Location/Photo/Haptic services',
         status: 'Implemented',
         confidence: 'High',
       },
@@ -451,7 +544,7 @@ export const projects: Project[] = [
     name: 'FlowWorks',
     category: 'Web App',
     platforms: ['Web', 'macOS', 'iOS', 'Android'],
-    technologies: ['React', 'TypeScript', 'Vite', 'Express', 'Prisma', 'Capacitor', 'Electron', 'Zustand'],
+    technologies: ['React', 'TypeScript', 'Vite', 'Express', 'Prisma', 'Capacitor', 'Electron', 'Zustand', 'WebSocket'],
     status: 'partial',
     visibility: 'approved',
     featured: false,
@@ -464,34 +557,40 @@ export const projects: Project[] = [
     ko: {
       tagline: '서버 없이도 돌아가는 협업 MVP.',
       shortDescription:
-        '채팅·협업·지라 스타일 프로젝트 관리를 담은 풀스택 MVP로, 무료 로컬 실행을 최우선으로 설계되었습니다.',
+        '채팅·프로젝트 관리·미니게임·자동화까지 담은 풀스택 협업 MVP입니다.',
       overview:
-        'FlowWorks는 React 웹 + Express API + 선택적 Prisma 구조 위에, 기본 스탠드얼론 모드(브라우저 저장소만으로 동작)와 무료 로컬 JSON API 모드를 제공합니다. Capacitor와 Electron으로 모바일·데스크탑 확장이 같은 코드베이스에서 이어집니다.',
+        'FlowWorks는 이메일 코드+JWT 인증, 워크스페이스·룸·메시지, 이슈·프로젝트·스프린트·태스크·댓글·링크의 지라 스타일 관리 API를 갖춘 협업 MVP입니다. 기본 스탠드얼론 모드(브라우저 저장소만)와 무료 로컬 JSON API, 선택적 Prisma 이관 구조 위에, 같은 코드베이스로 PWA·Capacitor 모바일·Electron 데스크탑을 뽑습니다. 덤으로 GameZone(2048·Flappy·Hextris·Pac-Man 내장)과 영상 생성·자동화 러너·관리 서버가 들어 있습니다.',
       howItWorks: [
         '스탠드얼론 모드에서 설치 없이 바로 씁니다.',
-        '필요하면 무료 로컬 API를 켜고 팀 데이터로 확장합니다.',
-        '같은 빌드를 PWA·모바일·데스크탑으로 패키징합니다.',
+        '필요하면 무료 로컬 API를 켜고 워크스페이스·룸·이슈로 확장합니다.',
+        '같은 빌드를 PWA·모바일·데스크탑으로 패키징하고, 쉬는 시간엔 GameZone을 엽니다.',
       ],
       developmentNotes:
-        'package.json의 dev:api:free·build:pwa·desktop:build 스크립트와 backend JSON 저장소가 확인됩니다. Prisma 스키마는 이후 유료 이전용 옵션으로 분리되어 있습니다.',
+        'server.ts의 40+ 라우트(auth·workspaces·rooms·messages·issues·projects·sprints·tasks), adminServer·WebSocket·rate-limit·Zod, standalone/pwa/websocket 서비스, GameZone·VideoGen·Automation 뷰, public/games 4종, dev:api:free·build:pwa·desktop:build 스크립트가 확인됩니다.',
       futurePlans: '프로덕션 DB 마이그레이션과 호스팅 운영 정책은 미확정으로 표기합니다.',
     },
     en: {
       tagline: 'A collaboration MVP that runs server-free.',
       shortDescription:
-        'A full-stack MVP for chat and Jira-style project work, designed to run free and local first.',
+        'A full-stack collaboration MVP spanning chat, project tracking, mini-games, and automation.',
       overview:
-        'FlowWorks pairs a React web app with an Express API and optional Prisma layer. A standalone mode runs on browser storage alone, while a free local JSON API mode extends it for teams. Capacitor and Electron package the same build for mobile and desktop.',
+        'FlowWorks is a collaboration MVP with email-code + JWT auth and Jira-style APIs across workspaces, rooms, messages, issues, projects, sprints, tasks, comments, and links. A standalone mode (browser storage only) and a free local JSON API sit under an optional Prisma migration path, while the same build ships as PWA, Capacitor mobile, and Electron desktop. Bonus: a built-in GameZone (2048, Flappy, Hextris, Pac-Man), video generation, an automation runner, and an admin server.',
       howItWorks: [
         'Start instantly in standalone mode with no setup.',
-        'Turn on the free local API to scale to team data.',
-        'Package the same build as PWA, mobile, or desktop.',
+        'Turn on the free local API to scale to workspaces, rooms, and issues.',
+        'Package the same build as PWA, mobile, or desktop — and open GameZone for breaks.',
       ],
       developmentNotes:
-        'Verified scripts: dev:api:free, build:pwa, desktop:build, plus a backend JSON store. The Prisma schema stays an optional later migration path.',
+        'Verified: 40+ routes in server.ts, adminServer, WebSocket, rate limiting, Zod, standalone/PWA/websocket services, GameZone/VideoGen/Automation views, 4 games in public/games, and dev:api:free, build:pwa, desktop:build scripts.',
       futurePlans: 'Production database migration and hosting policy are marked undecided.',
     },
     features: [
+      {
+        titleKo: '지라 스타일 관리 API',
+        titleEn: 'Jira-style tracking API',
+        bodyKo: '이슈·프로젝트·스프린트·태스크·댓글·링크와 워크스페이스·룸·메시지를 한 API에 담습니다.',
+        bodyEn: 'Issues, projects, sprints, tasks, comments, and links plus workspaces, rooms, and messages in one API.',
+      },
       {
         titleKo: '스탠드얼론 PWA',
         titleEn: 'Standalone PWA',
@@ -499,28 +598,34 @@ export const projects: Project[] = [
         bodyEn: 'Runs on browser storage alone with no API server, installable as a PWA.',
       },
       {
-        titleKo: '무료 로컬 API',
-        titleEn: 'Free local API',
-        bodyKo: '로컬 JSON 파일 저장으로 유료 DB 없이 팀 기능을 시험할 수 있습니다.',
-        bodyEn: 'A local JSON store lets teams trial features with no paid database.',
+        titleKo: '내장 GameZone',
+        titleEn: 'Built-in GameZone',
+        bodyKo: '2048·Flappy·Hextris·Pac-Man이 앱 안에 들어 있어 쉬는 시간용으로 열립니다.',
+        bodyEn: '2048, Flappy, Hextris, and Pac-Man ship inside the app for breaks.',
       },
       {
-        titleKo: '멀티 패키징',
-        titleEn: 'Multi packaging',
-        bodyKo: '같은 빌드를 Capacitor·Electron으로 모바일·데스크탑에 얹습니다.',
-        bodyEn: 'The same build ships to mobile and desktop via Capacitor and Electron.',
+        titleKo: '자동화와 영상 생성',
+        titleEn: 'Automation and video generation',
+        bodyKo: '파이썬 자동화 러너·영상 생성 뷰·관리 서버가 MVP에 딸려 있습니다.',
+        bodyEn: 'A Python automation runner, video-generation views, and an admin server ride along with the MVP.',
       },
     ],
     evidence: [
       {
-        feature: 'Standalone mode',
-        evidence: 'README standalone section + build:pwa script',
+        feature: 'Tracking + chat API',
+        evidence: 'backend/src/server.ts: auth/workspaces/rooms/messages/issues/projects/sprints/tasks routes',
         status: 'Implemented',
         confidence: 'High',
       },
       {
-        feature: 'Local JSON API',
-        evidence: 'backend/src/server.ts + FLOWWORKS_DATA_PATH',
+        feature: 'Standalone + free local API',
+        evidence: 'README standalone section + src/services/standalone + FLOWWORKS_DATA_PATH JSON store',
+        status: 'Implemented',
+        confidence: 'High',
+      },
+      {
+        feature: 'GameZone + extras',
+        evidence: 'GameZoneView, VideoGenView, AutomationView + public/games (2048, flappy, hextris, pacman)',
         status: 'Implemented',
         confidence: 'High',
       },
@@ -551,30 +656,30 @@ export const projects: Project[] = [
     ko: {
       tagline: '바이닐 문화에서 온 플레이리스트 소셜.',
       shortDescription:
-        '바이닐 문화에서 영감을 받은 크로스플랫폼 플레이리스트 소셜 앱입니다.',
+        '바이닐 감성의 크로스플랫폼 플레이리스트 소셜 앱입니다.',
       overview:
-        'Side A는 Expo 모노레포(apps/mobile·apps/api·packages)와 Cloudflare Workers + D1 구조로, 유료 음악 API나 호스팅 오디오 없이 플레이리스트 소셜을 구현합니다. 기본 실행은 허구 로컬 데모로 명확히 표기되어 있고, 핵심 API 테스트는 통과 상태로 문서화되어 있습니다.',
+        'Side A는 Expo 모노레포(apps/mobile·apps/api·packages)와 Cloudflare Workers + D1 API(auth·rooms·social·context·security, 마이그레이션 2종)로 유료 음악 API·호스팅 오디오 없이 플레이리스트 소셜을 구현합니다. 모바일은 app·features·profile·db·i18n·design·store 분리에 한/영 지원 구조이며, 기본 실행은 허구 로컬 데모로 명확히 표기되고 핵심 API 테스트가 통과 상태로 문서화되어 있습니다.',
       howItWorks: [
         '로컬 데모 모드에서 플레이리스트를 만들고 탐색합니다.',
         '로그인 연동 시 실제 계정 플로우를 시험합니다.',
         '웹 빌드를 무료 티어에 배포합니다.',
       ],
       developmentNotes:
-        'npm workspaces, typecheck·lint·vitest 게이트, docs/VALIDATION·XCODE 문서가 확인됩니다. 아직 git 저장소가 아니라는 점이 README에 명시되어 있습니다.',
+        'npm workspaces, apps/api 7개 라우트 모듈+D1 마이그레이션 2종, 모바일 src 11개 영역, typecheck·lint·vitest 게이트, docs/VALIDATION·XCODE가 확인됩니다. 아직 git 저장소가 아니라는 점이 README에 명시되어 있습니다.',
       futurePlans: '검증된 프로덕션 릴리스가 아니며 출시 QA 진행 중으로 표기합니다.',
     },
     en: {
       tagline: 'Playlist social, pressed like vinyl.',
       shortDescription: 'A cross-platform playlist social app inspired by vinyl culture.',
       overview:
-        'Side A is an Expo monorepo (apps/mobile, apps/api, packages) on Cloudflare Workers + D1 with no paid music API or hosted audio. It launches by default in a clearly labelled fictional local demo; core API tests pass per docs.',
+        'Side A is an Expo monorepo (apps/mobile, apps/api, packages) on Cloudflare Workers + D1 (auth, rooms, social, context, security; 2 migrations) with no paid music API or hosted audio. Mobile splits into app, features, profile, db, i18n, design, and store with KO/EN structure. It launches by default in a clearly labelled fictional local demo; core API tests pass per docs.',
       howItWorks: [
         'Create and explore playlists in local demo mode.',
         'Try real account flows when login is wired up.',
         'Deploy the web build to a free tier.',
       ],
       developmentNotes:
-        'Verified: npm workspaces, typecheck/lint/vitest gates, docs/VALIDATION and XCODE. The README states it is not yet a git repo.',
+        'Verified: npm workspaces, 7 API route modules + 2 D1 migrations, 11 mobile src areas, typecheck/lint/vitest gates, docs/VALIDATION and XCODE. The README states it is not yet a git repo.',
       futurePlans: 'Marked as not a verified production release; release QA in progress.',
     },
     features: [
@@ -587,8 +692,8 @@ export const projects: Project[] = [
       {
         titleKo: '무료 서버 구조',
         titleEn: 'Free-tier backend',
-        bodyKo: 'Cloudflare Workers + D1 조합으로 유료 의존 없이 설계되었습니다.',
-        bodyEn: 'Cloudflare Workers + D1 with no paid dependencies by design.',
+        bodyKo: 'Workers + D1와 2종 마이그레이션으로 유료 의존 없이 설계되었습니다.',
+        bodyEn: 'Workers + D1 with 2 migrations and no paid dependencies by design.',
       },
       {
         titleKo: '검증 문서화',
@@ -599,16 +704,16 @@ export const projects: Project[] = [
     ],
     evidence: [
       {
-        feature: 'Monorepo structure',
-        evidence: 'package.json workspaces apps/* packages/*',
+        feature: 'Monorepo + API',
+        evidence: 'workspaces apps/* packages/* + apps/api/src (auth, rooms, social, context, security) + 2 D1 migrations',
         status: 'Implemented',
         confidence: 'High',
       },
       {
-        feature: 'Core API tests',
-        evidence: 'docs/VALIDATION.md (per README)',
-        status: 'Partially Implemented',
-        confidence: 'Medium',
+        feature: 'Mobile structure',
+        evidence: 'apps/mobile/src: app, features, profile, db, i18n, design, store (+ react-native-web for web builds)',
+        status: 'Implemented',
+        confidence: 'High',
       },
       {
         feature: 'Production release',
@@ -622,9 +727,9 @@ export const projects: Project[] = [
     id: 'recordflow',
     slug: 'recordflow',
     name: 'RecordFlow',
-    category: 'Mobile App',
+    category: 'AI App',
     platforms: ['iOS', 'Android'],
-    technologies: ['Expo', 'React Native', 'TypeScript', 'React Navigation'],
+    technologies: ['Expo', 'React Native', 'TypeScript', 'React Navigation', 'On-device AI'],
     status: 'partial',
     visibility: 'approved',
     featured: false,
@@ -635,58 +740,70 @@ export const projects: Project[] = [
     demoUrl: null,
     updatedAt: '2026-10-11',
     ko: {
-      tagline: '기록의 흐름을 가볍게.',
+      tagline: '기록을 읽고, 질문을 만들고, 그래프로 잇다.',
       shortDescription:
-        '가볍게 기록하고 흐름으로 되돌아보는 Expo 기반 모바일 기록 앱입니다.',
+        '온디바이스 AI 학습 도구를 품은 Expo 기록·학습 앱입니다.',
       overview:
-        'RecordFlow는 Expo + React Navigation 탭 구조 위에 파일 시스템 기반 기록 흐름을 얹은 초기 단계 프로젝트입니다. 확인된 의존성은 expo-file-system·blur·safe-area로, 무거운 서버 없이 기기 저장을 전제로 합니다.',
+        'RecordFlow는 하단 탭의 기록 흐름 위에 로컬 AI 학습 엔진을 얹은 앱입니다. LocalAIManager·ModelRegistry·providers 구조의 모델 관리와 요약·코넬식 노트·플래시카드·퀴즈·Ask AI·청킹·프롬프트 빌더가 src/ai에 들어 있고, 홈·학습·라이브러리·지식 그래프·설정 화면, 오피스/파일 가져오기 미리보기와 내보내기, 협업 영역까지 확인됩니다. 번들 ID와 portrait·태블릿·엣지투엣지 설정이 app.json에 정리되어 있습니다.',
       howItWorks: [
-        '탭을 오가며 기록을 남깁니다.',
-        '저장된 흐름을 시간 순으로 확인합니다.',
-        '필요한 기록을 다시 꺼내 씁니다.',
+        '홈·학습 탭에서 기록을 남기고 파일을 가져옵니다.',
+        '로컬 AI로 요약·코넬 노트·플래시카드·퀴즈를 뽑고 지식 그래프로 잇습니다.',
+        '라이브러리에서 되돌아보고 필요할 때 내보내거나 함께 씁니다.',
       ],
       developmentNotes:
-        'package.json(Expo 54 + React Navigation 7)과 src 존재가 확인되나, 상세 기능 문서는 부족해 부분 구현으로 표기합니다.',
-      futurePlans: '기능 문서화와 실행 검증이 남은 상태입니다.',
+        'src 20+ 영역(screens 5종·ai/localAI 10+ 모듈·import·export·collaboration·services·navigation 등)과 Expo 54 + React Navigation 7이 확인되나, README가 없어 성숙도는 부분 구현으로 표기합니다.',
+      futurePlans: '기능 문서화와 실행 검증, 모델 제공자 연결 상태 확인이 남은 상태입니다.',
     },
     en: {
-      tagline: 'Lightweight logging, gentle flow.',
-      shortDescription: 'An early-stage Expo mobile logger built around a gentle timeline flow.',
+      tagline: 'Read logs, mint quizzes, link the graph.',
+      shortDescription: 'An Expo logging and study app with on-device AI study tools.',
       overview:
-        'RecordFlow is an early Expo + React Navigation tab app with a file-system-backed log flow. Verified dependencies (expo-file-system, blur, safe-area) point at on-device storage with no heavy server.',
+        'RecordFlow layers a local-AI study engine over a tabbed log flow. Source shows model management (LocalAIManager, ModelRegistry, providers) with summarization, Cornell notes, flashcards, quizzes, Ask AI, chunking, and prompt building in src/ai — plus Home, Learning, Library, Knowledge-Graph, and Settings screens, office/file import previews, export, and collaboration areas. Bundle ID and portrait/tablet/edge-to-edge settings live in app.json.',
       howItWorks: [
-        'Capture logs across tabs.',
-        'Review the saved flow chronologically.',
-        'Pull records back up when needed.',
+        'Capture logs and import files from Home and Learning tabs.',
+        'Mint summaries, Cornell notes, flashcards, and quizzes with local AI and link them in the knowledge graph.',
+        'Revisit in the library, then export or collaborate as needed.',
       ],
       developmentNotes:
-        'Verified: Expo 54 + React Navigation 7 with src present. Feature docs are thin, so this is marked partial.',
-      futurePlans: 'Feature documentation and run verification remain.',
+        'Verified: 20+ src areas (5 screens, 10+ ai/localAI modules, import, export, collaboration, services, navigation) with Expo 54 + React Navigation 7. No README exists, so maturity is marked partial.',
+      futurePlans: 'Feature docs, run verification, and provider wiring checks remain.',
     },
     features: [
       {
-        titleKo: '탭 기반 기록',
-        titleEn: 'Tab-based logging',
-        bodyKo: '하단 탭 구조로 빠르게 기록을 남깁니다.',
-        bodyEn: 'Bottom-tab structure for fast capture.',
+        titleKo: '로컬 AI 학습 엔진',
+        titleEn: 'Local AI study engine',
+        bodyKo: '요약·코넬 노트·플래시카드·퀴즈·Ask AI를 기기 측 구조에서 뽑습니다.',
+        bodyEn: 'Summaries, Cornell notes, flashcards, quizzes, and Ask AI from an on-device-side structure.',
       },
       {
-        titleKo: '기기 저장 전제',
-        titleEn: 'On-device storage',
-        bodyKo: '파일 시스템 의존으로 로컬 저장을 전제로 설계되었습니다.',
-        bodyEn: 'File-system dependencies assume local storage.',
+        titleKo: '지식 그래프',
+        titleEn: 'Knowledge graph',
+        bodyKo: '기록과 학습 카드를 그래프로 이어 관계로 되돌아봅니다.',
+        bodyEn: 'Link logs and study cards in a graph to revisit by relation.',
+      },
+      {
+        titleKo: '가져오기·내보내기',
+        titleEn: 'Import and export',
+        bodyKo: '오피스·파일 미리보기 가져오기와 내보내기, 협업 영역을 갖춥니다.',
+        bodyEn: 'Office/file import previews, export, and collaboration areas included.',
       },
     ],
     evidence: [
       {
-        feature: 'Navigation shell',
-        evidence: 'package.json: React Navigation 7 + expo',
+        feature: 'AI services',
+        evidence: 'src/ai/localAI: LocalAIManager, ModelRegistry, providers + Summary/CornellNote/Flashcard/Quiz/AskAI/Chunking/PromptBuilder',
         status: 'Partially Implemented',
         confidence: 'Medium',
       },
       {
-        feature: 'Full feature set',
-        evidence: 'No feature docs verified',
+        feature: 'Screens + flows',
+        evidence: 'src/screens: Home, Learning, Library, KnowledgeGraph, Settings + import/export/collaboration dirs',
+        status: 'Partially Implemented',
+        confidence: 'Medium',
+      },
+      {
+        feature: 'Release readiness',
+        evidence: 'No README or run capture verified',
         status: 'Unverified',
         confidence: 'High',
       },
@@ -698,7 +815,7 @@ export const projects: Project[] = [
     name: 'Cyworld 2026',
     category: 'Web App',
     platforms: ['Web', 'iOS', 'Android'],
-    technologies: ['Next.js 16', 'React 19', 'Tailwind CSS', 'Prisma', 'Capacitor', 'next-auth'],
+    technologies: ['Next.js 16', 'React 19', 'Tailwind CSS', 'Prisma', 'next-auth', 'Capacitor', 'Framer Motion'],
     status: 'partial',
     visibility: 'approved',
     featured: false,
@@ -711,50 +828,62 @@ export const projects: Project[] = [
     ko: {
       tagline: '미니홈피 감성의 현대적 재해석.',
       shortDescription:
-        '미니홈피 감성을 Next.js와 Capacitor로 다시 만든 레트로 소셜 웹 프로젝트입니다.',
+        '미니홈피·미니룸 감성을 Next.js로 다시 만든 레트로 소셜 프로젝트입니다.',
       overview:
-        'Cyworld 2026(패키지명 vibesphere-2026)은 Next.js 16 + Prisma + next-auth 구조에 Capacitor를 얹어 웹·모바일 확장을 노립니다. 미니룸·방명록 계열의 소셜 흐름이 소스 구조에 드러나나, 완성도는 초기 단계로 표기합니다.',
+        'Cyworld 2026(패키지·브랜드 VIBESPHERE 2026)은 랜딩·로그인·회원가입·닉네임 미니홈피·아바타 라우트와 픽셀아트 로고·Framer Motion 랜딩을 갖춘 Next.js 16 앱입니다. Prisma·next-auth·미들웨어의 계정 기반에 Capacitor+iOS·Android·Expo 셸(mobile/)의 모바일 확장을 얹고, Docker· )/dev.db 등 로컬 개발 흔적이 확인되는 초기 단계 프로젝트입니다.',
       howItWorks: [
-        '웹에서 미니홈피를 꾸미고 글을 남깁니다.',
-        'Capacitor 빌드로 모바일 셸에 얹습니다.',
-        '지인 흐름으로 확장합니다.',
+        '랜딩에서 들어와 로그인·회원가입으로 계정을 만듭니다.',
+        '닉네임 미니홈피와 아바타·미니룸을 꾸밉니다.',
+        '모바일 셸 빌드로 폰에서도 이어 씁니다.',
       ],
       developmentNotes:
-        'package.json(Next 16, Prisma, Capacitor, next-auth)과 ios·android·capacitor.config.ts 존재가 확인됩니다.',
+        'app 6개 라우트·api·middleware, Prisma·next-auth·Capacitor 의존성과 ios/·android/·mobile/ 존재, Docker 파일이 확인됩니다. out/ 정적 산출물은 0바이트로 무효해 dev 서버 캡처로 전환했습니다.',
       futurePlans: '인증·DB 운영 정책과 모바일 빌드 검증이 남은 상태입니다.',
     },
     en: {
       tagline: 'Mini-homepage nostalgia, rebuilt modern.',
-      shortDescription: 'A retro-social web project rebuilding mini-homepage vibes with Next.js and Capacitor.',
+      shortDescription: 'A retro-social project rebuilding mini-homepage and mini-room vibes with Next.js.',
       overview:
-        'Cyworld 2026 (package: vibesphere-2026) pairs Next.js 16 + Prisma + next-auth with Capacitor for web-to-mobile reach. Mini-room and guestbook-style social flows appear in structure, but maturity is early.',
+        'Cyworld 2026 (package and brand: VIBESPHERE 2026) is a Next.js 16 app with landing, login, signup, nickname mini-homepage, and avatar routes plus a pixel-art logo and Framer Motion landing. Account foundations (Prisma, next-auth, middleware) pair with mobile reach via Capacitor, iOS, Android, and an Expo shell (mobile/). Early stage, with local dev traces (Docker, dev DB) present.',
       howItWorks: [
-        'Decorate a mini homepage and leave posts on the web.',
-        'Wrap it in a mobile shell via Capacitor builds.',
-        'Grow it through friend flows.',
+        'Enter via landing, then sign up or log in.',
+        'Decorate a nickname mini-homepage with avatar and mini-room.',
+        'Continue on phones via mobile-shell builds.',
       ],
       developmentNotes:
-        'Verified: Next 16, Prisma, Capacitor, next-auth in package.json with ios/, android/, capacitor.config.ts present.',
+        'Verified: 6 app routes, api, middleware, Prisma/next-auth/Capacitor deps, ios/, android/, mobile/ presence, Docker files. The out/ static artifact was 0 bytes (stale), so capture switched to the dev server.',
       futurePlans: 'Auth, database policy, and mobile build verification remain.',
     },
     features: [
       {
         titleKo: '미니홈피 소셜',
         titleEn: 'Mini-homepage social',
-        bodyKo: '꾸미기와 방명록 흐름의 레트로 소셜을 지향합니다.',
-        bodyEn: 'Retro social around decorating and guestbooks.',
+        bodyKo: '닉네임 홈·아바타·미니룸 꾸미기와 랜딩의 레트로 소셜을 지향합니다.',
+        bodyEn: 'Retro social around nickname homes, avatars, mini-rooms, and landing.',
+      },
+      {
+        titleKo: '계정 기반 구조',
+        titleEn: 'Account foundations',
+        bodyKo: '회원가입·로그인·미들웨어·Prisma를 갖춘 실제 서비스형 뼈대입니다.',
+        bodyEn: 'Real service skeleton with signup, login, middleware, and Prisma.',
       },
       {
         titleKo: '웹-모바일 확장',
         titleEn: 'Web-to-mobile',
-        bodyKo: 'Capacitor로 같은 웹을 모바일 셸에 얹습니다.',
-        bodyEn: 'The same web ships in a mobile shell via Capacitor.',
+        bodyKo: 'Capacitor와 Expo 셸로 같은 웹을 모바일에 얹습니다.',
+        bodyEn: 'The same web ships to mobile via Capacitor and an Expo shell.',
       },
     ],
     evidence: [
       {
-        feature: 'Web + Capacitor shell',
-        evidence: 'capacitor.config.ts + ios/ + android/',
+        feature: 'Routes + landing',
+        evidence: 'app/: page, landing, login, signup, [nickname], avatar + pixel-art logo + framer-motion',
+        status: 'Partially Implemented',
+        confidence: 'Medium',
+      },
+      {
+        feature: 'Mobile reach',
+        evidence: 'capacitor.config.ts + ios/ + android/ + mobile/ Expo shell',
         status: 'Partially Implemented',
         confidence: 'Medium',
       },
@@ -787,7 +916,7 @@ export const projects: Project[] = [
       shortDescription:
         '펜슬 필기·PDF 주석·블록 에디터를 한곳에 모으려는 iPad 네이티브 학습 노트 기획입니다.',
       overview:
-        'FlowNote(PDFLOW)는 Apple Pencil 필기와 PDF 주석, Notion식 블록 편집, 온디바이스 학습 도구를 지향합니다. 다만 README가 현재 빌드·실행 불가 상태임을 명시하고 있어, DESKSHOW에서는 기획(Planned)으로만 표기합니다.',
+        'FlowNote(PDFLOW)는 Apple Pencil 정밀 필기와 PDF 주석, Notion식 블록 편집, 온디바이스 학습 도구(요약·플래시카드·퀴즈·지식 그래프)를 노리는 기획입니다. docs 45종 아키텍처와 apps/ipad 스켈레톤·공유 contracts 패키지가 있으나, README가 현재 빌드·실행 불가 상태임을 명시해 DESKSHOW에서는 기획(Planned)으로만 표기합니다.',
       howItWorks: [
         '기획 문서와 스펙을 먼저 확정합니다.',
         '빌드 가능 상태가 되면 실행 화면을 확보합니다.',
@@ -795,14 +924,14 @@ export const projects: Project[] = [
       ],
       developmentNotes:
         'docs 아키텍처와 apps/ipad 스켈레톤은 있으나, 빌드 불가 상태가 README에 명시되어 있습니다. 실행된 것처럼 소개하지 않습니다.',
-      futurePlans: '빌드 복구가 최우선이며, 그 전까지 공개하지 않습니다.',
+      futurePlans: '빌드 복구가 최우선이며, 그 전까지 공개 범위도 기획으로 유지합니다.',
     },
     en: {
       tagline: 'A local-first iPad study-note experiment.',
       shortDescription:
         'An iPad-native study-note concept combining pencil, PDF, and block editing.',
       overview:
-        'FlowNote (PDFLOW) aims at Pencil notes, PDF annotation, Notion-like blocks, and on-device study tools. Its README states it cannot currently build or run, so DESKSHOW lists it as Planned only.',
+        'FlowNote (PDFLOW) aims at precision Pencil notes, PDF annotation, Notion-like blocks, and on-device study tools (summaries, flashcards, quizzes, knowledge graphs). Architecture docs (45 files), an apps/ipad skeleton, and shared contract packages exist — but the README states it cannot currently build or run, so DESKSHOW lists it as Planned only.',
       howItWorks: [
         'Finalize specs and architecture docs first.',
         'Capture real screens once it builds.',
@@ -810,7 +939,7 @@ export const projects: Project[] = [
       ],
       developmentNotes:
         'Docs and an apps/ipad skeleton exist, but the README marks it not buildable. It is not presented as running.',
-      futurePlans: 'Build recovery comes first; no public launch before that.',
+      futurePlans: 'Build recovery comes first; the listing stays Planned until then.',
     },
     features: [
       {
@@ -823,7 +952,7 @@ export const projects: Project[] = [
     evidence: [
       {
         feature: 'Buildable app',
-        evidence: 'README: NOT READY / cannot build or run',
+        evidence: 'README: NOT READY / cannot build or run + docs/ (45 files) + apps/ipad skeleton',
         status: 'Planned',
         confidence: 'High',
       },
@@ -834,9 +963,9 @@ export const projects: Project[] = [
     slug: 'rodeblockrush',
     name: 'RodeblockRush',
     category: 'Game',
-    platforms: ['macOS', 'Web'],
-    technologies: ['Godot', 'GDScript'],
-    status: 'unverified',
+    platforms: ['macOS', 'Mobile'],
+    technologies: ['Godot 4.7', 'GDScript'],
+    status: 'in-development',
     visibility: 'approved',
     featured: false,
     icon: 'icons/rodeblockrush.svg',
@@ -846,36 +975,70 @@ export const projects: Project[] = [
     demoUrl: null,
     updatedAt: '2026-10-11',
     ko: {
-      tagline: 'Godot 러너 프로토타입.',
+      tagline: '세로 화면 무한 드라이빙.',
       shortDescription:
-        'Godot 프로젝트 구조가 확인되는 러너 계열 게임 프로토타입입니다.',
+        '차고·미션·29대 수집으로 완성된 Godot 세로형 무한 레이싱입니다.',
       overview:
-        'RodeblockRush는 project.godot와 Godot 폴더 구조가 확인되나, 플레이 루프·에셋·실행 화면은 아직 검증하지 못했습니다. DESKSHOW에서는 미확인(Unverified)으로 표기하고 가짜 화면을 쓰지 않습니다.',
-      howItWorks: ['프로젝트 실행 검증이 필요합니다.', '실행 화면 확보 후 소개를 갱신합니다.'],
-      developmentNotes: 'project.godot 존재만 확인됨. 상세 분석은 스캔 후속 단계로 미뤄졌습니다.',
-      futurePlans: '실행 검증과 장르·조작 문서화가 필요합니다.',
+        'ROADBLOCK RUSH는 Godot 4.7·GDScript의 세로형 모바일 무한 드라이빙입니다. 스플래시→타이틀→차고/카드→6개 바이옴 3차선 트래픽·코인·위험·시간 이벤트→아차·플로우·부스트·완벽 회피→충돌→미션 정산·카드 드롭→29대 중 구매→재도전의 완성 루프를 갖추고, 사운드트랙과 효과음을 전부 실행 중 합성합니다. 합성 터치의 자동 스모크 190 어설션이 전부 통과 상태입니다.',
+      howItWorks: [
+        'Godot에서 열어 F5로 실행합니다(첫 클론은 임포트 패스 1회).',
+        '화면 좌우·A/D·스와이프로 조향하며 코인·미션을 모읍니다.',
+        '카드를 모아 29대 중 다음 차를 사고 재도전합니다.',
+      ],
+      developmentNotes:
+        'scenes(environment·game·garage·main·road·traffic·ui·vehicles)와 scripts(audio·core·flow·mobile·obstacles·pickups·player·progression·save·score·traffic·ui) 분리, tests/SmokeTest, 저장소 복구 프로브(옵트인)가 확인됩니다. MacBook Pro와 PROJECT에 동명 폴더가 있어 중복으로 기록합니다.',
+      futurePlans: '릴리스 익스포트 검증과 실행 화면 확보가 남은 상태입니다.',
     },
     en: {
-      tagline: 'A Godot runner prototype.',
-      shortDescription: 'A runner-style game prototype with a verified Godot project structure.',
+      tagline: 'Portrait endless driving.',
+      shortDescription: 'A Godot portrait endless racer with garage, missions, and 29 collectible cars.',
       overview:
-        'RodeblockRush has a verified project.godot and Godot folder layout, but its loop, assets, and runnable screens are not yet verified. DESKSHOW lists it as Unverified with no fake screens.',
-      howItWorks: ['Run verification is needed.', 'The write-up updates after real captures.'],
-      developmentNotes: 'Only project.godot verified so far; deeper analysis is deferred to a later scan.',
-      futurePlans: 'Run verification plus genre and control documentation are needed.',
+        'ROADBLOCK RUSH is a portrait mobile endless driver in Godot 4.7 and GDScript. Its finished loop runs splash → title → garage/cards → six biomes of 3-lane traffic, coins, hazards, and timed events → near miss → flow → boost → perfect dodge → crash → mission settlement and card drops → buying from 29 cars → retry. Soundtrack and effects are synthesized at runtime. An automated smoke test (190 assertions, synthetic touch) is green.',
+      howItWorks: [
+        'Open in Godot and press F5 (one import pass on fresh clones).',
+        'Steer via screen halves, A/D keys, or swipe while collecting coins and missions.',
+        'Spend cards on the next of 29 cars and retry.',
+      ],
+      developmentNotes:
+        'Verified split: scenes (environment, game, garage, main, road, traffic, ui, vehicles) and scripts (audio, core, flow, mobile, obstacles, pickups, player, progression, save, score, traffic, ui), tests/SmokeTest, opt-in save-recovery probes. Duplicate folders exist in MacBook Pro and PROJECT — recorded as one entry.',
+      futurePlans: 'Release-export verification and real captures remain.',
     },
     features: [
       {
-        titleKo: '구조 확인됨',
-        titleEn: 'Structure verified',
-        bodyKo: 'Godot 프로젝트 파일이 존재합니다.',
-        bodyEn: 'A Godot project file exists.',
+        titleKo: '완성형 무한 루프',
+        titleEn: 'Finished endless loop',
+        bodyKo: '차고·6 바이옴·미션·카드·수집이 맞물린 feature-complete 루프입니다.',
+        bodyEn: 'A feature-complete loop meshing garage, six biomes, missions, cards, and collection.',
+      },
+      {
+        titleKo: '실행 중 합성 오디오',
+        titleEn: 'Runtime-synthesized audio',
+        bodyKo: '음악과 효과음을 전부 실행 중에 합성해 에셋 없이 냅니다.',
+        bodyEn: 'Music and effects are synthesized at runtime with no audio assets.',
+      },
+      {
+        titleKo: '190 어설션 스모크',
+        titleEn: '190-assertion smoke test',
+        bodyKo: '메뉴→주행→충돌→재도전 흐름을 합성 터치로 검증하고 전부 통과 중입니다.',
+        bodyEn: 'Menu → drive → crash → retry flows verified with synthetic touch — all green.',
       },
     ],
     evidence: [
       {
-        feature: 'Playable build',
-        evidence: 'project.godot only; no run captured',
+        feature: 'Game loop + content',
+        evidence: 'README loop description + scenes/ (8 areas) + scripts/ (13 areas)',
+        status: 'Implemented',
+        confidence: 'High',
+      },
+      {
+        feature: 'Automated verification',
+        evidence: 'tests/SmokeTest.tscn: 190 non-destructive assertions, all green per README',
+        status: 'Implemented',
+        confidence: 'Medium',
+      },
+      {
+        feature: 'Shipped build',
+        evidence: 'No export/capture verified',
         status: 'Unverified',
         confidence: 'High',
       },
@@ -885,10 +1048,10 @@ export const projects: Project[] = [
     id: 'blanky',
     slug: 'blanky',
     name: 'BLANKY',
-    category: 'Mobile App',
+    category: 'Game',
     platforms: ['iOS', 'Android'],
     technologies: ['Flutter', 'Dart'],
-    status: 'unverified',
+    status: 'in-development',
     visibility: 'approved',
     featured: false,
     icon: 'icons/blanky.png',
@@ -898,36 +1061,70 @@ export const projects: Project[] = [
     demoUrl: null,
     updatedAt: '2026-10-11',
     ko: {
-      tagline: 'Flutter 구조가 확인된 초기 프로젝트.',
+      tagline: '빈칸 하나로 터지는 우리 이야기.',
       shortDescription:
-        'Flutter 앱 구조(pubspec·lib·android·ios)가 확인되는 초기 단계 프로젝트입니다.',
+        '20가지 파티 게임을 담은 Flutter 크로스플랫폼 파티 게임입니다.',
       overview:
-        'BLANKY는 Flutter 프로젝트 뼈대가 확인되나, 기능·화면·상태는 아직 검증하지 못했습니다. 성급하게 소개하지 않고 미확인으로 표기합니다.',
-      howItWorks: ['상세 스캔 후 소개를 작성합니다.'],
-      developmentNotes: 'pubspec.yaml·lib 존재만 확인됨.',
-      futurePlans: '코드 분석과 실행 검증이 필요합니다.',
+        'BLANKY(블랭키)는 모두에게 같은 빈칸을 주고 익명 답변·투표·득점으로 빈칸왕을 가리는 파티 게임입니다. 빈칸 채우기·이어 말하기·퀴즈·밸런스·타자·초성·이 방의 누구·거짓말 사전·다른 질문·시간 맞히기·끝말잇기·그림·라이어·마피아 등 20종과 방·로비·온보딩·결과·저널·가이드 흐름, custom·game·home·lobby·room·result·journal·settings 기능 분리가 확인됩니다.',
+      howItWorks: [
+        '방을 만들고 함께 들어갑니다.',
+        '20가지 중 고른 게임으로 빈칸·퀴즈·그림 대결을 펼칩니다.',
+        '투표·득점으로 라운드를 쌓고 빈칸왕을 가립니다.',
+      ],
+      developmentNotes:
+        'lib(features 9종·game·core·data·models·networking·services·widgets)와 상세 README 게임 목록, 앱 아이콘·스플래시 브랜딩이 확인됩니다. 실행 캡처는 아직 없습니다.',
+      futurePlans: '실행 검증과 멀티플레이 연결 방식 문서화가 남은 상태입니다.',
     },
     en: {
-      tagline: 'An early Flutter project, structure verified.',
-      shortDescription: 'An early-stage project with a verified Flutter structure.',
+      tagline: 'One blank, endless stories.',
+      shortDescription: 'A Flutter cross-platform party game packing 20 party games.',
       overview:
-        'BLANKY has a verified Flutter skeleton (pubspec, lib, android, ios), but features, screens, and status are not yet verified. It stays Unverified until a deeper scan.',
-      howItWorks: ['A write-up follows a deeper scan.'],
-      developmentNotes: 'Only pubspec.yaml and lib verified so far.',
-      futurePlans: 'Code analysis and run verification are needed.',
+        'BLANKY deals everyone the same fill-in-the-blank, reveals answers anonymously in random order, votes for favorites, and crowns a blank-master by score. Source shows 20 games (blanks, story chains, quizzes, balance, typing, choseong, who-in-room, lie dictionary, odd-one-out, time guessing, word chains, drawing, liar, mafia, and more) with room, lobby, onboarding, results, journal, and guide flows across 9 feature areas.',
+      howItWorks: [
+        'Create a room and gather everyone in.',
+        'Pick from 20 games for blank, quiz, and drawing battles.',
+        'Stack rounds through votes and scores to crown the blank-master.',
+      ],
+      developmentNotes:
+        'Verified: lib (9 features, game, core, data, models, networking, services, widgets), a detailed README game list, and app-icon/splash branding. No run capture yet.',
+      futurePlans: 'Run verification and multiplayer wiring docs remain.',
     },
     features: [
       {
-        titleKo: '구조 확인됨',
-        titleEn: 'Structure verified',
-        bodyKo: 'Flutter 기본 구조가 존재합니다.',
-        bodyEn: 'A base Flutter structure exists.',
+        titleKo: '20가지 파티 게임',
+        titleEn: '20 party games',
+        bodyKo: '빈칸·이야기·퀴즈·밸런스·타자·초성·그림·라이어·마피아까지 한 방에 담습니다.',
+        bodyEn: 'Blanks, stories, quizzes, balance, typing, choseong, drawing, liar, and mafia in one room.',
+      },
+      {
+        titleKo: '익명 투표 라운드',
+        titleEn: 'Anonymous voting rounds',
+        bodyKo: '작성자를 숨기고 무작위 순서로 공개해 가장 마음에 드는 답을 뽑습니다.',
+        bodyEn: 'Authors stay hidden while answers reveal in random order for fair votes.',
+      },
+      {
+        titleKo: '방·로비 흐름',
+        titleEn: 'Room and lobby flow',
+        bodyKo: '온보딩·로비·결과·저널·가이드가 파티의 처음과 끝을 묶습니다.',
+        bodyEn: 'Onboarding, lobby, results, journal, and guide wrap each party.',
       },
     ],
     evidence: [
       {
-        feature: 'Feature set',
-        evidence: 'No feature code reviewed yet',
+        feature: 'Game roster',
+        evidence: 'README: 20 games listed + lib/features (custom, game, guide, home, journal, lobby, onboarding, result, room)',
+        status: 'Implemented',
+        confidence: 'Medium',
+      },
+      {
+        feature: 'Brand assets',
+        evidence: 'assets/branding: app_icon, splash logos + public icon copy',
+        status: 'Implemented',
+        confidence: 'High',
+      },
+      {
+        feature: 'Playable verification',
+        evidence: 'No run capture verified',
         status: 'Unverified',
         confidence: 'High',
       },

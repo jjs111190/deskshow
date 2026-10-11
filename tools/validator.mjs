@@ -57,9 +57,16 @@ ok('visibility flags explicit (nothing auto-published by tooling)');
 if (src.includes('localhost') || src.includes('192.168.')) fail('internal host leak in projects.ts');
 else ok('no internal host leak');
 
-// 4. Screenshots honesty: every screenshots: [] is fine (CONCEPT UI). Non-empty must reference public/
-const nonEmpty = (src.match(/screenshots: \[[^\]]/g) ?? []).length;
-ok(`screenshot honesty check (${nonEmpty} non-empty arrays — must point at public/ if any)`);
+// 4. Screenshots honesty: non-empty entries must reference public/ bundle paths
+const shotSrcs = [...src.matchAll(/src: '([^']+)'/g)].map((m) => m[1]);
+let shotCount = 0;
+for (const ssrc of shotSrcs) {
+  if (ssrc.startsWith('screenshots/') || ssrc.startsWith('icons/')) {
+    shotCount++;
+    if (!existsSync('public/' + ssrc)) fail(`screenshot file missing: public/${ssrc}`);
+  }
+}
+ok(`screenshot honesty check (${shotCount} bundled real shots, files verified)`);
 
 // 5. Required public files
 for (const f of ['public/robots.txt', 'public/favicon.svg', 'index.html', '.github/workflows/deploy.yml']) {
