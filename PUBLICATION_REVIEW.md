@@ -5,15 +5,15 @@
 
 | # | Project | Status shown | Screenshots | Links shown | Approve? |
 |---|---------|--------------|-------------|-------------|----------|
-| 1 | HANDY | 개발 중 (In development) | 실화면 1 (온보딩) | none | [x] |
-| 2 | Spotory | 개발 중 | 실화면 1 (지도) | none | [x] |
+| 1 | HANDY | 개발 중 (In development) | 실화면 2 (온보딩·런치아트) | none | [x] |
+| 2 | Spotory | 개발 중 | 실화면 9 (지도+홍보 8) | none | [x] |
 | 3 | VIBLOG | 개발 중 | 실화면 1 (로그인) | none | [x] |
 | 4 | Chain Zero | 개발 중 | 실화면 1 (홈) | none | [x] |
 | 5 | RECEIPT | 개발 중 | 실화면 1 (온보딩) | none | [x] |
 | 6 | FlowWorks | 부분 구현 (Partial) | CONCEPT (환경 한계, 사유 기록) | none | [x] |
-| 7 | Side A | 개발 중 (출시 QA 중, 미검증 릴리스 명시) | 실화면 3 (로그인·회원가입·한국어) | none | [x] |
-| 8 | RecordFlow | 부분 구현 (AI 학습) | 브랜드 에셋 1 (실행 캡처 아님 명시) | none | [x] |
-| 9 | Cyworld 2026 | 부분 구현 | CONCEPT (환경 한계, 사유 기록) | none | [x] |
+| 7 | Side A | 개발 중 (출시 QA 중, 미검증 릴리스 명시) | 실화면 4 (로그인·회원가입·한국어·브랜드) | none | [x] |
+| 8 | RecordFlow | 부분 구현 (AI 학습) | 브랜드 에셋 2 (실행 캡처 아님 명시) | none | [x] |
+| 9 | Cyworld 2026 | 부분 구현 | 미니룸 에셋 6 (실행 캡처 아님 명시) | none | [x] |
 | 10 | FlowNote | 기획 (Planned, 빌드 실패 확인) | CONCEPT | none | [x] |
 | 11 | RodeblockRush | 개발 중 (루프 완성, 테스트 통과) | 스플래시 에셋 1 (실행 캡처 아님 명시) | none | [x] |
 | 12 | BLANKY | 개발 중 (20종 파티게임) | 스플래시 에셋 1 (실행 캡처 아님 명시) | none | [x] |
