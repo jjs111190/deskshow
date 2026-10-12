@@ -104,8 +104,8 @@ export function Demo() {
         <>
           <p className="prose muted">
             {lang === 'ko'
-              ? 'Chain Zero에 들어 있는 실제 SUMPLETE 엔진을 브라우저에서 그대로 돌립니다. 원본 코드는 손대지 않고 읽기만 참조합니다.'
-              : 'Runs the real SUMPLETE engine from Chain Zero in your browser. The original code is only read, never modified.'}
+              ? 'Chain Zero의 실제 SUMPLETE 엔진을 브라우저에서 그대로 돌립니다. 승인받아 복제한 엔진 코드로, 원본 프로젝트는 손대지 않았습니다.'
+              : 'Runs the real SUMPLETE engine from Chain Zero in your browser — vendored with approval; the original project is untouched.'}
           </p>
           <ChainZeroDemo />
         </>
