@@ -55,12 +55,23 @@ export function Home() {
             </div>
             <div className="shot" style={{ padding: first.screenshots.length > 0 ? 0 : 16 }}>
               {first.screenshots.length > 0 ? (
-                <img
-                  className="shot-img"
-                  src={`${import.meta.env.BASE_URL}${first.screenshots[0].src}`}
-                  alt={lang === 'ko' ? first.screenshots[0].altKo : first.screenshots[0].altEn}
-                  loading="lazy"
-                />
+                first.screenshots[0].frame === 'phone' ? (
+                  <span className="device-frame" style={{ margin: 12 }}>
+                    <img
+                      className="shot-img"
+                      src={`${import.meta.env.BASE_URL}${first.screenshots[0].src}`}
+                      alt={lang === 'ko' ? first.screenshots[0].altKo : first.screenshots[0].altEn}
+                      loading="lazy"
+                    />
+                  </span>
+                ) : (
+                  <img
+                    className="shot-img"
+                    src={`${import.meta.env.BASE_URL}${first.screenshots[0].src}`}
+                    alt={lang === 'ko' ? first.screenshots[0].altKo : first.screenshots[0].altEn}
+                    loading="lazy"
+                  />
+                )
               ) : (
                 <span>
                   <span className="badge-concept">{s.concept}</span>

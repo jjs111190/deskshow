@@ -114,12 +114,23 @@ export function ProjectDetail() {
               onClick={() => setLightbox(shotUrl(shot.src))}
               aria-label={`open screenshot ${i + 1}`}
             >
-              <img
-                className="shot-img"
-                src={shotUrl(shot.src)}
-                alt={lang === 'ko' ? shot.altKo : shot.altEn}
-                loading="lazy"
-              />
+              {shot.frame === 'phone' ? (
+                <span className="device-frame">
+                  <img
+                    className="shot-img"
+                    src={shotUrl(shot.src)}
+                    alt={lang === 'ko' ? shot.altKo : shot.altEn}
+                    loading="lazy"
+                  />
+                </span>
+              ) : (
+                <img
+                  className="shot-img"
+                  src={shotUrl(shot.src)}
+                  alt={lang === 'ko' ? shot.altKo : shot.altEn}
+                  loading="lazy"
+                />
+              )}
             </button>
           ))}
           {p.screenshots.length === 0 && (

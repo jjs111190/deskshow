@@ -110,6 +110,12 @@ select.search { flex: 0 1 auto; }
 .gallery .shot { scroll-snap-align: start; }
 .shot-img { width: auto; height: auto; max-width: min(78vw, 560px); max-height: 516px; object-fit: contain; border-radius: 10px; display: block; }
 .shot-btn { padding: 0; cursor: zoom-in; font: inherit; color: inherit; }
+.device-frame {
+  background: #0b0b0e; border-radius: 46px; padding: 11px;
+  box-shadow: 0 0 0 1px var(--border), 0 18px 40px -18px rgba(0,0,0,.45);
+  display: grid; place-items: center;
+}
+.device-frame .shot-img { border-radius: 36px; }
 .lightbox-img { width: auto; height: auto; max-width: 94vw; max-height: 90vh; object-fit: contain; border-radius: 18px; }
 .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: grid; place-items: center; z-index: 100; padding: 24px; }
 .lightbox .shot { max-height: 80vh; width: min(420px, 90vw); background: #111; color: #fff; font-size: 15px; }

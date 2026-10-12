@@ -28,6 +28,7 @@ export const projects: Project[] = [
         captionKo: '실제 온보딩 화면 (시뮬레이터 실행 캡처)',
         captionEn: 'Real onboarding screen (simulator capture)',
         concept: false,
+        frame: 'phone',
       },
       {
         src: 'screenshots/handy-launch.png',
@@ -36,6 +37,15 @@ export const projects: Project[] = [
         captionKo: '프로젝트 런치 에셋 (실행 캡처는 온보딩 참조)',
         captionEn: 'Project launch asset (see onboarding for run capture)',
         concept: false,
+      },
+      {
+        src: 'screenshots/handy-2-tabs.png',
+        altKo: 'HANDY 내 명함 탭 — 첫 명함 스캔 빈 화면과 하단 탭',
+        altEn: 'HANDY My Cards tab — empty state with bottom tabs',
+        captionKo: '실제 메인 화면 (시뮬레이터 실행 캡처, 온보딩 스킵)',
+        captionEn: 'Real main screen (simulator capture, onboarding skipped)',
+        concept: false,
+        frame: 'phone',
       },
     ],
     videos: [],
@@ -152,6 +162,7 @@ export const projects: Project[] = [
         captionKo: '실제 지도 화면 (지도 타일에 CARTO 키 필요 표시가 보이는 개발 중 상태)',
         captionEn: 'Real map screen (CARTO key-required tiles visible — work in progress)',
         concept: false,
+        frame: 'phone',
       },
       {
         src: 'screenshots/01_spotory_cover.png',
@@ -332,6 +343,7 @@ export const projects: Project[] = [
         captionKo: '실제 로그인 화면 (시뮬레이터 실행 캡처, 로컬 모드 안내 표시)',
         captionEn: 'Real sign-in screen (simulator capture, local-mode notice)',
         concept: false,
+        frame: 'phone',
       },
       {
         src: 'screenshots/viblog-icon-dark.png',
@@ -456,6 +468,7 @@ export const projects: Project[] = [
         captionKo: '실제 홈 화면 (시뮬레이터 실행 캡처)',
         captionEn: 'Real home screen (simulator capture)',
         concept: false,
+        frame: 'phone',
       },
       {
         src: 'screenshots/chain-zero-splash.png',
@@ -578,6 +591,7 @@ export const projects: Project[] = [
         captionKo: '실제 온보딩 화면 (시뮬레이터 실행 캡처)',
         captionEn: 'Real onboarding screen (simulator capture)',
         concept: false,
+        frame: 'phone',
       },
     ],
     videos: [],
@@ -810,6 +824,7 @@ export const projects: Project[] = [
         captionKo: '실제 로그인 화면 (Expo 웹 실행 캡처)',
         captionEn: 'Real sign-in screen (Expo web capture)',
         concept: false,
+        frame: 'phone',
       },
       {
         src: 'screenshots/side-a-2.png',
@@ -818,6 +833,7 @@ export const projects: Project[] = [
         captionKo: '실제 회원가입 화면 (Expo 웹 실행 캡처)',
         captionEn: 'Real sign-up screen (Expo web capture)',
         concept: false,
+        frame: 'phone',
       },
       {
         src: 'screenshots/side-a-3.png',
@@ -826,6 +842,7 @@ export const projects: Project[] = [
         captionKo: '실제 한국어 화면 (Expo 웹 실행 캡처)',
         captionEn: 'Real Korean screen (Expo web capture)',
         concept: false,
+        frame: 'phone',
       },
       {
         src: 'screenshots/side-a-brand.png',

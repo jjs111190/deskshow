@@ -35,6 +35,7 @@ export const ScreenshotSchema = z.object({
   captionKo: z.string().optional(),
   captionEn: z.string().optional(),
   concept: z.boolean().default(false),
+  frame: z.enum(['phone', 'none']).optional(),
 });
 export type ProjectScreenshot = z.infer<typeof ScreenshotSchema>;
 
