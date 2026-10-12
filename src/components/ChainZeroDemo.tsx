@@ -1,7 +1,6 @@
 import { Fragment, useMemo, useState } from 'react';
-// Live reference to the real game engine (read-only; nothing is copied
-// into this repo and the original is never modified).
-import { SumpleteEngine, type SumpleteBoard } from '@cz-engine';
+// Vendored copy of the real game engine (see src/vendor/chain-zero/ header).
+import { SumpleteEngine, type SumpleteBoard } from '../vendor/chain-zero/SumpleteEngine';
 import { useLang } from '../i18n';
 
 export function ChainZeroDemo() {
