@@ -91,6 +91,12 @@ export function ProjectDetail() {
       <section className="section">
         <h2>{s.overview}</h2>
         <p className="prose">{tr.overview}</p>
+        {p.screenshots.length > 0 && (
+          <p className="muted" style={{ fontSize: 13, margin: '0 0 8px' }}>
+            {p.screenshots.length}
+            {lang === 'ko' ? '장의 이미지 · 좌우로 넘기고 클릭하면 크게 볼 수 있습니다' : ' images · scroll sideways, click to enlarge'}
+          </p>
+        )}
         <div className="gallery">
           {p.screenshots.map((shot, i) => (
             <button
