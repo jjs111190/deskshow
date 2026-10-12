@@ -8,15 +8,15 @@
 | 1 | HANDY | 개발 중 (In development) | 실화면 2 (온보딩·런치아트) | none | [x] |
 | 2 | Spotory | 개발 중 | 실화면 9 (지도+홍보 8) | none | [x] |
 | 3 | VIBLOG | 개발 중 | 실화면 1 (로그인) | none | [x] |
-| 4 | Chain Zero | 개발 중 | 실화면 1 (홈) | none | [x] |
+| 4 | Chain Zero | 개발 중 | 실화면 2 (홈·스플래시) | none | [x] |
 | 5 | RECEIPT | 개발 중 | 실화면 1 (온보딩) | none | [x] |
-| 6 | FlowWorks | 부분 구현 (Partial) | CONCEPT (환경 한계, 사유 기록) | none | [x] |
+| 6 | FlowWorks | 부분 구현 (Partial) | 실화면 3 (GameZone 게임) | none | [x] |
 | 7 | Side A | 개발 중 (출시 QA 중, 미검증 릴리스 명시) | 실화면 4 (로그인·회원가입·한국어·브랜드) | none | [x] |
 | 8 | RecordFlow | 부분 구현 (AI 학습) | 브랜드 에셋 2 (실행 캡처 아님 명시) | none | [x] |
 | 9 | Cyworld 2026 | 부분 구현 | 미니룸 에셋 6 (실행 캡처 아님 명시) | none | [x] |
-| 10 | FlowNote | 기획 (Planned, 빌드 실패 확인) | CONCEPT | none | [x] |
-| 11 | RodeblockRush | 개발 중 (루프 완성, 테스트 통과) | 스플래시 에셋 1 (실행 캡처 아님 명시) | none | [x] |
-| 12 | BLANKY | 개발 중 (20종 파티게임) | 스플래시 에셋 1 (실행 캡처 아님 명시) | none | [x] |
+| 10 | FlowNote | 기획 (Planned, 빌드 실패 확인) | 개발 중 UI 2 (문서 캡처) | none | [x] |
+| 11 | RodeblockRush | 개발 중 (루프 완성, 테스트 통과) | 스플래시·아이콘 에셋 2 (실행 캡처 아님 명시) | none | [x] |
+| 12 | BLANKY | 개발 중 (20종 파티게임) | 스플래시 2종 (실행 캡처 아님 명시) | none | [x] |
 
 ## Security scan (2026-10-11, local)
 
@@ -52,7 +52,8 @@ HANDY + Spotory + VIBLOG + Chain Zero (4 featured, strongest evidence). The rest
 Not captured (CONCEPT shown, reasons recorded):
 
 - RECEIPT — captured (`receipt-1.png`, real onboarding). Earlier failures were a wedged simulator device, not the app; healthy device worked first try.
-- FlowWorks — dev serves + transforms OK, but the app renders blank without its API; the free API (`tsx`, plain or watch) and `tsc -b`/`vite build` all wedge at 0% CPU in this env (diagnosed: entry/bootstrap stall, not fixable without touching originals).
+| FlowWorks | `flowworks-2048/hextris/pacman.png` — GameZone 내장 게임 실행 3종 | 정적 서빙 + Playwright 캡처 (본앱은 API 없이 blank라 제외, 사유 기록) |
+| FlowNote | `flownote-complete-ui/mainappview-success.png` — 개발 중 UI 2종 | 프로젝트 docs 캡처 (빌드는 컴파일 실패로 Planned 유지) |
 - BLANKY — run capture blocked by third-party conflict: `google_mobile_ads` (CocoaPods) vs `webview_flutter_wkwebview` (SPM); needs owner-side Podfile fix. Disclosed: flutter tool auto-migrated BLANKY's Podfile/AppDelegate/.gitignore/xcscheme during attempts (standard forward-compatible upgrades).
 - Cyworld 2026 — blocked three ways: `next dev` wedges at startup (0% CPU, no output, no listen, Node 22 and 25); `next build` hits a Turbopack IPC crash plus a genuine type error in the original (`app/api/upload/route.ts` FormData — owner fix needed); stale `out/` is 0 bytes.
 - VIBLOG — `flutter build ios --simulator` in progress (web platform not configured; expo-style web capture N/A).
