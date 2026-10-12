@@ -3,6 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { projects } from '../data/projects';
 import { ProjectCard, initial, iconUrl } from '../components/ProjectCard';
+import { DEMOS } from './Demo';
+import { FlaskConical } from 'lucide-react';
 import { useLang, ui } from '../i18n';
 
 const shotUrl = (src: string) => `${import.meta.env.BASE_URL}${src}`;
@@ -85,6 +87,13 @@ export function ProjectDetail() {
               </span>
             ))}
           </div>
+          {slug && DEMOS[slug] && (
+            <p style={{ marginTop: 14 }}>
+              <Link className="btn" to={`/demo/${slug}`}>
+                <FlaskConical size={15} /> {lang === 'ko' ? '웹에서 체험하기' : 'Try in browser'}
+              </Link>
+            </p>
+          )}
         </div>
       </div>
 

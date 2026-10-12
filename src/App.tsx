@@ -5,6 +5,7 @@ import { Nav } from './components/Nav';
 import { Home } from './pages/Home';
 import { Projects } from './pages/Projects';
 import { ProjectDetail } from './pages/ProjectDetail';
+import { Demo } from './pages/Demo';
 import { About } from './pages/About';
 import { Stack } from './pages/Stack';
 
@@ -48,6 +49,8 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/:slug" element={<ProjectDetail />} />
+            <Route path="/demo" element={<Demo />} />
+            <Route path="/demo/:slug" element={<Demo />} />
             <Route path="/about" element={<About />} />
             <Route path="/stack" element={<Stack />} />
             <Route path="*" element={<NotFound />} />

@@ -29,6 +29,14 @@ describe('deskshow public data', () => {
     assert.ok(app.includes('HashRouter'), 'must use HashRouter for GitHub Pages');
   });
 
+  it('demo routes and vendored demos exist', () => {
+    const app = readFileSync('src/App.tsx', 'utf8');
+    assert.ok(app.includes('/demo/:slug'), 'demo route required');
+    assert.ok(existsSync('public/demo/gamezone/2048/index.html'), 'gamezone demo missing');
+    assert.ok(existsSync('public/demo/side-a/index.html'), 'side-a demo missing');
+    assert.ok(existsSync('public/demo/THIRD_PARTY_NOTICES.md'), 'demo attribution missing');
+  });
+
   it('deploy workflow deploys only on main push', () => {
     const yml = readFileSync('.github/workflows/deploy.yml', 'utf8');
     assert.ok(yml.includes('gh-pages') || yml.includes('pages'), 'must target pages');

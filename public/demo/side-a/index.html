@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>SIDE A</title>
+    <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
+    <style id="expo-reset">
+      /* These styles make the body full-height */
+      html,
+      body {
+        height: 100%;
+      }
+      /* These styles disable body scrolling if you are using <ScrollView> */
+      body {
+        overflow: hidden;
+      }
+      /* These styles make the root element full-height */
+      #root {
+        display: flex;
+        height: 100%;
+        flex: 1;
+      }
+    </style>
+    <!--
+      Boot splash: the same scene as src/components/AnimatedSplash.tsx, drawn
+      in plain HTML/CSS so it starts animating before the JS bundle has even
+      downloaded. AnimatedSplash dismisses it (adds .bs-exit, then removes it)
+      once the app is ready. CSS only — the site CSP blocks inline scripts.
+    -->
+    <style id="boot-splash-style">
+      html, body { background: #FAF9F6; }
+      #boot-splash { position: fixed; inset: 0; z-index: 2147483647; display: flex; align-items: center; justify-content: center; background: #FAF9F6; transition: opacity .42s cubic-bezier(.32, 0, .67, 0); }
+      #boot-splash .bs-stage { position: relative; width: 132px; height: 132px; transition: transform .42s cubic-bezier(.32, 0, .67, 0); }
+      #boot-splash .bs-record { position: absolute; inset: 0; animation: bs-in .42s cubic-bezier(.2, .8, .2, 1) both; }
+      #boot-splash svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+      #boot-splash .bs-disc { animation: bs-spin 1.8s linear .1s infinite; }
+      #boot-splash .bs-arm { transform-origin: 91.83% 16.67%; animation: bs-arm .75s cubic-bezier(.33, 0, .2, 1) .35s both; }
+      #boot-splash .bs-word { position: absolute; top: calc(100% + 26px); left: -80px; right: -80px; text-align: center; font: 700 20px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; letter-spacing: 4px; color: #242723; animation: bs-word .45s cubic-bezier(.33, 1, .68, 1) .75s both; }
+      #boot-splash.bs-exit { opacity: 0; }
+      #boot-splash.bs-exit .bs-stage { transform: scale(1.15); }
+      @keyframes bs-in { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: none; } }
+      @keyframes bs-spin { to { transform: rotate(360deg); } }
+      @keyframes bs-arm { from { opacity: 0; transform: rotate(-40deg); } 35% { opacity: 1; } to { opacity: 1; transform: none; } }
+      @keyframes bs-word { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+      @media (prefers-color-scheme: dark) {
+        html, body, #boot-splash { background: #191C1A; }
+        #boot-splash .bs-word { color: #F6F3EA; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #boot-splash * { animation: none !important; }
+        #boot-splash .bs-stage { transition: none; }
+        #boot-splash.bs-exit { transition-duration: .2s; }
+      }
+    </style>
+  <link rel="icon" href="./favicon.ico"/></head>
+
+  <body>
+    <!-- Use static rendering with Expo Router to support running without JavaScript. -->
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="boot-splash" aria-hidden="true">
+      <div class="bs-stage">
+        <div class="bs-record">
+          <svg class="bs-disc" viewBox="0 0 300 300"><circle cx="150" cy="150" r="149" fill="#242724"/><g fill="none" stroke="#83877C" stroke-width=".8" opacity=".2"><circle cx="150" cy="150" r="62"/><circle cx="150" cy="150" r="70"/><circle cx="150" cy="150" r="78"/><circle cx="150" cy="150" r="86"/><circle cx="150" cy="150" r="94"/><circle cx="150" cy="150" r="102"/><circle cx="150" cy="150" r="110"/><circle cx="150" cy="150" r="118"/><circle cx="150" cy="150" r="126"/><circle cx="150" cy="150" r="134"/><circle cx="150" cy="150" r="142"/></g><circle cx="150" cy="150" r="47" fill="#E5785C"/><rect x="128" y="122" width="44" height="4" rx="2" fill="#F7F1E3" opacity=".9"/><rect x="136" y="130" width="28" height="3" rx="1.5" fill="#F7F1E3" opacity=".6"/><rect x="133" y="171" width="34" height="3" rx="1.5" fill="#F7F1E3" opacity=".6"/><circle cx="150" cy="150" r="7" fill="#252825"/></svg>
+          <svg class="bs-sheen" viewBox="0 0 300 300"><path d="M36 104A125 125 0 0 1 109 29M191 272A125 125 0 0 0 272 191" fill="none" stroke="#B0B6A4" stroke-width="3" stroke-linecap="round" opacity=".22"/></svg>
+          <svg class="bs-arm" viewBox="0 0 300 300"><path d="M275.5 50L230.5 123.7" stroke="#242724" stroke-width="9" stroke-linecap="round"/><path d="M275.5 50L230.5 123.7" stroke="#D8D3C6" stroke-width="5.5" stroke-linecap="round"/><rect x="216.9" y="116.9" width="16" height="36" rx="4" fill="#D8D3C6" stroke="#242724" stroke-width="1.5" transform="rotate(32 224.9 134.9)"/><circle cx="275.5" cy="50" r="11" fill="#D8D3C6" stroke="#242724" stroke-width="2"/><circle cx="275.5" cy="50" r="4" fill="#242724"/></svg>
+        </div>
+        <div class="bs-word">SIDE A</div>
+      </div>
+    </div>
+    <!-- The root element for your Expo app. -->
+    <div id="root"></div>
+  <script src="./_expo/static/js/web/entry-d5327ae746ba632d6847349842329796.js" defer></script>
+</body>
+</html>
