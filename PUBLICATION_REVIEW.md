@@ -5,7 +5,7 @@
 
 | # | Project | Status shown | Screenshots | Links shown | Approve? |
 |---|---------|--------------|-------------|-------------|----------|
-| 1 | HANDY | 개발 중 (In development) | 실화면 2 (온보딩·런치아트) | none | [x] |
+| 1 | HANDY | 개발 중 (In development) | 실화면 5 (온보딩 2·메인탭 2·런치아트) | none | [x] |
 | 2 | Spotory | 개발 중 | 실화면 9 (지도+홍보 8) | none | [x] |
 | 3 | VIBLOG | 개발 중 | 실화면 3 (로그인·아이콘 변형 2) | none | [x] |
 | 4 | Chain Zero | 개발 중 | 실화면 2 (홈·스플래시) | none | [x] |
