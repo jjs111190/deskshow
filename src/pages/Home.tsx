@@ -35,6 +35,30 @@ export function Home() {
         </a>
       </section>
 
+      <section aria-label={lang === 'ko' ? '실화면 미리보기' : 'Real screenshots preview'}>
+        <div className="gallery">
+          {projects
+            .filter((p) => p.screenshots.length > 0)
+            .slice(0, 8)
+            .map((p) => {
+              const shot = p.screenshots[0];
+              return (
+                <Link key={p.id} to={`/projects/${p.slug}`} style={{ textDecoration: 'none' }} aria-label={p.name}>
+                  <span className="shot shot-btn" style={{ display: 'grid' }}>
+                    {shot.frame === 'phone' ? (
+                      <span className="device-frame">
+                        <img className="shot-img" src={`${import.meta.env.BASE_URL}${shot.src}`} alt={p.name} loading="lazy" />
+                      </span>
+                    ) : (
+                      <img className="shot-img" src={`${import.meta.env.BASE_URL}${shot.src}`} alt={p.name} loading="lazy" />
+                    )}
+                  </span>
+                </Link>
+              );
+            })}
+        </div>
+      </section>
+
       <section className="section">
         <h2>{s.featured}</h2>
         <p className="sub">DESKSHOW · Your Apps, Beautifully Presented.</p>
