@@ -1,21 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
 import { projects } from '../data/projects';
-import { ProjectCard, initial, iconUrl } from '../components/ProjectCard';
-import { DEMOS } from './Demo';
-import { FlaskConical } from 'lucide-react';
+import { ProjectCard } from '../components/ProjectCard';
+import { StoreHero } from '../components/StoreHero';
 import { useLang, ui } from '../i18n';
 
 const shotUrl = (src: string) => `${import.meta.env.BASE_URL}${src}`;
-
-const statusLabel: Record<string, { ko: string; en: string }> = {
-  implemented: { ko: '구현 완료', en: 'Implemented' },
-  'in-development': { ko: '개발 중', en: 'In development' },
-  partial: { ko: '부분 구현', en: 'Partially implemented' },
-  planned: { ko: '기획', en: 'Planned' },
-  unverified: { ko: '미확인', en: 'Unverified' },
-};
 
 export function ProjectDetail() {
   const { slug } = useParams();
@@ -52,58 +42,20 @@ export function ProjectDetail() {
 
   return (
     <main className="wrap">
-      <div className="detail-hero fade-in">
-        {iconUrl(p) ? (
-          <img
-            src={iconUrl(p)!}
-            alt={`${p.name} icon`}
-            width={88}
-            height={88}
-            style={{ width: 88, height: 88, borderRadius: 22, border: '1px solid var(--border)' }}
-          />
-        ) : (
-          <div className="app-icon" aria-hidden>
-            {initial(p.name)}
-          </div>
-        )}
-        <div>
-          <p className="muted" style={{ margin: 0 }}>
-            <Link to="/projects" style={{ textDecoration: 'none' }}>
-              <ArrowLeft size={13} style={{ verticalAlign: -2 }} /> {s.back}
-            </Link>
-          </p>
-          <h1 style={{ margin: '6px 0', letterSpacing: '-0.03em' }}>{p.name}</h1>
-          <p className="muted" style={{ margin: 0 }}>
-            {tr.tagline}
-          </p>
-          <div className="pills">
-            <span className="pill">
-              <span className="status-dot" />
-              {statusLabel[p.status][lang]}
-            </span>
-            {p.platforms.map((x) => (
-              <span key={x} className="pill">
-                {x}
-              </span>
-            ))}
-          </div>
-          {slug && DEMOS[slug] && (
-            <p style={{ marginTop: 14 }}>
-              <Link className="btn" to={`/demo/${slug}`}>
-                <FlaskConical size={15} /> {lang === 'ko' ? '웹에서 체험하기' : 'Try in browser'}
-              </Link>
-            </p>
-          )}
-        </div>
-      </div>
+      <StoreHero p={p} onOpen={setLightbox} />
 
       <section className="section">
         <h2>{s.overview}</h2>
         <p className="prose">{tr.overview}</p>
+      </section>
+
+      <section className="section" id="screens">
+        <h2>{s.screens}</h2>
         {p.screenshots.length > 0 && (
-          <p className="muted" style={{ fontSize: 13, margin: '0 0 8px' }}>
+          <p className="muted" style={{ fontSize: 13, margin: '0 0 12px' }}>
             {p.screenshots.length}
-            {lang === 'ko' ? '장의 이미지 · 좌우로 넘기고 클릭하면 크게 볼 수 있습니다' : ' images · scroll sideways, click to enlarge'}
+            {lang === 'ko' ? '장 · ' : ' images · '}
+            {s.screensHint}
           </p>
         )}
         <div className="gallery">
@@ -112,7 +64,7 @@ export function ProjectDetail() {
               key={i}
               className="shot shot-btn"
               onClick={() => setLightbox(shotUrl(shot.src))}
-              aria-label={`open screenshot ${i + 1}`}
+              aria-label={`${s.openShot} ${i + 1}`}
             >
               {shot.frame === 'phone' ? (
                 <span className="device-frame">

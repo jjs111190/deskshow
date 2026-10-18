@@ -88,15 +88,47 @@ select.search { flex: 0 1 auto; }
 .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
 .stat { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; text-align: center; }
 .stat b { font-size: 30px; display: block; letter-spacing: -0.03em; }
-.detail-hero { padding: 48px 0 8px; display: grid; grid-template-columns: 88px 1fr; gap: 18px; align-items: start; }
-.detail-hero .app-icon { width: 88px; height: 88px; font-size: 34px; border-radius: 22px; }
+.store-hero { padding: 36px 0 10px; scroll-margin-top: 72px; }
+.store-hero-grid { display: grid; grid-template-columns: 1.02fr 1fr; gap: 36px; align-items: center; }
+.store-title-row { display: flex; align-items: center; gap: 16px; margin: 12px 0 14px; }
+.store-title-row img,
+.store-title-row .app-icon { width: 76px; height: 76px; border-radius: 20px; font-size: 30px; margin: 0; flex: 0 0 auto; }
+.store-title-row img { border: 1px solid var(--border); }
+.store-title-row h1 { margin: 0 0 2px; letter-spacing: -0.03em; }
+.store-title-row p { max-width: 52ch; }
+.store-badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
+.store-badges-label { width: 100%; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; color: var(--text-2); text-transform: uppercase; }
+.store-badge {
+  font-size: 13px; font-weight: 600; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 999px; padding: 6px 13px; color: var(--text);
+}
+.store-ctas { display: flex; flex-wrap: wrap; gap: 10px; }
+.carousel { width: 100%; }
+.carousel-track { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 2px 14px; scrollbar-width: none; }
+.carousel-track::-webkit-scrollbar { display: none; }
+.carousel-slide { flex: 0 0 auto; scroll-snap-align: center; display: grid; place-items: center; }
+.carousel-slide .shot-img { max-height: 416px; max-width: min(74vw, 320px); }
+/* Phone slides already carry a device bezel, so drop the extra card panel. */
+.carousel-slide .shot:has(.device-frame) { background: transparent; border-color: transparent; }
+.carousel-controls { display: flex; align-items: center; justify-content: center; gap: 12px; }
+.carousel-arrow {
+  width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--surface); border: 1px solid var(--border); color: var(--text); cursor: pointer;
+}
+.carousel-arrow:disabled { opacity: 0.4; cursor: default; }
+.carousel-dots { display: flex; align-items: center; gap: 6px; }
+.carousel-dot {
+  width: 7px; height: 7px; padding: 0; border: 0; border-radius: 999px;
+  background: var(--border); cursor: pointer; transition: width 0.2s ease, background 0.2s ease;
+}
+.carousel-dot[aria-current='true'] { width: 20px; background: var(--accent); }
+.section[id] { scroll-margin-top: 72px; }
 .shot {
   border-radius: 18px; border: 1px solid var(--border);
   background: var(--surface); display: grid; place-items: center; color: var(--text-2);
   font-size: 13px; text-align: center; padding: 12px; overflow: hidden; flex: 0 0 auto;
   max-height: 540px;
 }
-.shot-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 16px 0; }
 .badge-concept { font-size: 11px; font-weight: 800; letter-spacing: 0.08em; border: 1px dashed var(--text-2); border-radius: 6px; padding: 2px 8px; }
 .prose { max-width: 720px; overflow-wrap: anywhere; }
 .steps { counter-reset: step; display: grid; gap: 10px; margin: 12px 0; overflow-wrap: anywhere; }
@@ -124,12 +156,15 @@ select.search { flex: 0 1 auto; }
   .featured-first { grid-template-columns: 1fr; }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .nav-links a.hide-m { display: none; }
+  .store-hero-grid { grid-template-columns: 1fr; gap: 22px; }
 }
 @media (max-width: 600px) {
   .featured-grid, .grid { grid-template-columns: 1fr; }
   .hero { padding: 56px 0 20px; }
-  .detail-hero { grid-template-columns: 1fr; gap: 12px; padding-top: 28px; }
-  .detail-hero .app-icon { width: 68px; height: 68px; font-size: 26px; border-radius: 18px; }
+  .store-hero { padding-top: 24px; }
+  .store-title-row img,
+  .store-title-row .app-icon { width: 60px; height: 60px; border-radius: 16px; font-size: 24px; }
+  .carousel-slide .shot-img { max-height: 360px; }
   h1 { overflow-wrap: anywhere; }
 }
 @media (prefers-reduced-motion: reduce) {

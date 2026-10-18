@@ -84,3 +84,9 @@ Still on asset-only galleries (no real run capture) with reasons:
 Notes on environment: the Supabase local stack for VIBLOG was already running, so integration tests could execute. The FlowWorks free JSON API (`tsx backend/src/server.ts`) still exits without listening in this environment, so its main app remains uncaptured.
 
 Total published real images: 72.
+
+## UI change (2026-10-18) — store-style detail header
+
+Each project detail page now opens with a store-listing style header: app icon, name, one-line description, status/platform pills, up to three key-feature badges (taken from the project's own verified feature titles), a demo CTA where one exists, and a swipeable carousel of up to five representative real screens with dots and prev/next arrows. Media in the carousel opens the existing lightbox. The full gallery of every published image remains below under "모든 화면 / All screens", with the existing click-to-enlarge behaviour.
+
+Verified: carousel dot/arrow sync, keyboard left/right on the track, lightbox open, and a responsive sweep of 10 routes at 320/390/768/1024/1440px with 0 horizontal overflow and 0 console errors, in light and dark themes.
