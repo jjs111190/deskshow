@@ -1652,11 +1652,38 @@ export const projects: Project[] = [
     icon: 'icons/blanky.png',
     screenshots: [
       {
+        src: 'screenshots/blanky-home.png',
+        altKo: 'BLANKY 홈 — 방 만들기·방 참가하기와 20가지 게임 목록',
+        altEn: 'BLANKY home — create or join a room, plus the roster of 20 games',
+        captionKo: '실제 홈 화면 (iOS 시뮬레이터 실행 캡처)',
+        captionEn: 'Real home screen (captured running on the iOS simulator)',
+        concept: false,
+        frame: 'phone',
+      },
+      {
+        src: 'screenshots/blanky-home-dark.png',
+        altKo: 'BLANKY 홈 — 다크 테마',
+        altEn: 'BLANKY home — dark theme',
+        captionKo: '실제 홈 화면, 다크 테마',
+        captionEn: 'Real home screen, dark theme',
+        concept: false,
+        frame: 'phone',
+      },
+      {
+        src: 'screenshots/blanky-onboarding.png',
+        altKo: 'BLANKY 첫 실행 — 닉네임 입력',
+        altEn: 'BLANKY first run — nickname entry',
+        captionKo: '실제 첫 실행 화면 (닉네임은 이 기기에만 저장됩니다)',
+        captionEn: 'Real first-run screen (the nickname stays on the device)',
+        concept: false,
+        frame: 'phone',
+      },
+      {
         src: 'screenshots/blanky-splash.png',
         altKo: 'BLANKY 스플래시 로고',
         altEn: 'BLANKY splash logo',
-        captionKo: '프로젝트 스플래시 에셋 (실행 캡처는 준비 중)',
-        captionEn: 'Project splash asset (run capture pending)',
+        captionKo: '프로젝트 스플래시 에셋',
+        captionEn: 'Project splash asset',
         concept: false,
       },
       {
@@ -1671,7 +1698,7 @@ export const projects: Project[] = [
     videos: [],
     repositoryUrl: null,
     demoUrl: null,
-    updatedAt: '2026-10-11',
+    updatedAt: '2026-10-18',
     ko: {
       tagline: '빈칸 하나로 터지는 우리 이야기.',
       shortDescription:
@@ -1684,7 +1711,7 @@ export const projects: Project[] = [
         '투표·득점으로 라운드를 쌓고 빈칸왕을 가립니다.',
       ],
       developmentNotes:
-        'lib(features 9종·game·core·data·models·networking·services·widgets)와 상세 README 게임 목록, 앱 아이콘·스플래시 브랜딩이 확인됩니다. 실행 캡처는 아직 없습니다.',
+        'lib(features 9종·game·core·data·models·networking·services·widgets)와 상세 README 게임 목록, 앱 아이콘·스플래시 브랜딩이 확인됩니다. iOS 시뮬레이터에서 직접 빌드해 실행했고, 홈 화면에서 게임 20가지 목록과 방 만들기·참가하기 흐름, 다크 테마까지 확인했습니다.',
       futurePlans: '실행 검증과 멀티플레이 연결 방식 문서화가 남은 상태입니다.',
     },
     en: {
@@ -1698,7 +1725,7 @@ export const projects: Project[] = [
         'Stack rounds through votes and scores to crown the blank-master.',
       ],
       developmentNotes:
-        'Verified: lib (9 features, game, core, data, models, networking, services, widgets), a detailed README game list, and app-icon/splash branding. No run capture yet.',
+        'Verified: lib (9 features, game, core, data, models, networking, services, widgets), a detailed README game list, and app-icon/splash branding. Built it and ran it on the iOS simulator: the home screen shows the 20-game roster with the create-room and join-room flows, in light and dark themes.',
       futurePlans: 'Run verification and multiplayer wiring docs remain.',
     },
     features: [
@@ -1736,8 +1763,8 @@ export const projects: Project[] = [
       },
       {
         feature: 'Playable verification',
-        evidence: 'No run capture verified',
-        status: 'Unverified',
+        evidence: 'Built and ran on the iOS simulator from a scratch copy: real onboarding and home screens (light and dark); home shows the 20-game roster plus create/join room',
+        status: 'Implemented',
         confidence: 'High',
       },
     ],

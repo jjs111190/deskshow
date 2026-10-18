@@ -16,7 +16,7 @@
 | 9 | Cyworld 2026 | 부분 구현 | 미니룸 에셋 6 (실행 캡처 아님 명시) | none | [x] |
 | 10 | FlowNote | 기획 (Planned, 빌드 실패 확인) | 개발 중 UI 6 (문서 캡처: 시작·라이브러리·워크스페이스·스페이스) | none | [x] |
 | 11 | RodeblockRush | 개발 중 (루프 완성, 테스트 통과) | 실화면 13 (게임 플레이 11·스플래시·아이콘) | none | [x] |
-| 12 | BLANKY | 개발 중 (20종 파티게임) | 스플래시 2종 (실행 캡처 아님 명시) | none | [x] |
+| 12 | BLANKY | 개발 중 (20종 파티게임) | 실화면 3 (홈 라이트·다크, 첫 실행 닉네임) + 스플래시 2 | none | [x] |
 
 ## Security scan (2026-10-11, local)
 
@@ -75,7 +75,6 @@ Goal: replace splash/icon-only galleries with real in-app screens like a store l
 Removed from publication: a VIBLOG email-verification screen showing a local dev server URL and a synthetic test address (not store-quality), and a VIBLOG camera screen that only showed the simulator's "no camera" empty state.
 
 Still on asset-only galleries (no real run capture) with reasons:
-- BLANKY — `pod install` conflict: `google_mobile_ads` (CocoaPods) vs `webview_flutter_wkwebview` (SPM). Needs an owner-side Podfile fix.
 - Cyworld 2026 — `next dev` wedges at startup; `next build` hits a Turbopack IPC crash plus a real FormData type error in `app/api/upload/route.ts`. Mini-room art only.
 - RecordFlow — brand assets only; no runnable target located in this workspace.
 - Chain Zero — native home screen only; no UI-test target and no Simulator GUI available for scripted taps, and web capture needs an added dependency.
@@ -83,10 +82,57 @@ Still on asset-only galleries (no real run capture) with reasons:
 
 Notes on environment: the Supabase local stack for VIBLOG was already running, so integration tests could execute. The FlowWorks free JSON API (`tsx backend/src/server.ts`) still exits without listening in this environment, so its main app remains uncaptured.
 
-Total published real images: 72.
+Total published real images: 75 (72 after round 2, +3 BLANKY screens in round 3).
 
 ## UI change (2026-10-18) — store-style detail header
 
 Each project detail page now opens with a store-listing style header: app icon, name, one-line description, status/platform pills, up to three key-feature badges (taken from the project's own verified feature titles), a demo CTA where one exists, and a swipeable carousel of up to five representative real screens with dots and prev/next arrows. Media in the carousel opens the existing lightbox. The full gallery of every published image remains below under "모든 화면 / All screens", with the existing click-to-enlarge behaviour.
 
 Verified: carousel dot/arrow sync, keyboard left/right on the track, lightbox open, and a responsive sweep of 10 routes at 320/390/768/1024/1440px with 0 horizontal overflow and 0 console errors, in light and dark themes.
+
+## Round 3 (2026-10-18) — playable web demo + carousel autoplay
+
+### RodeblockRush is now playable in the browser
+`#/demo/rodeblockrush` runs the real game, embedded in its detail page: main menu → PLAY → a real run
+(distance and score climbing, "COIN CHAIN x6", traffic, JUMP/BOOST), lane changes by tapping the left/right half of the
+screen or with ←/→ · A/D, and the pause overlay. Verified with Playwright, 0 console errors.
+
+How it was produced, without touching the original:
+- Web engine shell: Godot 4.7.1 release template, exported with `variant/thread_support=false` (so it needs no
+  COOP/COEP headers, which static Pages hosting cannot send). Exported from a scratch copy.
+- Game data: the project's own shipped pack, `build/ios/RoadblockRush.pck` — the same compiled build its iOS export
+  produced. The only edit was rewriting `index.pck`'s size in the generated `index.html` so the loader's size check passes.
+- The project already uses `renderer/rendering_method="gl_compatibility"` and `import_etc2_astc=true`, which is why a
+  pack built for iOS runs unchanged under WebGL2.
+
+### Finding — the RodeblockRush source tree on disk is incomplete
+`scripts/` is missing 8 `.gd` sources; only their `.gd.uid` stubs remain:
+`core/BlockyMesh.gd`, `core/ObjectPool.gd`, `core/VehicleBuilder.gd`, `ui/HUD.gd`, `ui/CardsScreen.gd`,
+`obstacles/ObstacleManager.gd`, `traffic/TrafficManager.gd`, `environment/RoadsideProps.gd`,
+`progression/MissionLibrary.gd`. With them gone, `RoadManager.gd` fails to parse ("Could not find type ObjectPool") and
+the project cannot run or export from source at all. The compiled code is still inside the shipped pack, which is why the
+pack runs. The original folder was **not** modified — nothing was written into it. Owner action needed: restore those files.
+
+### Carousel autoplay
+Store-style hero carousels auto-advance every 4.5 s, pause while the visitor hovers or focuses them, stop when the
+carousel is scrolled off-screen or the tab is hidden, are disabled entirely under `prefers-reduced-motion: reduce`, and
+stop for good once the visitor takes over with a dot, arrow or the keyboard. All five behaviours verified with Playwright.
+
+### BLANKY — real screens obtained
+BLANKY now publishes 3 real screens (home light, home dark, first-run nickname) plus its 2 branding assets.
+The build previously failed for three separate reasons, all fixed **in a scratch copy only**:
+1. `win32 5.5.0` (transitive) uses a Dart API that no longer exists → pinned `win32: ^5.13.0` via `dependency_overrides`.
+2. `dialogTheme: DialogTheme(...)` → `DialogThemeData(...)` (SDK rename).
+3. `CupertinoPageTransitionsBuilder` is no longer re-exported by `material.dart` → added the `cupertino.dart` import.
+None of these touch the app's UI or behaviour — they are SDK-drift fixes, and page transitions do not affect a static screen.
+
+Capture notes: Impeller is disabled on the simulator (`FLTEnableImpeller=false`) because on this simulator runtime it draws every
+glyph as a placeholder box; with it off, text renders correctly. To reach the home screen without a GUI to tap, the stored
+nickname was seeded into the app's container preferences while the simulator was shut down, and the app's own "ads removed"
+preference was set so the SDK's one-time consent sheet does not cover the screen. Owner action needed: reinstall/upgrade the
+Flutter toolchain or fix these three compile errors, since the project does not build with the installed Flutter 3.47.5.
+
+### Responsive fix
+The Side A demo page overflowed horizontally at 320px (a fixed-width frame inside a centred grid); it now shrinks with
+the viewport. Demo sweep at 320/390/768/1440px over all four demo routes: 0 overflow, 0 console errors.
+

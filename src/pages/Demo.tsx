@@ -16,7 +16,49 @@ export const DEMOS: Record<string, { ko: string; en: string }> = {
   'chain-zero': { ko: 'SUMPLETE 플레이', en: 'Play SUMPLETE' },
   flowworks: { ko: 'GameZone 미니게임', en: 'GameZone mini-games' },
   'side-a': { ko: '앱 실행해 보기', en: 'Try the app' },
+  rodeblockrush: { ko: '게임 플레이', en: 'Play the game' },
 };
+
+function RodeblockRushDemo() {
+  const { lang } = useLang();
+  return (
+    <div style={{ display: 'grid', justifyItems: 'center', gap: 12 }}>
+      <p className="muted" style={{ fontSize: 13, maxWidth: 620, textAlign: 'center' }}>
+        {lang === 'ko'
+          ? 'RodeblockRush의 실제 Godot 4.7 빌드를 그대로 브라우저에서 실행합니다. 화면 왼쪽·오른쪽을 탭(또는 키보드 ←/→, A/D)해 차선을 바꾸고, 아래 JUMP·BOOST 버튼을 눌러 보세요. 한 번 클릭하면 소리가 켜집니다.'
+          : 'The real Godot 4.7 build of RodeblockRush, running as-is in the browser. Tap the left or right half of the screen (or use ←/→, A/D) to change lanes and press the JUMP / BOOST buttons. Click once to enable sound.'}
+      </p>
+      <div
+        style={{
+          width: 'min(400px, 100%)',
+          border: '1px solid var(--border)',
+          borderRadius: 30,
+          padding: 10,
+          background: 'var(--surface)',
+        }}
+      >
+        <iframe
+          title="RodeblockRush demo"
+          src={`${base}demo/rodeblockrush/index.html`}
+          style={{
+            width: '100%',
+            aspectRatio: '9 / 16',
+            border: 0,
+            borderRadius: 22,
+            background: '#000',
+            display: 'block',
+          }}
+          sandbox="allow-scripts allow-same-origin"
+        />
+      </div>
+      <p className="muted" style={{ fontSize: 12 }}>
+        {lang === 'ko'
+          ? '원본 프로젝트는 수정하지 않았습니다. 프로젝트가 직접 내보낸 게임 데이터(PCK)를 그대로 사용하고, 웹 엔진 셸만 복사본에서 빌드했습니다.'
+          : "The original project was not modified. It runs the project's own exported game data (PCK); only the web engine shell was built from a scratch copy."}
+      </p>
+    </div>
+  );
+}
 
 function FlowWorksDemo() {
   const [game, setGame] = useState(GAMES[0]);
@@ -54,13 +96,13 @@ function FlowWorksDemo() {
 function SideADemo() {
   const { lang } = useLang();
   return (
-    <div style={{ display: 'grid', justifyItems: 'center', gap: 12 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr)', justifyItems: 'center', gap: 12 }}>
       <p className="muted" style={{ fontSize: 13, maxWidth: 560, textAlign: 'center' }}>
         {lang === 'ko'
           ? 'Side A의 실제 웹 빌드를 그대로 얹은 체험판입니다. 로그인 화면에서 둘러볼 수 있습니다.'
           : 'The real Side A web build, embedded for trial. Explore from the sign-in screen.'}
       </p>
-      <div style={{ width: 390, maxWidth: '100%', border: '1px solid var(--border)', borderRadius: 36, padding: 12, background: 'var(--surface)' }}>
+      <div style={{ width: 'min(390px, 100%)', border: '1px solid var(--border)', borderRadius: 36, padding: 12, background: 'var(--surface)' }}>
         <iframe
           title="Side A demo"
           src={`${base}demo/side-a/`}
@@ -88,7 +130,7 @@ export function Demo() {
         </Link>
       </p>
       <h2 style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        {slug === 'chain-zero' ? <Puzzle size={22} /> : <Smartphone size={22} />}
+        {slug === 'chain-zero' ? <Puzzle size={22} /> : slug === 'rodeblockrush' ? <Gamepad2 size={22} /> : <Smartphone size={22} />}
         {lang === 'ko' ? '웹 체험' : 'Web demo'} {meta ? `· ${lang === 'ko' ? meta.ko : meta.en}` : ''}
       </h2>
       {!slug || !meta ? (
@@ -111,6 +153,8 @@ export function Demo() {
         </>
       ) : slug === 'flowworks' ? (
         <FlowWorksDemo />
+      ) : slug === 'rodeblockrush' ? (
+        <RodeblockRushDemo />
       ) : (
         <SideADemo />
       )}
