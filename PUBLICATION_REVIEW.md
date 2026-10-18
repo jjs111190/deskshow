@@ -7,15 +7,15 @@
 |---|---------|--------------|-------------|-------------|----------|
 | 1 | HANDY | 개발 중 (In development) | 실화면 5 (온보딩 2·메인탭 2·런치아트) | none | [x] |
 | 2 | Spotory | 개발 중 | 실화면 9 (지도+홍보 8) | none | [x] |
-| 3 | VIBLOG | 개발 중 | 실화면 3 (로그인·아이콘 변형 2) | none | [x] |
+| 3 | VIBLOG | 개발 중 | 실화면 11 (회원가입·인트로·로그인·프로필 설정·포토부스·편집기 4·아이콘 2) | none | [x] |
 | 4 | Chain Zero | 개발 중 | 실화면 2 (홈·스플래시) | none | [x] |
 | 5 | RECEIPT | 개발 중 | 실화면 1 (온보딩) | none | [x] |
-| 6 | FlowWorks | 부분 구현 (Partial) | 실화면 3 (GameZone 게임) | none | [x] |
-| 7 | Side A | 개발 중 (출시 QA 중, 미검증 릴리스 명시) | 실화면 4 (로그인·회원가입·한국어·브랜드) | none | [x] |
+| 6 | FlowWorks | 부분 구현 (Partial) | 실화면 4 (GameZone 게임 2048·Flappy·Hextris·Pac-Man) | none | [x] |
+| 7 | Side A | 개발 중 (출시 QA 중, 미검증 릴리스 명시) | 실화면 10 (홈·디스커버·제작·프로필·레코드·Spins·로그인 2·한국어·브랜드) | none | [x] |
 | 8 | RecordFlow | 부분 구현 (AI 학습) | 브랜드 에셋 3 (실행 캡처 아님 명시) | none | [x] |
 | 9 | Cyworld 2026 | 부분 구현 | 미니룸 에셋 6 (실행 캡처 아님 명시) | none | [x] |
-| 10 | FlowNote | 기획 (Planned, 빌드 실패 확인) | 개발 중 UI 2 (문서 캡처) | none | [x] |
-| 11 | RodeblockRush | 개발 중 (루프 완성, 테스트 통과) | 스플래시·아이콘 에셋 2 (실행 캡처 아님 명시) | none | [x] |
+| 10 | FlowNote | 기획 (Planned, 빌드 실패 확인) | 개발 중 UI 6 (문서 캡처: 시작·라이브러리·워크스페이스·스페이스) | none | [x] |
+| 11 | RodeblockRush | 개발 중 (루프 완성, 테스트 통과) | 실화면 13 (게임 플레이 11·스플래시·아이콘) | none | [x] |
 | 12 | BLANKY | 개발 중 (20종 파티게임) | 스플래시 2종 (실행 캡처 아님 명시) | none | [x] |
 
 ## Security scan (2026-10-11, local)
@@ -59,3 +59,28 @@ Not captured (CONCEPT shown, reasons recorded):
 - VIBLOG — `flutter build ios --simulator` in progress (web platform not configured; expo-style web capture N/A).
 - Chain Zero / RecordFlow — no `react-native-web` dep; web capture would require adding deps to originals (declined).
 - FlowNote — not buildable per its README (Planned).
+
+## Capture log (2026-10-18 round 2 — deeper real screens)
+
+Goal: replace splash/icon-only galleries with real in-app screens like a store listing.
+
+| Project | Images added | How obtained |
+|---|---|---|
+| RodeblockRush | 11 gameplay screens (title, lane change, traffic/near-miss, boost, coins, perfect dodge, result, garage, cards, missions, pause) | Ran the game's own `tests/SmokeTest.tscn` (Godot 4.7) in a scratch copy; it saves 720×1280 portrait stage renders to `user://smoke/`. |
+| VIBLOG | 9 real screens (sign-up, onboarding, sign-in, profile setup, photo booth, editor filter/adjust/face-sticker/video) | Ran the project's own `integration_test/looks_faces_flow_test.dart` on the iOS simulator with `TEST_SHOTS=true`; the tests write screenshots themselves. Server-free test, so it passed. |
+| Side A | 6 real screens (home, discover, create, profile, record detail, spins) | Built an offline Expo web export with empty `EXPO_PUBLIC_*` (the repo's documented local-demo mode) and drove it with Playwright through the guest "Browse the records" path. Demo-studio banner (fictional content) is visible in-frame. |
+| FlowNote | 4 more iPad UI captures (launch, workspace docs, spaces, empty library) | In-repo `docs/` captures only; the app still does not build (Planned). |
+| FlowWorks | +1 game (Flappy) | Static-served `public/games/flappy` + Playwright. |
+
+Removed from publication: a VIBLOG email-verification screen showing a local dev server URL and a synthetic test address (not store-quality), and a VIBLOG camera screen that only showed the simulator's "no camera" empty state.
+
+Still on asset-only galleries (no real run capture) with reasons:
+- BLANKY — `pod install` conflict: `google_mobile_ads` (CocoaPods) vs `webview_flutter_wkwebview` (SPM). Needs an owner-side Podfile fix.
+- Cyworld 2026 — `next dev` wedges at startup; `next build` hits a Turbopack IPC crash plus a real FormData type error in `app/api/upload/route.ts`. Mini-room art only.
+- RecordFlow — brand assets only; no runnable target located in this workspace.
+- Chain Zero — native home screen only; no UI-test target and no Simulator GUI available for scripted taps, and web capture needs an added dependency.
+- FlowNote — not buildable (Planned).
+
+Notes on environment: the Supabase local stack for VIBLOG was already running, so integration tests could execute. The FlowWorks free JSON API (`tsx backend/src/server.ts`) still exits without listening in this environment, so its main app remains uncaptured.
+
+Total published real images: 72.
