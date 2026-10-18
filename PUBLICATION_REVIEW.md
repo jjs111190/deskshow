@@ -8,7 +8,7 @@
 | 1 | HANDY | 개발 중 (In development) | 실화면 5 (온보딩 2·메인탭 2·런치아트) | none | [x] |
 | 2 | Spotory | 개발 중 | 실화면 9 (지도+홍보 8) | none | [x] |
 | 3 | VIBLOG | 개발 중 | 실화면 11 (회원가입·인트로·로그인·프로필 설정·포토부스·편집기 4·아이콘 2) | none | [x] |
-| 4 | Chain Zero | 개발 중 | 실화면 2 (홈·스플래시) | none | [x] |
+| 4 | Chain Zero | 개발 중 | 실화면 7 (홈·플레이보드·모드선택·튜토리얼·도감·업적·등급) + 스플래시 | none | [x] |
 | 5 | RECEIPT | 개발 중 | 실화면 1 (온보딩) | none | [x] |
 | 6 | FlowWorks | 부분 구현 (Partial) | 실화면 4 (GameZone 게임 2048·Flappy·Hextris·Pac-Man) | none | [x] |
 | 7 | Side A | 개발 중 (출시 QA 중, 미검증 릴리스 명시) | 실화면 10 (홈·디스커버·제작·프로필·레코드·Spins·로그인 2·한국어·브랜드) | none | [x] |
@@ -77,12 +77,12 @@ Removed from publication: a VIBLOG email-verification screen showing a local dev
 Still on asset-only galleries (no real run capture) with reasons:
 - Cyworld 2026 — `next dev` wedges at startup; `next build` hits a Turbopack IPC crash plus a real FormData type error in `app/api/upload/route.ts`. Mini-room art only.
 - RecordFlow — brand assets only; no runnable target located in this workspace.
-- Chain Zero — native home screen only; no UI-test target and no Simulator GUI available for scripted taps, and web capture needs an added dependency.
+- Chain Zero — native home screen only; no UI-test target and no Simulator GUI available for scripted taps, and web capture needs an added dependency. *(Resolved in round 4: captured from a scratch copy's own web build.)*
 - FlowNote — not buildable (Planned).
 
 Notes on environment: the Supabase local stack for VIBLOG was already running, so integration tests could execute. The FlowWorks free JSON API (`tsx backend/src/server.ts`) still exits without listening in this environment, so its main app remains uncaptured.
 
-Total published real images: 75 (72 after round 2, +3 BLANKY screens in round 3).
+Total published real images: 81 (75 after round 3, +6 Chain Zero screens in round 4).
 
 ## UI change (2026-10-18) — store-style detail header
 
@@ -135,4 +135,33 @@ Flutter toolchain or fix these three compile errors, since the project does not 
 ### Responsive fix
 The Side A demo page overflowed horizontally at 320px (a fixed-width frame inside a centred grid); it now shrinks with
 the viewport. Demo sweep at 320/390/768/1440px over all four demo routes: 0 overflow, 0 console errors.
+
+## Round 4 (2026-10-19) — Chain Zero play screens
+
+Chain Zero publishes 6 new real screens, captured by running the app itself:
+
+| Image | Screen |
+|---|---|
+| `chain-zero-board.png` | CHAIN ORIGIN STAGE 01 play board — 점수 0, 이동 9, 클리어 0/3, OVERDRIVE gauge, "합을 10으로" goal + filter chips, 6×6 number grid with a live selected tile |
+| `chain-zero-mode-select.png` | 모드 선택 — CHAIN and SUIKA open, DEFENSE/SOKOBAN/SNAKE shown locked ("레벨 6에서 해제"), category filters 전체/실시간/퍼즐/점수·기억 |
+| `chain-zero-tutorial.png` | Per-mode spotlight tutorial over the board — "MISSION 1/4 목표와 규칙부터", 건너뛰기/다음 |
+| `chain-zero-codex.png` | 도감 — gimmicks (OVERDRIVE, JACKPOT, GIFT, GOLDEN, STREAK) and special tiles (골든, 잭팟, 선물, 폭탄, 와일드, 복사) |
+| `chain-zero-achievements.png` | 업적 — 0/16 달성 with all 16 achievement cards and progress bars |
+| `chain-zero-grade.png` | 등급 — 1/10 달성, CURRENT GRADE BOOT, 기록 stats, and the 10-grade roadmap (BOOT → WIRE 800 → … → RESONANCE 45,000) |
+
+How they were obtained, without touching the original:
+- `npx expo export -p web` in a scratch copy (the project's own App/Navigator/screens/engines), plus the three web
+  dependencies Expo requires. The result is served statically and driven by a scripted Playwright session
+  (home → 플레이 → CHAIN → tutorial → 등급 보기, then 도감 / 업적 / MY GRADE) that clicks the app's real controls.
+- Two edits exist **in the scratch copy only**: a web platform twin for `src/services/AdEngine` (AdMob ships no web
+  target and Metro refuses to bundle its React Native internals; the twin reproduces the file's own
+  "native module missing" no-op path, so behaviour on web matches a JS-only reload), and the exported `web/` output.
+  The original project folder is unchanged and still has no web target.
+- Note the earlier round's blocker is resolved in a copy, not in the original: the original still needs
+  `react-native-web`/`react-dom`/`@expo/metro-runtime` added (or a UI-test target) before it can produce web captures itself.
+
+Honesty notes: these captures come from the app's own web build rather than a device screenshot, so they show the real
+screens, state, and copy but not the iOS status bar — the existing native home capture (`chain-zero-1.png`) is kept
+first in the gallery as device evidence. The 설정 (settings) screen was not captured (its icon button did not open under
+scripted input); no substitute image was invented for it. Localisation is Korean, matching the app's shipped default.
 
