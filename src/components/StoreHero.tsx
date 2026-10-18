@@ -30,6 +30,13 @@ export function StoreHero({ p, onOpen }: { p: Project; onOpen: (url: string) => 
   const slides = p.screenshots.slice(0, MAX_SLIDES);
   const track = useRef<HTMLDivElement>(null);
   const [idx, setIdx] = useState(0);
+  // Autoplay is on until the visitor takes over, and is paused while they
+  // hover, focus, scroll away or switch tabs (WCAG 2.2.2).
+  const [autoplay, setAutoplay] = useState(true);
+  const hovering = useRef(false);
+  const inView = useRef(true);
+  const idxRef = useRef(0);
+  idxRef.current = idx;
 
   const goTo = useCallback((i: number) => {
     const el = track.current;
@@ -41,6 +48,15 @@ export function StoreHero({ p, onOpen }: { p: Project; onOpen: (url: string) => 
       behavior: reduce ? 'auto' : 'smooth',
     });
   }, []);
+
+  /** Same as goTo, but records that the visitor is now driving the carousel. */
+  const goToByUser = useCallback(
+    (i: number) => {
+      setAutoplay(false);
+      goTo(i);
+    },
+    [goTo],
+  );
 
   // Keep the dots in sync while the user swipes/drags the track by hand.
   useEffect(() => {
@@ -61,6 +77,31 @@ export function StoreHero({ p, onOpen }: { p: Project; onOpen: (url: string) => 
     };
     el.addEventListener('scroll', onScroll, { passive: true });
     return () => el.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Store-style autoplay: advance every few seconds while it is safe to do so.
+  useEffect(() => {
+    if (!autoplay || slides.length < 2) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const id = window.setInterval(() => {
+      if (hovering.current || !inView.current || document.hidden) return;
+      goTo((idxRef.current + 1) % slides.length);
+    }, 4500);
+    return () => window.clearInterval(id);
+  }, [autoplay, slides.length, goTo]);
+
+  // Offscreen carousels should not scroll themselves.
+  useEffect(() => {
+    const el = track.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        inView.current = entries.some((e) => e.isIntersecting);
+      },
+      { threshold: 0.35 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
   const jumpToScreens = () => {
@@ -140,13 +181,25 @@ export function StoreHero({ p, onOpen }: { p: Project; onOpen: (url: string) => 
           role="region"
           aria-roledescription="carousel"
           aria-label={lang === 'ko' ? '대표 화면' : 'App screenshots'}
+          onPointerEnter={() => {
+            hovering.current = true;
+          }}
+          onPointerLeave={() => {
+            hovering.current = false;
+          }}
+          onFocusCapture={() => {
+            hovering.current = true;
+          }}
+          onBlurCapture={() => {
+            hovering.current = false;
+          }}
         >
           <div
             className="carousel-track"
             ref={track}
             onKeyDown={(e) => {
-              if (e.key === 'ArrowRight') goTo(Math.min(slides.length - 1, idx + 1));
-              if (e.key === 'ArrowLeft') goTo(Math.max(0, idx - 1));
+              if (e.key === 'ArrowRight') goToByUser(Math.min(slides.length - 1, idx + 1));
+              if (e.key === 'ArrowLeft') goToByUser(Math.max(0, idx - 1));
             }}
           >
             {slides.map((shot, i) => (
@@ -199,7 +252,7 @@ export function StoreHero({ p, onOpen }: { p: Project; onOpen: (url: string) => 
               <button
                 type="button"
                 className="carousel-arrow"
-                onClick={() => goTo(Math.max(0, idx - 1))}
+                onClick={() => goToByUser(Math.max(0, idx - 1))}
                 disabled={idx === 0}
                 aria-label={s.prevScreen}
               >
@@ -213,14 +266,14 @@ export function StoreHero({ p, onOpen }: { p: Project; onOpen: (url: string) => 
                     className="carousel-dot"
                     aria-current={i === idx}
                     aria-label={`${i + 1} / ${slides.length}`}
-                    onClick={() => goTo(i)}
+                    onClick={() => goToByUser(i)}
                   />
                 ))}
               </div>
               <button
                 type="button"
                 className="carousel-arrow"
-                onClick={() => goTo(Math.min(slides.length - 1, idx + 1))}
+                onClick={() => goToByUser(Math.min(slides.length - 1, idx + 1))}
                 disabled={idx === slides.length - 1}
                 aria-label={s.nextScreen}
               >
