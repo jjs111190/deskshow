@@ -13,7 +13,7 @@
 | 6 | FlowWorks | 부분 구현 (Partial) | 실화면 4 (GameZone 게임 2048·Flappy·Hextris·Pac-Man) | none | [x] |
 | 7 | Side A | 개발 중 (출시 QA 중, 미검증 릴리스 명시) | 실화면 10 (홈·디스커버·제작·프로필·레코드·Spins·로그인 2·한국어·브랜드) | none | [x] |
 | 8 | RecordFlow | 부분 구현 (AI 학습) | 브랜드 에셋 3 (실행 캡처 아님 명시) | none | [x] |
-| 9 | Cyworld 2026 | 부분 구현 | 미니룸 에셋 6 (실행 캡처 아님 명시) | none | [x] |
+| 9 | Cyworld 2026 | 부분 구현 (회원가입→로그인→미니홈피 전체 탭 실행 확인) | 실화면 9 (미니홈피·다이어리·파도타기·뮤직·릴스·방명록·설정·로그인·회원가입) | none | [x] |
 | 10 | FlowNote | 기획 (Planned, 빌드 실패 확인) | 개발 중 UI 6 (문서 캡처: 시작·라이브러리·워크스페이스·스페이스) | none | [x] |
 | 11 | RodeblockRush | 개발 중 (루프 완성, 테스트 통과) | 실화면 13 (게임 플레이 11·스플래시·아이콘) | none | [x] |
 | 12 | BLANKY | 개발 중 (20종 파티게임) | 실화면 3 (홈 라이트·다크, 첫 실행 닉네임) + 스플래시 2 | none | [x] |
@@ -75,14 +75,14 @@ Goal: replace splash/icon-only galleries with real in-app screens like a store l
 Removed from publication: a VIBLOG email-verification screen showing a local dev server URL and a synthetic test address (not store-quality), and a VIBLOG camera screen that only showed the simulator's "no camera" empty state.
 
 Still on asset-only galleries (no real run capture) with reasons:
-- Cyworld 2026 — `next dev` wedges at startup; `next build` hits a Turbopack IPC crash plus a real FormData type error in `app/api/upload/route.ts`. Mini-room art only.
+- Cyworld 2026 — `next dev` wedges at startup; `next build` hits a Turbopack IPC crash plus a real FormData type error in `app/api/upload/route.ts`. Mini-room art only. *(Resolved in round 4b: the copy builds and runs; 9 real screens published.)*
 - RecordFlow — brand assets only; no runnable target located in this workspace.
 - Chain Zero — native home screen only; no UI-test target and no Simulator GUI available for scripted taps, and web capture needs an added dependency. *(Resolved in round 4: captured from a scratch copy's own web build.)*
 - FlowNote — not buildable (Planned).
 
 Notes on environment: the Supabase local stack for VIBLOG was already running, so integration tests could execute. The FlowWorks free JSON API (`tsx backend/src/server.ts`) still exits without listening in this environment, so its main app remains uncaptured.
 
-Total published real images: 81 (75 after round 3, +6 Chain Zero screens in round 4).
+Total published real images: 84 (81 after round 4, then −6 Cyworld art assets +9 real Cyworld screens in round 4b).
 
 ## UI change (2026-10-18) — store-style detail header
 
@@ -164,4 +164,35 @@ Honesty notes: these captures come from the app's own web build rather than a de
 screens, state, and copy but not the iOS status bar — the existing native home capture (`chain-zero-1.png`) is kept
 first in the gallery as device evidence. The 설정 (settings) screen was not captured (its icon button did not open under
 scripted input); no substitute image was invented for it. Localisation is Korean, matching the app's shipped default.
+
+## Round 4b (2026-10-19) — Cyworld 2026 real screens
+
+Cyworld 2026 replaces its 6 mini-room art assets with 9 real screens of the running app:
+
+| Image | Screen |
+|---|---|
+| `cyworld-2026-minihompy.png` | 미니홈피 home — TODAY/TOTAL counters, search, profile minime, TODAY'S MOOD, nickname, friends/guest counts, 도토리 balance, CURRENTLY PLAYING, WELCOME TO + OWNER MODE, MINIROOM 3.0 interactive room, DECORATE |
+| `cyworld-2026-diary.png` | CYBER DIARY "마음 기록장" including its real empty state and WRITE TODAY / DIARY SAVE |
+| `cyworld-2026-waves.png` | WAVES (파도타기) |
+| `cyworld-2026-music.png` | MUSIC — the BGM player tab |
+| `cyworld-2026-reels.png` | REELS / SNS — vertical feed, LIVE SNS comment panel, like/comment/share, comment box |
+| `cyworld-2026-guestbook.png` | GUEST — the guestbook tab |
+| `cyworld-2026-setting.png` | SETTING — minihompy settings |
+| `cyworld-2026-login.png` | LOGIN HOMPY — CYWORLD 2026 / RETRO REUNION 2026, email + password |
+| `cyworld-2026-signup.png` | SIGN UP — email, nickname, password |
+
+How they were obtained, without touching the original:
+- `next build` in a scratch copy. Two edits exist **in the copy only**: `formData.get("file") as unknown as File` in
+  `app/api/upload/route.ts` (the original's cast fails the type check — owner fix needed there), and adding `mobile` to
+  the tsconfig `exclude` so the sibling Expo app is not type-checked by the Next build.
+- The build was served against a **scratch** Postgres (`cyworld-pg` container on port 5433, created for this capture);
+  no database was created or changed anywhere near the original project. A demo account was created through the app's
+  own signup form, then signed in.
+- Screens were captured with a scripted Playwright session that clicked the app's own tab bar (HOME / DIARY / WAVES /
+  MUSIC / GUEST / REELS·SNS / SETTING).
+
+Honesty notes: the account is a locally created demo account (fictional nickname 민지, the reserved domain
+`example.com` for its email), so the friend count / 댓글 / REELS content shown is the app's own seeded demo data, not real
+users. No database, tunnel, or environment URL appears in any published image. The original project folder is unchanged:
+it still needs the FormData cast fixed and a runnable database before it can produce these captures itself.
 
