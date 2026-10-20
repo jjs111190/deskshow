@@ -14,7 +14,7 @@
 | 7 | Side A | 개발 중 (출시 QA 중, 미검증 릴리스 명시) | 실화면 10 (홈·디스커버·제작·프로필·레코드·Spins·로그인 2·한국어·브랜드) | none | [x] |
 | 8 | RecordFlow | 부분 구현 (AI 학습) | 브랜드 에셋 3 (실행 캡처 아님 명시) | none | [x] |
 | 9 | Cyworld 2026 | 부분 구현 (회원가입→로그인→미니홈피 전체 탭 실행 확인) | 실화면 9 (미니홈피·다이어리·파도타기·뮤직·릴스·방명록·설정·로그인·회원가입) | none | [x] |
-| 10 | FlowNote | 기획 (Planned, 빌드 실패 확인) | 개발 중 UI 6 (문서 캡처: 시작·라이브러리·워크스페이스·스페이스) | none | [x] |
+| 10 | FlowNote | 개발 중 (스크래치 사본에서 iPad 실행 확인) | 실화면 6 (홈·새 문서 시트·블록 문서·라이브러리·설정·로컬 LLM) | none | [x] |
 | 11 | RodeblockRush | 개발 중 (루프 완성, 테스트 통과) | 실화면 13 (게임 플레이 11·스플래시·아이콘) | none | [x] |
 | 12 | BLANKY | 개발 중 (20종 파티게임) | 실화면 3 (홈 라이트·다크, 첫 실행 닉네임) + 스플래시 2 | none | [x] |
 
@@ -53,12 +53,12 @@ Not captured (CONCEPT shown, reasons recorded):
 
 - RECEIPT — captured (`receipt-1.png`, real onboarding). Earlier failures were a wedged simulator device, not the app; healthy device worked first try.
 | FlowWorks | `flowworks-2048/hextris/pacman.png` — GameZone 내장 게임 실행 3종 | 정적 서빙 + Playwright 캡처 (본앱은 API 없이 blank라 제외, 사유 기록) |
-| FlowNote | `flownote-complete-ui/mainappview-success.png` — 개발 중 UI 2종 | 프로젝트 docs 캡처 (빌드는 컴파일 실패로 Planned 유지) |
+| FlowNote | `flownote-complete-ui/mainappview-success.png` — 개발 중 UI 2종 | 프로젝트 docs 캡처 (빌드는 컴파일 실패로 Planned 유지) *(해결: 라운드 6에서 사본 빌드·실행 성공, 실화면 6장으로 교체)* |
 - BLANKY — run capture blocked by third-party conflict: `google_mobile_ads` (CocoaPods) vs `webview_flutter_wkwebview` (SPM); needs owner-side Podfile fix. Disclosed: flutter tool auto-migrated BLANKY's Podfile/AppDelegate/.gitignore/xcscheme during attempts (standard forward-compatible upgrades).
 - Cyworld 2026 — blocked three ways: `next dev` wedges at startup (0% CPU, no output, no listen, Node 22 and 25); `next build` hits a Turbopack IPC crash plus a genuine type error in the original (`app/api/upload/route.ts` FormData — owner fix needed); stale `out/` is 0 bytes.
 - VIBLOG — `flutter build ios --simulator` in progress (web platform not configured; expo-style web capture N/A).
 - Chain Zero / RecordFlow — no `react-native-web` dep; web capture would require adding deps to originals (declined).
-- FlowNote — not buildable per its README (Planned).
+- FlowNote — not buildable per its README (Planned). *(Resolved in round 6.)*
 
 ## Capture log (2026-10-18 round 2 — deeper real screens)
 
@@ -69,7 +69,7 @@ Goal: replace splash/icon-only galleries with real in-app screens like a store l
 | RodeblockRush | 11 gameplay screens (title, lane change, traffic/near-miss, boost, coins, perfect dodge, result, garage, cards, missions, pause) | Ran the game's own `tests/SmokeTest.tscn` (Godot 4.7) in a scratch copy; it saves 720×1280 portrait stage renders to `user://smoke/`. |
 | VIBLOG | 9 real screens (sign-up, onboarding, sign-in, profile setup, photo booth, editor filter/adjust/face-sticker/video) | Ran the project's own `integration_test/looks_faces_flow_test.dart` on the iOS simulator with `TEST_SHOTS=true`; the tests write screenshots themselves. Server-free test, so it passed. |
 | Side A | 6 real screens (home, discover, create, profile, record detail, spins) | Built an offline Expo web export with empty `EXPO_PUBLIC_*` (the repo's documented local-demo mode) and drove it with Playwright through the guest "Browse the records" path. Demo-studio banner (fictional content) is visible in-frame. |
-| FlowNote | 4 more iPad UI captures (launch, workspace docs, spaces, empty library) | In-repo `docs/` captures only; the app still does not build (Planned). |
+| FlowNote | 4 more iPad UI captures (launch, workspace docs, spaces, empty library) | In-repo `docs/` captures only; the app still does not build (Planned). *(Resolved in round 6: the copy builds and ran on an iPad simulator; 6 real screens published.)* |
 | FlowWorks | +1 game (Flappy) | Static-served `public/games/flappy` + Playwright. |
 
 Removed from publication: a VIBLOG email-verification screen showing a local dev server URL and a synthetic test address (not store-quality), and a VIBLOG camera screen that only showed the simulator's "no camera" empty state.
@@ -78,11 +78,11 @@ Still on asset-only galleries (no real run capture) with reasons:
 - Cyworld 2026 — `next dev` wedges at startup; `next build` hits a Turbopack IPC crash plus a real FormData type error in `app/api/upload/route.ts`. Mini-room art only. *(Resolved in round 4b: the copy builds and runs; 9 real screens published.)*
 - RecordFlow — brand assets only; no runnable target located in this workspace.
 - Chain Zero — native home screen only; no UI-test target and no Simulator GUI available for scripted taps, and web capture needs an added dependency. *(Resolved in round 4: captured from a scratch copy's own web build.)*
-- FlowNote — not buildable (Planned).
+- FlowNote — not buildable (Planned). *(Resolved in round 6: builds and runs from a scratch copy; real screens published.)*
 
 Notes on environment: the Supabase local stack for VIBLOG was already running, so integration tests could execute. The FlowWorks free JSON API (`tsx backend/src/server.ts`) still exits without listening in this environment, so its main app remains uncaptured.
 
-Total published real images: 84 (81 after round 4, then −6 Cyworld art assets +9 real Cyworld screens in round 4b).
+Total published real images: 84 (81 after round 4, −6 Cyworld art assets +9 real Cyworld screens in round 4b, then −6 FlowNote docs captures +6 real iPad screens in round 6).
 
 ## UI change (2026-10-18) — store-style detail header
 
@@ -195,4 +195,33 @@ Honesty notes: the account is a locally created demo account (fictional nickname
 `example.com` for its email), so the friend count / 댓글 / REELS content shown is the app's own seeded demo data, not real
 users. No database, tunnel, or environment URL appears in any published image. The original project folder is unchanged:
 it still needs the FormData cast fixed and a runnable database before it can produce these captures itself.
+
+## Round 6 (2026-10-19) — FlowNote real iPad screens
+
+FlowNote replaces its 6 in-repo `docs/` UI captures with 6 real screens of the app running on an iPad simulator:
+
+| Image | Screen |
+|---|---|
+| `flownote-home.png` | Home dashboard — NoviNote greeting, date card, library summary (3 documents, 1 workspace), 7-day activity chart, weekly timetable |
+| `flownote-create.png` | New-document sheet — NoviFlow plus the ten document types (notebook, PDF notebook, block document, whiteboard, database, recording, spreadsheet, presentation) |
+| `flownote-editor.png` | Block document "2026 가을 학기 노트" — two paragraphs, two bullets, one to-do (5 blocks) typed in-app |
+| `flownote-library.png` | Library — three documents, favorites/recents/trash, workspace tree |
+| `flownote-settings.png` | Settings — version 1.0.0 (23), language, appearance Light/Dark/System, five accent themes |
+| `flownote-local-ai.png` | On-device LLM — Private Local Chat, Chat/Models/Local API/Settings, model-not-installed state |
+
+How they were obtained, without touching the original:
+- `xcodebuild -scheme FlowNote -sdk iphonesimulator build` in a scratch copy. **Copy-only fix:** the Xcode 27 SDK
+  added `SwiftUI.Document`, which makes the app's own `DataCore.Document` ambiguous in every file importing both.
+  The copy adds a module-scope `typealias Document = DataCore.Document` in AppShell, RepositoryCore, AIEngine and
+  BlockEditor. The original repo still fails to build until its owner applies the same fix.
+- The project ships a `FlowNoteUITests` folder but **no test target** in the Xcode project; the copy wires one up
+  (xcodeproj gem) so the app's UI could be scripted: dismiss the tutorial, create documents, type titles and blocks,
+  and save `XCUIScreen` screenshots on an iPad Pro 11-inch (iOS 26.5 runtime, Release build, unsigned).
+- The three documents in the library are demo content typed through the app's own editor; no user data is shown.
+
+Honesty notes: **no handwriting is shown** — the notebook/whiteboard canvases are pencil-only by default, the
+simulator has no Apple Pencil, and scripted touches produced no ink, so those screens were not published. The
+local-LLM screen is its real "Model not installed" state; no model was downloaded. PDF annotation, recording and
+study tools were not exercised. The UI mixes Korean and English through its own localisation and is left as shipped.
+
 
