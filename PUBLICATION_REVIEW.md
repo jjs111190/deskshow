@@ -5,18 +5,18 @@
 
 | # | Project | Status shown | Screenshots | Links shown | Approve? |
 |---|---------|--------------|-------------|-------------|----------|
-| 1 | HANDY | 개발 중 (In development) | 실화면 5 (온보딩 2·메인탭 2·런치아트) | none | [x] |
-| 2 | Spotory | 개발 중 | 실화면 9 (지도+홍보 8) | none | [x] |
-| 3 | VIBLOG | 개발 중 | 실화면 11 (회원가입·인트로·로그인·프로필 설정·포토부스·편집기 4·아이콘 2) | none | [x] |
-| 4 | Chain Zero | 개발 중 | 실화면 7 (홈·플레이보드·모드선택·튜토리얼·도감·업적·등급) + 스플래시 | none | [x] |
+| 1 | HANDY | 개발 중 (In development) | 실화면 4 (온보딩 2·메인탭 2) | none | [x] |
+| 2 | Spotory | 개발 중 | 실화면 1 (지도 — 마케팅 포스터는 갤러리에서 제외) | none | [x] |
+| 3 | VIBLOG | 개발 중 | 실화면 9 (회원가입·인트로·로그인·프로필 설정·포토부스·편집기 4) | none | [x] |
+| 4 | Chain Zero | 개발 중 | 실화면 7 (홈·플레이보드·모드선택·튜토리얼·도감·업적·등급) | none | [x] |
 | 5 | RECEIPT | 개발 중 | 실화면 1 (온보딩) | none | [x] |
 | 6 | FlowWorks | 부분 구현 (Partial) | 실화면 4 (GameZone 게임 2048·Flappy·Hextris·Pac-Man) | none | [x] |
-| 7 | Side A | 개발 중 (출시 QA 중, 미검증 릴리스 명시) | 실화면 10 (홈·디스커버·제작·프로필·레코드·Spins·로그인 2·한국어·브랜드) | none | [x] |
-| 8 | RecordFlow | 부분 구현 (AI 학습) | 브랜드 에셋 3 (실행 캡처 아님 명시) | none | [x] |
+| 7 | Side A | 개발 중 (출시 QA 중, 미검증 릴리스 명시) | 실화면 9 (홈·디스커버·제작·프로필·레코드·Spins·로그인 2·한국어) | none | [x] |
+| 8 | RecordFlow | 부분 구현 (AI 학습) | 0 (컨셉 플레이스홀더 — 아이콘·브랜드 아트는 갤러리에서 제외) | none | [x] |
 | 9 | Cyworld 2026 | 부분 구현 (회원가입→로그인→미니홈피 전체 탭 실행 확인) | 실화면 9 (미니홈피·다이어리·파도타기·뮤직·릴스·방명록·설정·로그인·회원가입) | none | [x] |
 | 10 | FlowNote | 개발 중 (스크래치 사본에서 iPad 실행 확인) | 실화면 6 (홈·새 문서 시트·블록 문서·라이브러리·설정·로컬 LLM) | none | [x] |
-| 11 | RodeblockRush | 개발 중 (루프 완성, 테스트 통과) | 실화면 13 (게임 플레이 11·스플래시·아이콘) | none | [x] |
-| 12 | BLANKY | 개발 중 (20종 파티게임) | 실화면 3 (홈 라이트·다크, 첫 실행 닉네임) + 스플래시 2 | none | [x] |
+| 11 | RodeblockRush | 개발 중 (루프 완성, 테스트 통과) | 실화면 11 (게임 플레이) | none | [x] |
+| 12 | BLANKY | 개발 중 (20종 파티게임) | 실화면 3 (홈 라이트·다크, 첫 실행 닉네임) | none | [x] |
 
 ## Security scan (2026-10-11, local)
 
@@ -82,7 +82,31 @@ Still on asset-only galleries (no real run capture) with reasons:
 
 Notes on environment: the Supabase local stack for VIBLOG was already running, so integration tests could execute. The FlowWorks free JSON API (`tsx backend/src/server.ts`) still exits without listening in this environment, so its main app remains uncaptured.
 
-Total published real images: 84 (81 after round 4, −6 Cyworld art assets +9 real Cyworld screens in round 4b, then −6 FlowNote docs captures +6 real iPad screens in round 6).
+Total published real images: 64 (84 after round 6, −20 branding images in round 7: app icons, splash art, key art, marketing posters and brand placeholders removed from every gallery).
+
+## Round 7 (2026-10-20) — galleries are real screens only
+
+Every screenshot gallery now contains **only real in-app captures**. Removed 20 images that were not screens:
+
+| Project | Removed | Why |
+|---|---|---|
+| VIBLOG | `viblog-icon-dark`, `viblog-icon-tinted` | app icon renders (1024×1024) |
+| RodeblockRush | `rodeblockrush-iconart`, `rodeblockrush-splash` | App Store key art and splash (1024×1024) |
+| Side A | `side-a-brand` | app icon (900×900) |
+| RecordFlow | `recordflow-art`, `recordflow-note`, `recordflow-splash` | brand art, app icon, splash — no real screen exists for this project |
+| Chain Zero | `chain-zero-splash` | splash icon (512×512) |
+| BLANKY | `blanky-splash`, `blanky-splash-dark` | splash lockups (1200×744) |
+| HANDY | `handy-launch` | launch art (600×600) |
+| Spotory | `01_spotory_cover` … `08_spotory_october_launch` | App Store marketing posters, each with the app icon in the footer; `08_…october_launch` also had corrupted repeated text |
+
+The app icon is still shown once per project — in the header icon from `public/icons/`, which is where it belongs.
+Spotory now publishes its single real map screen; RecordFlow has no verified screen left, so its detail page shows the
+existing concept placeholder instead of brand art. The earlier capture-log rows that mention these files are superseded
+by this round.
+
+Reason for the rule: icon/splash/poster images look like screens in a carousel but carry no interface, and the
+marketing posters embedded the icon in the frame itself — the exact problem reported.
+
 
 ## UI change (2026-10-18) — store-style detail header
 
