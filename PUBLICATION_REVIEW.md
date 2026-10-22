@@ -1,6 +1,7 @@
 # DESKSHOW publication review — APPROVAL REQUIRED
 
-> Owner approved all 12 rows on 2026-10-11 (chat). Pushed after approval only.
+> Owner approved all 12 initial rows on 2026-10-11 (chat), then approved adding the Desktop games
+> (TWO TO FALL, ROOFTOP DAYS) on 2026-10-22. Pushed after approval only.
 > Flip a project to `visibility: 'approved'` ONLY after you confirm its row.
 
 | # | Project | Status shown | Screenshots | Links shown | Approve? |
@@ -17,6 +18,8 @@
 | 10 | FlowNote | 개발 중 (스크래치 사본에서 iPad 실행 확인) | 실화면 6 (홈·새 문서 시트·블록 문서·라이브러리·설정·로컬 LLM) | none | [x] |
 | 11 | RodeblockRush | 개발 중 (루프 완성, 테스트 통과) | 실화면 11 (게임 플레이) | none | [x] |
 | 12 | BLANKY | 개발 중 (20종 파티게임) | 실화면 3 (홈 라이트·다크, 첫 실행 닉네임) | none | [x] |
+| 13 | TWO TO FALL | 개발 중 (Steam·Twitch 종단 간 검증 전) | 실화면 8 (메뉴·스테이지 선택·챕터 선택·컨트롤·협동 플레이·ECHO·설정·일시정지) | none | [x] |
+| 14 | ROOFTOP DAYS (오늘도 옥상) | 개발 중 (v1.1.0, 광고 테스트 ID) | 실화면 8 (타이틀·낮/밤/비 옥상·시설 시트·미니룸·돌발 사건·탐험 결과) | none | [x] |
 
 ## Security scan (2026-10-11, local)
 
@@ -82,7 +85,7 @@ Still on asset-only galleries (no real run capture) with reasons:
 
 Notes on environment: the Supabase local stack for VIBLOG was already running, so integration tests could execute. The FlowWorks free JSON API (`tsx backend/src/server.ts`) still exits without listening in this environment, so its main app remains uncaptured.
 
-Total published real images: 64 (84 after round 6, −20 branding images in round 7: app icons, splash art, key art, marketing posters and brand placeholders removed from every gallery).
+Total published real images: 80 (64 after round 7 + 8 TWO TO FALL + 8 ROOFTOP DAYS in round 8).
 
 ## Round 7 (2026-10-20) — galleries are real screens only
 
@@ -106,6 +109,27 @@ by this round.
 
 Reason for the rule: icon/splash/poster images look like screens in a carousel but carry no interface, and the
 marketing posters embedded the icon in the frame itself — the exact problem reported.
+
+## Round 8 (2026-10-22) — Desktop games added with real run captures
+
+Two Godot games that were not on the site yet were captured from scratch copies (originals untouched) and published
+as entries 13–14. Both use the same rule as round 7: only real in-app screens.
+
+| Project | Captures | How they were produced |
+|---|---|---|
+| TWO TO FALL | 8 (1280×720) | Ran the project from a scratch copy in Godot 4.7.1 with an injected capture autoload; opened both stage-select panels and settings through the real UI, started local co-op Chapter 01 and solo Stage 6, took viewport renders |
+| ROOFTOP DAYS | 8 (390×844) | Ran the game's own `tests/screenshot_tour.gd` (`--tour`) at 390×844, which drives title → creator → rooftop → sheets/screens → night/rain → event/expedition and saves real renders |
+
+Verification performed in the same pass:
+
+- TWO TO FALL: `tools/validate_project.sh` — 13 of 14 steps pass headless. The shared-keyboard input simulation fails
+  only in headless mode (real key events need a display); the same scene passes in a windowed run. The Steam and Twitch
+  paths were **not** exercised (no App ID, no Twitch credentials) and are labelled Partially Implemented.
+- ROOFTOP DAYS: `tests/TestRunner.tscn` headless — **46 passed, 0 failed**. Mobile builds and AdMob are reported by the
+  project README but were not re-verified; AdMob uses test IDs only, so it is labelled Partially Implemented.
+
+Icons were copied from each project's own icon asset into `public/icons/`; app icons do not appear in the galleries.
+No credentials, tokens, or absolute local paths were published.
 
 
 ## UI change (2026-10-18) — store-style detail header

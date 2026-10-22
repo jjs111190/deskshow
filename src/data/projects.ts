@@ -6,7 +6,7 @@ import type { Project } from '../types';
  * - Every feature claim has an entry in `evidence` with a status.
  * - repositoryUrl / demoUrl are null unless a public URL was verified.
  * - screenshots: real captures only (public/screenshots/). Empty = CONCEPT placeholder UI.
- * - Owner approved all 12 rows on 2026-10-11 (see PUBLICATION_REVIEW.md).
+ * - Owner approved all rows (12 on 2026-10-11; two games added 2026-10-22 — see PUBLICATION_REVIEW.md).
  */
 export const projects: Project[] = [
   {
@@ -1771,6 +1771,354 @@ export const projects: Project[] = [
         feature: 'Playable verification',
         evidence: 'Built and ran on the iOS simulator from a scratch copy: real onboarding and home screens (light and dark); home shows the 20-game roster plus create/join room',
         status: 'Implemented',
+        confidence: 'High',
+      },
+    ],
+  },
+  {
+    id: 'two-to-fall',
+    slug: 'two-to-fall',
+    name: 'TWO TO FALL',
+    category: 'Game',
+    platforms: ['macOS', 'Windows'],
+    technologies: ['Godot 4.7', 'GDScript', 'GodotSteam', 'ENet'],
+    status: 'in-development',
+    visibility: 'approved',
+    featured: false,
+    icon: 'icons/two-to-fall.png',
+    screenshots: [
+      {
+        src: 'screenshots/two-to-fall-menu.png',
+        altKo: 'TWO TO FALL 메인 메뉴 — PLAY LOCAL CO-OP·2P CAMPAIGN·STREAM MODE와 픽셀 캐릭터',
+        altEn: 'TWO TO FALL main menu — PLAY LOCAL CO-OP, 2P CAMPAIGN, STREAM MODE and pixel characters',
+        captionKo: '실제 실행 화면 (메인 메뉴)',
+        captionEn: 'Real running screen (main menu)',
+        concept: false,
+        frame: 'none',
+      },
+      {
+        src: 'screenshots/two-to-fall-campaign.png',
+        altKo: '2P 캠페인 스테이지 선택 — 1 Player Role Swap / 2 Players One Keyboard와 6개 스테이지',
+        altEn: '2P campaign stage select — 1 Player Role Swap / 2 Players One Keyboard with six stages',
+        captionKo: '실제 스테이지 선택 (모드 전환·6개 스테이지)',
+        captionEn: 'Real stage select (mode switch, six stages)',
+        concept: false,
+        frame: 'none',
+      },
+      {
+        src: 'screenshots/two-to-fall-coop.png',
+        altKo: '메인 협동 캠페인 챕터 선택 — 10개 챕터의 CLEAR/AVAILABLE/LOCKED 상태',
+        altEn: 'Main co-op chapter select — 10 chapters with CLEAR/AVAILABLE/LOCKED states',
+        captionKo: '실제 챕터 선택 (10챕터 진행도)',
+        captionEn: 'Real chapter select (10-chapter progress)',
+        concept: false,
+        frame: 'none',
+      },
+      {
+        src: 'screenshots/two-to-fall-controls.png',
+        altKo: '협동 컨트롤 브리핑 — P1 FORCE와 P2 TECH의 키 배치와 게임패드 안내',
+        altEn: 'Co-op controls briefing — P1 FORCE and P2 TECH key layouts plus gamepad notes',
+        captionKo: '실제 컨트롤 브리핑 (두 역할의 키 배치)',
+        captionEn: 'Real controls briefing (both roles)',
+        concept: false,
+        frame: 'none',
+      },
+      {
+        src: 'screenshots/two-to-fall-coop-play.png',
+        altKo: '챕터 01 AWAKENING 인게임 — 두 캐릭터와 P1/P2 역할별 체력 HUD',
+        altEn: 'Chapter 01 AWAKENING in-game — both characters with P1/P2 role HUD',
+        captionKo: '실제 협동 플레이 (챕터 01)',
+        captionEn: 'Real co-op play (Chapter 01)',
+        concept: false,
+        frame: 'none',
+      },
+      {
+        src: 'screenshots/two-to-fall-echo.png',
+        altKo: 'STAGE 6 SECOND CHANCE — ECHO로 파트너의 과거를 재생하는 밤하늘 스테이지',
+        altEn: 'STAGE 6 SECOND CHANCE — night-sky stage built around the ECHO rewind',
+        captionKo: '실제 플레이 (ECHO 스테이지)',
+        captionEn: 'Real play (ECHO stage)',
+        concept: false,
+        frame: 'none',
+      },
+      {
+        src: 'screenshots/two-to-fall-settings.png',
+        altKo: '설정 화면 — 해상도·VSync·FPS 제한·화면 흔들림·플래시 효과·컨트롤러',
+        altEn: 'Settings — resolution, VSync, FPS limit, screen shake, flash effects, controller',
+        captionKo: '실제 설정 화면 (접근성 옵션 포함)',
+        captionEn: 'Real settings screen (with accessibility options)',
+        concept: false,
+        frame: 'none',
+      },
+      {
+        src: 'screenshots/two-to-fall-paused.png',
+        altKo: '일시정지 메뉴 — RESUME·RESTART STAGE·MAIN MENU',
+        altEn: 'Pause menu — RESUME, RESTART STAGE, MAIN MENU',
+        captionKo: '실제 일시정지 화면',
+        captionEn: 'Real pause screen',
+        concept: false,
+        frame: 'none',
+      },
+    ],
+    videos: [],
+    repositoryUrl: null,
+    demoUrl: null,
+    updatedAt: '2026-10-22',
+    ko: {
+      tagline: '두 사람이 하나의 산을 오르는 2인 협동 플랫포머.',
+      shortDescription:
+        'FORCE와 TECH의 서로 다른 능력을 맞물려 10개 챕터를 오르는 픽셀 협동 플랫포머. 한 키보드 2인 협동과 6스테이지 솔로 캠페인을 함께 담았습니다.',
+      overview:
+        'TWO TO FALL은 Godot 4.7·GDScript로 만든 2D 픽셀 협동 플랫포머입니다. FORCE는 앵커로 무게를 고정하고 파트너를 들어 던지며, TECH는 링크·글라이드·월클라임으로 길을 만듭니다. 메인 모드는 10개 챕터의 2인 협동 캠페인이고, 별도로 1인이 Tab으로 몸을 바꾸거나 키보드 하나를 나눠 2인이 함께하는 6스테이지 캠페인이 있습니다. 후반 스테이지는 두 역할의 입력이 동시에 맞아야 풀리는 퍼즐로 확장되고, 6스테이지에는 파트너의 최근 4초를 되감는 ECHO 기믹이 등장합니다.',
+      howItWorks: [
+        'Godot 4.7.1에서 프로젝트를 열고 F5로 실행합니다(첫 실행은 임포트 1회).',
+        'PLAY LOCAL CO-OP에서 한 키보드로 P1(FORCE · WASD)과 P2(TECH · 방향키)를 동시에 조작합니다.',
+        '한 명이면 2P CAMPAIGN에서 1 Player · Role Swap을 골라 Tab으로 두 몸을 바꿔 가며 플레이합니다.',
+      ],
+      developmentNotes:
+        'scenes/chapters의 10개 챕터, prefabs/puzzle의 재사용 퍼즐, scripts/players·physics·network·steam·streaming으로 분리되어 있습니다. 14단계 검증 스크립트는 임포트·단위 테스트·10챕터 물리 경로·솔로/공유 키보드·이동 감각·시청자 이벤트·메인 씬 부팅까지 확인합니다. 이 Mac에서는 공유 키보드 입력 시뮬레이션이 헤드리스에서만 실패하고 창을 띄운 실행에서는 통과했습니다(실입력 이벤트가 디스플레이를 필요로 함).',
+      futurePlans:
+        'Steam 로비와 Twitch 관전자 모드는 코드 경로가 연결되어 있지만 실제 App ID·두 계정·두 환경에서의 종단 간 검증이 남아 있습니다. macOS 유니버설 앱은 빌드되어 있습니다.',
+    },
+    en: {
+      tagline: 'A two-player co-op platformer about climbing one mountain together.',
+      shortDescription:
+        'A pixel co-op platformer where FORCE and TECH combine their abilities across 10 chapters, with shared-keyboard co-op and a six-stage solo campaign.',
+      overview:
+        'TWO TO FALL is a 2D pixel co-op platformer built in Godot 4.7 and GDScript. FORCE anchors weight, lifts and throws their partner; TECH builds routes with links, glides and wall climbs. The main mode is a 10-chapter two-player co-op campaign, and a separate six-stage campaign supports either one player swapping bodies with Tab or two players sharing one keyboard. Later stages add puzzles that need both roles\' inputs at the same moment, and stage 6 introduces ECHO — a rewind of the partner\'s last four seconds.',
+      howItWorks: [
+        'Open the project in Godot 4.7.1 and press F5 (one import pass on first run).',
+        'In PLAY LOCAL CO-OP, P1 drives FORCE (WASD) while P2 drives TECH (arrow keys) on one keyboard.',
+        'Alone, pick 1 Player · Role Swap in 2P CAMPAIGN and switch bodies with Tab.',
+      ],
+      developmentNotes:
+        'Separated into scenes/chapters (10 chapters), prefabs/puzzle (reusable puzzle pieces), and scripts/players, physics, network, steam, and streaming. A 14-step validation script covers import, unit tests, the ten-chapter physical paths, solo and shared-keyboard input, movement feel, viewer events, and main-scene boot. On this Mac the shared-keyboard input simulation fails only in headless mode and passes in a windowed run (real input events need a display).',
+      futurePlans:
+        'Steam lobbies and Twitch viewer mode are wired through their code paths, but end-to-end verification with a real App ID, two accounts and two machines is still pending. A macOS universal app is built.',
+    },
+    features: [
+      {
+        titleKo: '한 키보드 2인 협동',
+        titleEn: 'Two players, one keyboard',
+        bodyKo: 'P1 FORCE(WASD)와 P2 TECH(방향키)가 동시에 움직이고, 카메라가 두 사람을 함께 담습니다.',
+        bodyEn: 'P1 FORCE (WASD) and P2 TECH (arrow keys) move at the same time while the camera frames both.',
+      },
+      {
+        titleKo: '10챕터 협동 캠페인',
+        titleEn: '10-chapter co-op campaign',
+        bodyKo: '앵커 리프트, 달빛 다리, 슬램 봉인, 던지기 룬, 산바람, 달 위상 발판까지 챕터마다 새 기믹이 쌓입니다.',
+        bodyEn: 'New mechanics stack chapter by chapter: anchor lifts, moon bridges, slam seals, throw runes, mountain wind, and lunar platforms.',
+      },
+      {
+        titleKo: 'ECHO 리와인드',
+        titleEn: 'ECHO rewind',
+        bodyKo: '파트너의 최근 4초를 실체 있는 잔상으로 재생해 두 곳을 동시에 점유합니다.',
+        bodyEn: 'Replay the partner\'s last four seconds as a solid echo and hold two places at once.',
+      },
+      {
+        titleKo: '접근성 설정',
+        titleEn: 'Accessibility settings',
+        bodyKo: '화면 흔들림과 플래시 효과를 각각 끄고, VSync·FPS 제한·컨트롤러 입력을 조정합니다.',
+        bodyEn: 'Toggle screen shake and flash effects independently, and adjust VSync, FPS limit, and controller input.',
+      },
+    ],
+    evidence: [
+      {
+        feature: 'Campaign content',
+        evidence: 'Real run: menu, six-stage select, 10-chapter co-op select, Chapter 01 co-op play, and the ECHO stage were captured',
+        status: 'Implemented',
+        confidence: 'High',
+      },
+      {
+        feature: 'Automated verification',
+        evidence: 'tools/validate_project.sh: 13 of 14 steps pass headless; the shared-keyboard input simulation passes in a windowed run',
+        status: 'Implemented',
+        confidence: 'High',
+      },
+      {
+        feature: 'Steam P2P + Twitch viewer mode',
+        evidence: 'GodotSteam lobby/Rich Presence and Twitch IRC code paths exist; no end-to-end run with two accounts',
+        status: 'Partially Implemented',
+        confidence: 'Medium',
+      },
+      {
+        feature: 'Packaged macOS build',
+        evidence: 'README reports a universal app in builds/macos; captures came from a source run',
+        status: 'Unverified',
+        confidence: 'Medium',
+      },
+    ],
+  },
+  {
+    id: 'rooftop-days',
+    slug: 'rooftop-days',
+    name: 'ROOFTOP DAYS',
+    category: 'Game',
+    platforms: ['iOS', 'Android'],
+    technologies: ['Godot 4.7', 'GDScript', 'AdMob'],
+    status: 'in-development',
+    visibility: 'approved',
+    featured: false,
+    icon: 'icons/rooftop-days.png',
+    screenshots: [
+      {
+        src: 'screenshots/rooftop-days-title.png',
+        altKo: '오늘도 옥상 타이틀 — 게임 시작·설정·크레딧과 옥상 일러스트',
+        altEn: 'ROOFTOP DAYS title — start, settings, credits and a rooftop illustration',
+        captionKo: '실제 실행 화면 (타이틀)',
+        captionEn: 'Real running screen (title)',
+        concept: false,
+        frame: 'phone',
+      },
+      {
+        src: 'screenshots/rooftop-days-rooftop.png',
+        altKo: '낮의 옥상 — 시설 10종과 생존자, 자원 HUD',
+        altEn: 'Daytime rooftop — facilities, survivors and the resource HUD',
+        captionKo: '실제 옥상 화면 (낮)',
+        captionEn: 'Real rooftop screen (day)',
+        concept: false,
+        frame: 'phone',
+      },
+      {
+        src: 'screenshots/rooftop-days-night.png',
+        altKo: '밤의 옥상 — 조명이 켜진 시설과 도시 불빛',
+        altEn: 'Rooftop at night — lit facilities against the city lights',
+        captionKo: '실제 옥상 화면 (밤)',
+        captionEn: 'Real rooftop screen (night)',
+        concept: false,
+        frame: 'phone',
+      },
+      {
+        src: 'screenshots/rooftop-days-rain.png',
+        altKo: '비 오는 날의 옥상 — 빗물과 날씨에 반응하는 시설',
+        altEn: 'Rooftop in the rain — facilities responding to weather',
+        captionKo: '실제 옥상 화면 (비)',
+        captionEn: 'Real rooftop screen (rain)',
+        concept: false,
+        frame: 'phone',
+      },
+      {
+        src: 'screenshots/rooftop-days-building.png',
+        altKo: '텐트 시설 시트 — 레벨·생산량·업그레이드 비용·담당 생존자',
+        altEn: 'Tent facility sheet — level, output, upgrade cost and assigned survivor',
+        captionKo: '실제 시설 관리 화면',
+        captionEn: 'Real facility sheet',
+        concept: false,
+        frame: 'phone',
+      },
+      {
+        src: 'screenshots/rooftop-days-miniroom.png',
+        altKo: '미니룸 — 10×10 방에 배치한 가구와 사용 중인 캐릭터',
+        altEn: 'Miniroom — a 10×10 room furnished with characters using the items',
+        captionKo: '실제 미니룸 화면',
+        captionEn: 'Real miniroom screen',
+        concept: false,
+        frame: 'phone',
+      },
+      {
+        src: 'screenshots/rooftop-days-event.png',
+        altKo: '돌발 사건 — 선택지별 사망 확률과 15초 제한',
+        altEn: 'Sudden event — choices with death odds and a 15-second timer',
+        captionKo: '실제 돌발 사건 화면',
+        captionEn: 'Real sudden-event screen',
+        concept: false,
+        frame: 'phone',
+      },
+      {
+        src: 'screenshots/rooftop-days-explore.png',
+        altKo: '탐험 결과 — 발견한 가구의 희귀도와 획득 보상',
+        altEn: 'Expedition result — discovered furniture rarities and rewards',
+        captionKo: '실제 탐험 결과 화면',
+        captionEn: 'Real expedition result screen',
+        concept: false,
+        frame: 'phone',
+      },
+    ],
+    videos: [],
+    repositoryUrl: null,
+    demoUrl: null,
+    updatedAt: '2026-10-22',
+    ko: {
+      tagline: '자연이 되찾은 서울, 옥상 위의 아늑한 생존.',
+      shortDescription:
+        '사라진 서울의 옥상에서 시설을 짓고 생존자와 살아가는 포스트 아포칼립스 방치형 생활 시뮬레이션. 154종 가구·미니룸·탐험·돌발 사건을 담았습니다.',
+      overview:
+        '오늘도 옥상(ROOFTOP DAYS)은 Godot 4.7로 만든 세로형 2D 아이소메트릭 생활 시뮬레이션입니다. 16×16 옥상에 텐트·정원·태양광·온실 등 10종 시설을 세우고, 봄·준·나래·순자·단비와 고양이 모찌·강아지 콩이가 살아가는 공동체를 꾸립니다. 시설은 레벨·담당 생존자·날씨·낮밤에 따라 자원을 생산하고, 앱을 꺼 둔 시간만큼 보상이 쌓입니다. 탐험·제작·돌발 사건·미니룸·성장이 하나의 루프로 이어지고, 모든 그래픽과 음악은 프로젝트 스크립트로 직접 제작했습니다.',
+      howItWorks: [
+        'Godot 4.7.1에서 실행하거나 iOS/Android 빌드를 설치합니다.',
+        '옥상에서 시설을 짓고 생존자를 배치해 자원을 생산하고, 잡동사니를 주워 재료를 모읍니다.',
+        '탐험으로 가구와 생존자를 얻고, 미니룸을 꾸미고, 돌발 사건의 선택지로 하루를 넘깁니다.',
+      ],
+      developmentNotes:
+        'core/systems/world/ui로 나뉜 66개 스크립트와 JSON 데이터(가구 154·사건 32·UI 문자열 434)로 구성됩니다. 헤드리스 테스트 46개가 전부 통과했고, 게임에 포함된 스크린샷 투어가 실제 화면 40장을 생성합니다. 이 페이지의 캡처도 그 투어를 직접 실행해 얻었습니다.',
+      futurePlans:
+        'AdMob은 테스트 ID로만 연결되어 있어 실제 수익화 연동이 남아 있습니다. iOS는 실기기 디버그 빌드로 확인되었고, 시뮬레이터는 이 Mac의 Rosetta 부재로 실행되지 않습니다.',
+    },
+    en: {
+      tagline: 'A cozy survival life sim on a rooftop in a reclaimed Seoul.',
+      shortDescription:
+        'A post-apocalyptic idle life sim about building a rooftop home and living with survivors — 154 furniture pieces, minirooms, expeditions and sudden events.',
+      overview:
+        'ROOFTOP DAYS is a portrait 2D isometric life sim built in Godot 4.7. On a 16×16 rooftop you raise ten facility types — tent, garden, solar panel, greenhouse and more — and build a community with Bom, Jun, Narae, Sunja, Danbi, the cat Mochi and the dog Kongi. Facilities produce resources based on level, assigned survivor, weather and time of day, and keep accruing while the app is closed. Expeditions, crafting, sudden events, minirooms and growth feed one loop, and every graphic and music track was generated by the project\'s own scripts.',
+      howItWorks: [
+        'Run it in Godot 4.7.1 or install the iOS/Android build.',
+        'Build facilities and assign survivors to produce resources; pick up junk for materials.',
+        'Explore for furniture and survivors, furnish minirooms, and guide choices through sudden events.',
+      ],
+      developmentNotes:
+        'Sixty-six scripts split across core, systems, world and ui, backed by JSON data (154 furniture pieces, 32 events, 434 UI strings). All 46 headless tests pass, and the game\'s own screenshot tour produces 40 real screens — the captures on this page come from running that tour.',
+      futurePlans:
+        'AdMob is wired with test IDs only, so real monetization is still pending. iOS was verified on a physical debug build; the simulator cannot run here because this Mac lacks Rosetta.',
+    },
+    features: [
+      {
+        titleKo: '옥상 기지 건설',
+        titleEn: 'Rooftop base building',
+        bodyKo: '10종 시설×5레벨, 이동·회전, 2단계 옥상 확장과 시설별 고유 애니메이션.',
+        bodyEn: 'Ten facilities with five levels each, move and rotate, two rooftop expansions, and per-facility animation.',
+      },
+      {
+        titleKo: '방치형 생산과 오프라인 보상',
+        titleEn: 'Idle production and offline rewards',
+        bodyKo: '날씨·낮밤·담당 생존자에 따라 생산량이 바뀌고, 최대 12시간의 오프라인 보상이 쌓입니다.',
+        bodyEn: 'Output shifts with weather, time of day and assigned survivors, with up to 12 hours of offline rewards.',
+      },
+      {
+        titleKo: '생존자와 미니룸',
+        titleEn: 'Survivors and minirooms',
+        bodyKo: '6명의 생존자와 2마리 반려동물, 친밀도 5단계, 방 확장과 154종 가구 배치.',
+        bodyEn: 'Six survivors and two pets, five affinity levels, room expansions and 154 placeable furniture pieces.',
+      },
+      {
+        titleKo: '돌발 사건',
+        titleEn: 'Sudden events',
+        bodyKo: '15초 제한의 선택형 사건 32종. 선택지마다 사망 확률이 표시됩니다.',
+        bodyEn: 'Thirty-two timed choice events with a 15-second limit; each choice shows its death odds.',
+      },
+    ],
+    evidence: [
+      {
+        feature: 'Game loop and content',
+        evidence: 'Real run: title, day/night/rain rooftops, facility sheet, miniroom, sudden event, expedition result',
+        status: 'Implemented',
+        confidence: 'High',
+      },
+      {
+        feature: 'Automated tests',
+        evidence: 'tests/TestRunner.tscn headless run: 46 passed, 0 failed',
+        status: 'Implemented',
+        confidence: 'High',
+      },
+      {
+        feature: 'Mobile builds',
+        evidence: 'README reports an iOS device debug build and an Android APK; not re-verified in this pass',
+        status: 'Unverified',
+        confidence: 'Medium',
+      },
+      {
+        feature: 'Ads',
+        evidence: 'AdMob integrated with Google test IDs only; no real ads or revenue',
+        status: 'Partially Implemented',
         confidence: 'High',
       },
     ],
